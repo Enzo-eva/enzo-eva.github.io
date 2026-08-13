@@ -331,9 +331,14 @@
       <div class="icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
       </div>
-      <h1>Fatto, quasi tutto pronto.</h1>
-      <p class="intro-sub">Ho copiato un riepilogo delle tue risposte. Si è aperta (o si aprirà) una nuova scheda con Instagram: incolla il messaggio (basta premere <strong>Cmd+V</strong> o tenere premuto e scegliere "Incolla") e inviamelo. Ti rispondo io personalmente.</p>
-      <a id="reopenLink" href="https://ig.me/m/enzo_evandri" target="_blank" rel="noopener" class="btn-next active" style="display:inline-block; text-decoration:none; text-align:center;">Apri Instagram di nuovo →</a>
+      <h1>Un ultimo passo per inviarmi tutto.</h1>
+      <p class="intro-sub">Copia il messaggio qui sotto, poi apri Instagram e incollalo in un DM a @enzo_evandri. Ti rispondo io personalmente.</p>
+
+      <textarea id="summaryBox" readonly style="width:100%; min-height:180px; padding:16px; border:1px solid var(--line); border-radius:2px; font-family:inherit; font-size:14px; color:var(--ink); background:var(--grey-light); resize:vertical; margin-bottom:16px;"></textarea>
+
+      <button class="btn-next active" id="copyBtn" onclick="copySummary()" style="width:100%; text-align:center; margin-bottom:12px;">Copia il messaggio</button>
+      <a id="reopenLink" href="https://ig.me/m/enzo_evandri" target="_blank" rel="noopener" class="btn-next active" style="display:block; text-decoration:none; text-align:center; background:var(--stone-2); color:var(--mauve-dim); border:1px solid var(--mauve); opacity:1;">Apri Instagram e incolla →</a>
+      <p class="form-note" id="copyFeedback" style="text-align:center; margin-top:14px;"></p>
     </div>
   </div>
 
@@ -468,20 +473,70 @@
     summary += "Telefono: " + phone + "\n";
     if(centro) summary += "Centro: " + centro + "\n";
 
-    // Copia il riepilogo negli appunti
-    if(navigator.clipboard){
-      navigator.clipboard.writeText(summary).catch(()=>{});
-    }
+  let lastSummary = "";
 
-    // Canale di invio principale: Instagram DM (nessun testo precompilato possibile su Instagram)
-    window.open('https://ig.me/m/enzo_evandri', '_blank');
+  function submitQuiz(){
+    const name = document.getElementById('fName').value.trim();
+    const phone = document.getElementById('fPhone').value.trim();
+    const centro = document.getElementById('fCentro').value.trim();
+    if(!name || !phone) return;
 
-    // AGGIUNGI WHATSAPP QUI: quando hai il numero, sostituisci le due righe sopra con:
-    // const waText = encodeURIComponent(summary);
-    // window.open('https://wa.me/39NUMEROTELEFONO?text=' + waText, '_blank');
+    let summary = "Ciao Enzo, ho fatto il test del Percorso (20 Anni Dentro). Ecco le mie risposte:\n\n";
+    QUESTIONS.forEach((q, i) => {
+      summary += (i+1) + ". " + q.title + "\n→ " + (answers[i] || "-") + "\n\n";
+    });
+    summary += "Nome: " + name + "\n";
+    summary += "Telefono: " + phone + "\n";
+    if(centro) summary += "Centro: " + centro + "\n";
+
+    lastSummary = summary;
+    document.getElementById('summaryBox').value = summary;
+
+    // AGGIUNGI WHATSAPP QUI: quando hai il numero, sostituisci il link nel bottone
+    // #reopenLink con: https://wa.me/39NUMEROTELEFONO?text=ENCODED_SUMMARY
     // (WhatsApp precompila il messaggio da solo, non serve piu' il copia-incolla)
+    // Esempio, dentro questa funzione:
+    // const waText = encodeURIComponent(summary);
+    // document.getElementById('reopenLink').href = 'https://wa.me/39NUMEROTELEFONO?text=' + waText;
+    // document.getElementById('reopenLink').textContent = 'Apri WhatsApp e invia →';
 
     showStep('step-confirm');
+  }
+
+  function copySummary(){
+    const box = document.getElementById('summaryBox');
+    const feedback = document.getElementById('copyFeedback');
+    box.focus();
+    box.select();
+    box.setSelectionRange(0, 999999); // per mobile
+
+    let copied = false;
+
+    // Metodo moderno
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(lastSummary).then(() => {
+        showCopyFeedback();
+      }).catch(() => {
+        fallbackCopy();
+      });
+    } else {
+      fallbackCopy();
+    }
+
+    function fallbackCopy(){
+      try{
+        const ok = document.execCommand('copy');
+        if(ok){ showCopyFeedback(); }
+        else { feedback.textContent = "Non sono riuscito a copiare da solo: seleziona il testo qui sopra e copialo manualmente."; }
+      } catch(e){
+        feedback.textContent = "Non sono riuscito a copiare da solo: seleziona il testo qui sopra e copialo manualmente.";
+      }
+    }
+
+    function showCopyFeedback(){
+      feedback.textContent = "✓ Copiato! Ora tocca \"Apri Instagram e incolla\" qui sotto.";
+      feedback.style.color = "var(--mauve-dim)";
+    }
   }
 </script>
 
