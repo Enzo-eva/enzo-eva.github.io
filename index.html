@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enzo Evandri — Vent'anni Dentro | Consulente Estetica Professionale</title>
+<meta name="description" content="20 anni dentro ai centri estetici. Consulenza per centri estetici. Seguimi su Instagram @enzo_evandri.">
+
+<!--
+  =====================================================
+  COME PERSONALIZZARE
+  =====================================================
+  Cerca questi segnaposto e sostituiscili con i tuoi dati:
+  - IL TUO NOME          -> il tuo nome
+  - @tuo_handle          -> il tuo handle Instagram (compare piu' volte)
+  - NUMERO FORTE         -> un dato che colpisce (es. "12 anni", "80 centri seguiti")
+  - le righe della timeline nella sezione "Il percorso"
+  - le 3 righe in "Cosa condivido su Instagram"
+  - le citazioni in "Cosa dicono di me" (o cancella la sezione se non le hai)
+  Tutti i pulsanti "Seguimi su Instagram" puntano allo stesso link:
+  cercali con Ctrl+F su "instagram.com/tuo_handle" e sostituisci ovunque.
+  =====================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --stone:#FFFFFF;
+    --stone-2:#E8F8FC;
+    --grey-light:#EDEDEC;
+    --ink:#2D2A26;
+    --ink-soft:#6B6864;
+    --mauve:#00B3E6;
+    --mauve-dim:#0095C2;
+    --sage:#575756;
+    --line: rgba(45,42,38,0.13);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--stone);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:820px; margin:0 auto; padding:0 28px;}
+
+  /* HERO */
+  header.hero{
+    min-height:94vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    padding-top:60px;
+  }
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--mauve-dim);
+    font-weight:600;
+    margin-bottom:22px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(36px, 6.6vw, 62px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    max-width:13ch;
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:300;
+    color:var(--mauve);
+  }
+  .hero-sub{
+    margin-top:26px;
+    font-size:18px;
+    line-height:1.6;
+    max-width:46ch;
+    color:var(--ink-soft);
+  }
+  .stat-row{
+    display:flex;
+    gap:36px;
+    margin-top:38px;
+    flex-wrap:wrap;
+  }
+  .stat{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .stat-num{
+    font-family:'Fraunces', serif;
+    font-size:30px;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .stat-label{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    letter-spacing:0.02em;
+  }
+  .hero-cta{
+    margin-top:40px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:16px 30px;
+    border-radius:2px;
+    font-size:14.5px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    text-decoration:none;
+    transition:all .25s ease;
+    border:1px solid var(--ink);
+  }
+  .btn-primary{
+    background:var(--stone-2);
+    color:var(--mauve-dim);
+    border-color:var(--mauve);
+  }
+  .btn-primary:hover{
+    background:var(--mauve);
+    border-color:var(--mauve);
+    color:var(--stone);
+  }
+  .btn svg{ width:16px; height:16px; }
+  .cta-note{
+    margin-top:14px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .scroll-hint{
+    position:absolute;
+    bottom:36px;
+    left:28px;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:rgba(45,42,38,0.4);
+  }
+
+  /* SECTION SHARED */
+  section{
+    padding:88px 0;
+    border-top:1px solid var(--line);
+  }
+  .label{
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--mauve-dim);
+    font-weight:600;
+    margin-bottom:20px;
+  }
+  h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(26px, 3.8vw, 36px);
+    line-height:1.18;
+    max-width:17ch;
+    margin-bottom:26px;
+  }
+  p.lead{
+    font-size:16.5px;
+    line-height:1.75;
+    color:var(--ink-soft);
+    max-width:56ch;
+  }
+  p.lead + p.lead{ margin-top:16px; }
+
+  /* PROBLEMA */
+  .problem-list{
+    margin-top:36px;
+    display:flex;
+    flex-direction:column;
+  }
+  .problem-item{
+    padding:20px 0;
+    border-top:1px solid var(--line);
+    font-size:16px;
+    line-height:1.6;
+    color:var(--ink-soft);
+    max-width:58ch;
+  }
+  .problem-item:first-child{ border-top:none; }
+  .problem-item strong{ color:var(--ink); font-weight:600; }
+
+  /* TIMELINE */
+  .timeline{
+    margin-top:44px;
+    display:flex;
+    flex-direction:column;
+  }
+  .tl-row{
+    display:grid;
+    grid-template-columns:80px 1fr;
+    gap:24px;
+    padding:20px 0;
+    border-top:1px solid var(--line);
+  }
+  .tl-row:first-child{ border-top:none; }
+  .tl-year{
+    font-family:'Fraunces', serif;
+    font-size:15px;
+    color:var(--mauve-dim);
+    font-weight:500;
+    padding-top:2px;
+  }
+  .tl-text{ font-size:15.5px; line-height:1.65; color:var(--ink-soft); }
+  .tl-text strong{ font-weight:600; color:var(--ink); }
+
+  /* IG BOX */
+  .ig-box{
+    margin-top:40px;
+    padding:36px;
+    background:var(--grey-light);
+    color:var(--ink);
+    border:1px solid var(--line);
+  }
+  .ig-box .label{ color:var(--mauve-dim); }
+  .ig-box h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:24px;
+    margin-bottom:16px;
+  }
+  .ig-pillars{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-bottom:26px;
+  }
+  .ig-pillar{
+    display:flex;
+    gap:14px;
+    font-size:15px;
+    line-height:1.6;
+    color:var(--ink-soft);
+  }
+  .ig-pillar .n{
+    font-family:'Fraunces', serif;
+    color:var(--mauve);
+    flex-shrink:0;
+    width:22px;
+  }
+  .ig-box .btn-primary:hover{
+    background:var(--mauve);
+    border-color:var(--mauve);
+    color:var(--stone);
+  }
+
+  /* TESTIMONIANZE */
+  .quote-grid{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .quote{
+    background:var(--stone);
+    padding:26px;
+    font-size:14.5px;
+    line-height:1.65;
+    color:var(--ink-soft);
+  }
+  .quote .who{
+    display:block;
+    margin-top:14px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+  }
+
+  /* CTA FINALE */
+  .final-cta{
+    text-align:left;
+  }
+  .final-cta h2{ max-width:15ch; }
+
+  footer{
+    padding:40px 0 60px;
+    font-size:12px;
+    color:rgba(45,42,38,0.45);
+    display:flex;
+    justify-content:space-between;
+  }
+
+  @media (max-width:600px){
+    section{ padding:64px 0; }
+    .tl-row{ grid-template-columns:60px 1fr; gap:16px; }
+    .ig-box{ padding:26px; }
+    .quote-grid{ grid-template-columns:1fr; }
+    footer{ flex-direction:column; gap:8px; }
+    .stat-row{ gap:26px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Enzo Evandri</div>
+    <h1>20 anni <em>dentro</em> ai centri estetici. Ho visto tutto.</h1>
+    <p class="hero-sub">Consulente per centri estetici. Ogni settimana racconto storie vere, un episodio alla volta, in "Vent'anni Dentro".</p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat-num">20</span>
+        <span class="stat-label">anni nel settore</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">26</span>
+        <span class="stat-label">centri seguiti</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">296</span>
+        <span class="stat-label">follower su Instagram</span>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="https://instagram.com/enzo_evandri" class="btn btn-primary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        Seguimi su Instagram
+      </a>
+      <div class="cta-note">@enzo_evandri — nuovi episodi ogni settimana</div>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ Scorri</div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="label">Il problema</div>
+    <h2>Riconosci questa situazione nel tuo centro?</h2>
+    <div class="problem-list">
+      <div class="problem-item"><strong>Agenda incostante</strong> — settimane piene e settimane vuote, senza un metodo che porti clienti in modo prevedibile.</div>
+      <div class="problem-item"><strong>Trattamenti scontati</strong> — fai promozioni per riempire l'agenda invece di far percepire il valore del tuo lavoro.</div>
+      <div class="problem-item"><strong>Staff che non rende</strong> — hai un team ma senza processi chiari, e ogni operatrice lavora "a modo suo".</div>
+    </div>
+    <p class="lead" style="margin-top:32px;">Non è colpa tua: è che nessuno ti ha mai insegnato a gestire il centro come un'azienda, e non solo come un mestiere.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="label">Il percorso</div>
+    <h2>Vent'anni dentro al settore, non dietro a una scrivania.</h2>
+    <p class="lead">Ho iniziato nel 1998 come formatore a Roma. Da lì ho girato l'Italia, prima come rappresentante, poi come consulente indipendente — sempre dentro ai centri.</p>
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-year">1998</div>
+        <div class="tl-text">Comincio come <strong>formatore</strong> nel mondo dell'estetica professionale, a Roma.</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">2009</div>
+        <div class="tl-text">Mi trasferisco nelle Marche e lavoro sul campo, centro per centro, come rappresentante.</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">2019</div>
+        <div class="tl-text">Nasce <strong>Skinem</strong>: tecnologie, cosmesi e formazione per centri estetici professionali. Oggi in 26 centri italiani.</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">2024</div>
+        <div class="tl-text">Lancio <strong>SkinNate</strong>: microneedling consapevole, per chi vuole fare il trattamento direttamente a casa.</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">OGGI</div>
+        <div class="tl-text">Racconto quello che vedo dentro al settore in <strong>"Vent'anni Dentro"</strong> su Instagram.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="label">Su Instagram</div>
+    <h2>Cosa condivido ogni settimana</h2>
+    <p class="lead">Contenuti diretti su gestione, marketing e vendita per centri estetici — quello che ho visto funzionare davvero sul campo, in vent'anni dentro al settore.</p>
+    <div class="ig-box">
+      <div class="label">@enzo_evandri</div>
+      <h3>"Vent'anni Dentro" — le storie vere, un episodio alla volta.</h3>
+      <div class="ig-pillars">
+        <div class="ig-pillar"><span class="n">01</span><span>Episodi settimanali con storie vere viste dentro ai centri estetici.</span></div>
+        <div class="ig-pillar"><span class="n">02</span><span>Perché i clienti se ne vanno per il prezzo — e cosa fare davvero.</span></div>
+        <div class="ig-pillar"><span class="n">03</span><span>Metodo e posizionamento per smettere di svendersi.</span></div>
+      </div>
+      <a href="https://instagram.com/enzo_evandri" class="btn btn-primary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        Seguimi su Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="label">I miei brand</div>
+    <h2>Due metodi, due mondi diversi.</h2>
+    <p class="lead">In vent'anni ho costruito due aziende, ciascuna per un pubblico preciso. Le racconto ogni settimana nei contenuti — se mi segui, le vedrai crescere in diretta.</p>
+
+    <div class="ig-box" style="margin-top:32px;">
+      <div class="label">Dal 2019 — B2B</div>
+      <h3>Skinem</h3>
+      <p style="font-size:15px; line-height:1.7; color:var(--ink-soft); max-width:52ch; margin-bottom:22px;">
+        Tecnologie e cosmesi professionali per centri estetici, con consulenza personalizzata e formazione. Il metodo Skinem è oggi attivo in 26 centri in Italia.
+      </p>
+      <a href="https://skinem.it" class="btn btn-primary" target="_blank" rel="noopener">Scopri Skinem →</a>
+    </div>
+
+    <div class="ig-box" style="margin-top:20px; background:var(--stone-2); border-color:var(--mauve);">
+      <div class="label" style="color:var(--mauve-dim);">Da 2 anni — B2C</div>
+      <h3>SkinNate</h3>
+      <p style="font-size:15px; line-height:1.7; color:var(--ink-soft); max-width:52ch; margin-bottom:22px;">
+        Microneedling consapevole, a casa. Metodo, disciplina, risultati misurabili — pensato per chi cerca un percorso serio, non un miracolo.
+      </p>
+      <a href="https://skinnate.it" class="btn btn-primary" target="_blank" rel="noopener">Scopri SkinNate →</a>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <div class="label">Restiamo in contatto</div>
+    <h2>Ogni settimana un contenuto nuovo. Non perderlo.</h2>
+    <p class="lead">Seguimi su Instagram per contenuti su gestione, marketing e vendita per centri estetici.</p>
+    <div class="hero-cta" style="margin-top:30px;">
+      <a href="https://instagram.com/enzo_evandri" class="btn btn-primary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        Seguimi su Instagram
+      </a>
+      <div class="cta-note">@enzo_evandri</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>Enzo Evandri — Consulenza Estetica</span>
+    <span>@enzo_evandri</span>
+  </div>
+</footer>
+
+</body>
+</html>
