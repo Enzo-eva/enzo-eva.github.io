@@ -331,14 +331,9 @@
       <div class="icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
       </div>
-      <h1>Un ultimo passo per inviarmi tutto.</h1>
-      <p class="intro-sub">Copia il messaggio qui sotto, poi apri Instagram e incollalo in un DM a @enzo_evandri. Ti rispondo io personalmente.</p>
-
-      <textarea id="summaryBox" readonly style="width:100%; min-height:180px; padding:16px; border:1px solid var(--line); border-radius:2px; font-family:inherit; font-size:14px; color:var(--ink); background:var(--grey-light); resize:vertical; margin-bottom:16px;"></textarea>
-
-      <button class="btn-next active" id="copyBtn" onclick="copySummary()" style="width:100%; text-align:center; margin-bottom:12px;">Copia il messaggio</button>
-      <a id="reopenLink" href="https://ig.me/m/enzo_evandri" target="_blank" rel="noopener" class="btn-next active" style="display:block; text-decoration:none; text-align:center; background:var(--stone-2); color:var(--mauve-dim); border:1px solid var(--mauve); opacity:1;">Apri Instagram e incolla →</a>
-      <p class="form-note" id="copyFeedback" style="text-align:center; margin-top:14px;"></p>
+      <h1>Un ultimo passo.</h1>
+      <p class="intro-sub">Tocca il bottone qui sotto: si apre WhatsApp con il messaggio già scritto per me. Ti basta premere invio.</p>
+      <a id="waLink" href="#" target="_blank" rel="noopener" class="btn-next active" style="display:block; text-decoration:none; text-align:center; background:#25D366; border-color:#25D366; color:#fff;">Apri WhatsApp e invia →</a>
     </div>
   </div>
 
@@ -385,7 +380,7 @@
 
   let currentQ = 0;
   const answers = new Array(QUESTIONS.length).fill(null);
-  let lastSummary = "";
+  const WHATSAPP_NUMBER = "393460356595"; // numero di Enzo, prefisso incluso
 
   function showStep(id){
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
@@ -474,56 +469,15 @@
     summary += "Telefono: " + phone + "\n";
     if(centro) summary += "Centro: " + centro + "\n";
 
-    lastSummary = summary;
-    document.getElementById('summaryBox').value = summary;
-
-    // AGGIUNGI WHATSAPP QUI: quando hai il numero, sostituisci il link nel bottone
-    // #reopenLink con: https://wa.me/39NUMEROTELEFONO?text=ENCODED_SUMMARY
-    // (WhatsApp precompila il messaggio da solo, non serve piu' il copia-incolla)
-    // Esempio, dentro questa funzione:
-    // const waText = encodeURIComponent(summary);
-    // document.getElementById('reopenLink').href = 'https://wa.me/39NUMEROTELEFONO?text=' + waText;
-    // document.getElementById('reopenLink').textContent = 'Apri WhatsApp e invia →';
+    const waText = encodeURIComponent(summary);
+    document.getElementById('waLink').href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + waText;
 
     showStep('step-confirm');
   }
-
-  function copySummary(){
-    const box = document.getElementById('summaryBox');
-    const feedback = document.getElementById('copyFeedback');
-    box.focus();
-    box.select();
-    box.setSelectionRange(0, 999999); // per mobile
-
-    let copied = false;
-
-    // Metodo moderno
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(lastSummary).then(() => {
-        showCopyFeedback();
-      }).catch(() => {
-        fallbackCopy();
-      });
-    } else {
-      fallbackCopy();
-    }
-
-    function fallbackCopy(){
-      try{
-        const ok = document.execCommand('copy');
-        if(ok){ showCopyFeedback(); }
-        else { feedback.textContent = "Non sono riuscito a copiare da solo: seleziona il testo qui sopra e copialo manualmente."; }
-      } catch(e){
-        feedback.textContent = "Non sono riuscito a copiare da solo: seleziona il testo qui sopra e copialo manualmente.";
-      }
-    }
-
-    function showCopyFeedback(){
-      feedback.textContent = "✓ Copiato! Ora tocca \"Apri Instagram e incolla\" qui sotto.";
-      feedback.style.color = "var(--mauve-dim)";
-    }
-  }
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
