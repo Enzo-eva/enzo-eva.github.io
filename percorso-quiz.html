@@ -385,6 +385,7 @@
 
   let currentQ = 0;
   const answers = new Array(QUESTIONS.length).fill(null);
+  let lastSummary = "";
 
   function showStep(id){
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
@@ -458,22 +459,6 @@
       submitBtn.classList.remove('active');
     }
   }
-
-  function submitQuiz(){
-    const name = document.getElementById('fName').value.trim();
-    const phone = document.getElementById('fPhone').value.trim();
-    const centro = document.getElementById('fCentro').value.trim();
-    if(!name || !phone) return;
-
-    let summary = "Ciao Enzo, ho fatto il test del Percorso (20 Anni Dentro). Ecco le mie risposte:\n\n";
-    QUESTIONS.forEach((q, i) => {
-      summary += (i+1) + ". " + q.title + "\n→ " + (answers[i] || "-") + "\n\n";
-    });
-    summary += "Nome: " + name + "\n";
-    summary += "Telefono: " + phone + "\n";
-    if(centro) summary += "Centro: " + centro + "\n";
-
-  let lastSummary = "";
 
   function submitQuiz(){
     const name = document.getElementById('fName').value.trim();
