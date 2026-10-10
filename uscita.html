@@ -121,8 +121,10 @@ textarea:focus,input:focus{outline:none;border-color:var(--brand)}
       <p class="k" id="cName">Skinem</p>
       <h1>Grazie di esserti <b>presa questo tempo.</b></h1>
       <p class="lead">Prima di tornare alla tua giornata: come stai adesso? Ci servono le tue parole per prenderci cura di te ancora meglio.</p>
+      <label class="f" for="nome">Come ti chiami?</label>
+      <input type="text" id="nome" maxlength="60" autocomplete="given-name" autocapitalize="words" enterkeyhint="go" placeholder="Il tuo nome">
       <div class="sp"></div>
-      <button class="btn" data-next>Rispondo
+      <button class="btn" data-next id="start" disabled>Rispondo
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="time">5 domande · meno di un minuto</p>
       <div class="row" id="contacts"></div>
@@ -259,6 +261,11 @@ var CENTRI = {
     [].forEach.call(bar.children,function(b,i){b.classList.toggle('on',i<cur)});
     window.scrollTo(0,0);
   }
+  var nomeEl=document.getElementById('nome'),startEl=document.getElementById('start');
+  var pre=(qs.get('nome')||'').slice(0,60); if(pre){nomeEl.value=pre}
+  function chkNome(){A.nome=nomeEl.value.trim();startEl.disabled=A.nome.length<2}
+  chkNome();nomeEl.addEventListener('input',chkNome);
+  nomeEl.addEventListener('keydown',function(e){if(e.key==='Enter'&&!startEl.disabled){nomeEl.blur();go(1)}});
   document.querySelectorAll('[data-next]').forEach(function(b){b.addEventListener('click',function(){go(cur+1)})});
   document.querySelectorAll('[data-back]').forEach(function(b){b.addEventListener('click',function(){go(cur-1)})});
 
@@ -293,13 +300,13 @@ var CENTRI = {
   var sending=false;
   function send(){
     if(sending)return;sending=true;document.getElementById('err').hidden=true;
-    var data={centro:C.nome,operatrice:op,sensazione:A.sensazione||'',notato:A.notato||'',spiegazione:A.spiegazione||'',prossimo:A.prossimo||'',consiglio:(A.consiglio==null?'':A.consiglio),commento:'',nome:''};
+    var data={centro:C.nome,operatrice:op,sensazione:A.sensazione||'',notato:A.notato||'',spiegazione:A.spiegazione||'',prossimo:A.prossimo||'',consiglio:(A.consiglio==null?'':A.consiglio),commento:'',nome:A.nome||''};
     var URL_FOGLIO=C.foglio||ENDPOINT;
-    if(!URL_FOGLIO){finish('');return}
+    if(!URL_FOGLIO){finish(A.nome||'');return}
     try{
       fetch(URL_FOGLIO,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)})
-        .then(function(){finish('')},function(){sending=false;document.getElementById('err').hidden=false});
-    }catch(e){finish('')}
+        .then(function(){finish(A.nome||'')},function(){sending=false;document.getElementById('err').hidden=false});
+    }catch(e){finish(A.nome||'')}
   }
 
   function finish(nome){
