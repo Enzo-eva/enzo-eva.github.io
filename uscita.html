@@ -141,19 +141,19 @@ textarea:focus,input:focus{outline:none;border-color:var(--brand)}
   </section>
 
   <!-- 2 -->
-  <section class="page" data-p="2" data-key="notato" data-type="multi" aria-label="Domanda 2">
-    <p class="q">2 di 5 · puoi sceglierne più di una</p>
+  <section class="page" data-p="2" data-key="notato" data-type="one" aria-label="Domanda 2">
+    <p class="q">2 di 5</p>
     <h2>Cosa ti è rimasto <b>di più?</b></h2>
-    <div class="opts multi">
-      <button class="opt" aria-pressed="false"><span class="dot"></span>La pelle più luminosa</button>
-      <button class="opt" aria-pressed="false"><span class="dot"></span>Il corpo più leggero</button>
-      <button class="opt" aria-pressed="false"><span class="dot"></span>Le mani di chi mi ha seguita</button>
-      <button class="opt" aria-pressed="false"><span class="dot"></span>La tecnologia, il calore</button>
-      <button class="opt" aria-pressed="false"><span class="dot"></span>Un'ora tutta per me</button>
-      <button class="opt" aria-pressed="false"><span class="dot"></span>L'ambiente, l'accoglienza</button>
+    <div class="opts" role="radiogroup">
+      <button class="opt" role="radio" aria-checked="false"><span class="dot"></span>La pelle più luminosa</button>
+      <button class="opt" role="radio" aria-checked="false"><span class="dot"></span>Il corpo più leggero</button>
+      <button class="opt" role="radio" aria-checked="false"><span class="dot"></span>Le mani di chi mi ha seguita</button>
+      <button class="opt" role="radio" aria-checked="false"><span class="dot"></span>La tecnologia, il calore</button>
+      <button class="opt" role="radio" aria-checked="false"><span class="dot"></span>Un'ora tutta per me</button>
+      <button class="opt" role="radio" aria-checked="false"><span class="dot"></span>L'ambiente, l'accoglienza</button>
     </div>
     <div class="sp"></div>
-    <div class="nav"><button class="back" data-back aria-label="Indietro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button class="btn" data-next disabled>Avanti</button></div>
+    <div class="nav"><button class="back" data-back aria-label="Indietro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button></div>
   </section>
 
   <!-- 3 -->
@@ -189,25 +189,13 @@ textarea:focus,input:focus{outline:none;border-color:var(--brand)}
     <h2>Ci consiglieresti <b>a un'amica?</b></h2>
     <div class="nps" role="radiogroup" id="nps"></div>
     <div class="ends"><span>Per niente</span><span>Assolutamente</span></div>
+    <p class="err" id="err" hidden>Connessione assente. Tocca di nuovo il numero tra un attimo.</p>
     <div class="sp"></div>
     <div class="nav"><button class="back" data-back aria-label="Indietro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button></div>
   </section>
 
-  <!-- 6 -->
-  <section class="page" data-p="6" aria-label="Il tuo pensiero">
-    <p class="q">Facoltativo</p>
-    <h2>Vuoi lasciarci <b>un pensiero?</b></h2>
-    <label class="f" for="comm">Qualsiasi cosa: un complimento, un dubbio, un consiglio</label>
-    <textarea id="comm" maxlength="800"></textarea>
-    <label class="f" for="nome">Il tuo nome, se vuoi</label>
-    <input type="text" id="nome" maxlength="60" autocomplete="given-name">
-    <div class="sp"></div>
-    <div class="nav"><button class="back" data-back aria-label="Indietro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button class="btn" id="send">Invia</button></div>
-    <p class="err" id="err" hidden>Connessione assente. Riprova tra un attimo.</p>
-  </section>
-
-  <!-- 7 grazie -->
-  <section class="page" data-p="7" aria-label="Grazie">
+  <!-- 6 grazie -->
+  <section class="page" data-p="6" aria-label="Grazie">
     <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
     <h2 id="thx">Grazie. <b>Ci vediamo presto.</b></h2>
     <p class="lead">Leggiamo ogni risposta, una per una.</p>
@@ -292,24 +280,22 @@ var CENTRI = {
   var nps=document.getElementById('nps');
   for(var n=0;n<=10;n++){(function(n){
     var b=document.createElement('button');b.className='n';b.setAttribute('role','radio');b.setAttribute('aria-checked','false');b.textContent=n;
-    b.addEventListener('click',function(){nps.querySelectorAll('.n').forEach(function(x){x.setAttribute('aria-checked','false')});b.setAttribute('aria-checked','true');A.consiglio=n;setTimeout(function(){go(cur+1)},260)});
+    b.addEventListener('click',function(){nps.querySelectorAll('.n').forEach(function(x){x.setAttribute('aria-checked','false')});b.setAttribute('aria-checked','true');A.consiglio=n;setTimeout(send,260)});
     nps.appendChild(b);
   })(n)}
   nps.style.gridTemplateColumns='repeat(6,1fr)';
 
-  // invio
+  // invio automatico
   var sending=false;
-  document.getElementById('send').addEventListener('click',function(){
-    if(sending)return;sending=true;var btn=this;btn.textContent='Invio…';
-    var nome=document.getElementById('nome').value.trim();
-    var data={centro:C.nome,operatrice:op,sensazione:A.sensazione||'',notato:A.notato||'',spiegazione:A.spiegazione||'',prossimo:A.prossimo||'',consiglio:(A.consiglio==null?'':A.consiglio),commento:document.getElementById('comm').value.trim(),nome:nome};
-    var done=function(){finish(nome)};
-    if(!ENDPOINT||ENDPOINT.indexOf('{{')===0){done();return}
+  function send(){
+    if(sending)return;sending=true;document.getElementById('err').hidden=true;
+    var data={centro:C.nome,operatrice:op,sensazione:A.sensazione||'',notato:A.notato||'',spiegazione:A.spiegazione||'',prossimo:A.prossimo||'',consiglio:(A.consiglio==null?'':A.consiglio),commento:'',nome:''};
+    if(!ENDPOINT){finish('');return}
     try{
       fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)})
-        .then(done,function(){sending=false;btn.textContent='Invia';document.getElementById('err').hidden=false});
-    }catch(e){done()}
-  });
+        .then(function(){finish('')},function(){sending=false;document.getElementById('err').hidden=false});
+    }catch(e){finish('')}
+  }
 
   function finish(nome){
     if(nome){document.getElementById('thx').innerHTML='Grazie, '+nome.replace(/[<>&"]/g,'')+'. <b>Ci vediamo presto.</b>'}
