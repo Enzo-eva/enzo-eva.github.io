@@ -219,6 +219,7 @@ var CENTRI = {
   casabianca: { nome:"Skinem Casabianca", luogo:"Viale Casabianca, 30 · Lido di Fermo (FM)", wa:"393500581871", ig:"skinem_casabianca", mappa:"Viale Casabianca 30, Lido di Fermo FM", recensione:"" },
   psg:        { nome:"Centro Skinem Porto San Giorgio", luogo:"Porto San Giorgio (FM)", wa:"", ig:"", mappa:"Skinem Porto San Giorgio", recensione:"" }
 };
+/* Nuovo centro: copia una riga, cambia sigla e dati, e in foglio: metti l'URL /exec del foglio del centro */
 /* =============================================== */
 
 (function(){
@@ -293,9 +294,10 @@ var CENTRI = {
   function send(){
     if(sending)return;sending=true;document.getElementById('err').hidden=true;
     var data={centro:C.nome,operatrice:op,sensazione:A.sensazione||'',notato:A.notato||'',spiegazione:A.spiegazione||'',prossimo:A.prossimo||'',consiglio:(A.consiglio==null?'':A.consiglio),commento:'',nome:''};
-    if(!ENDPOINT){finish('');return}
+    var URL_FOGLIO=C.foglio||ENDPOINT;
+    if(!URL_FOGLIO){finish('');return}
     try{
-      fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)})
+      fetch(URL_FOGLIO,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)})
         .then(function(){finish('')},function(){sending=false;document.getElementById('err').hidden=false});
     }catch(e){finish('')}
   }
