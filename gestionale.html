@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Gestionale Skinem</title>
+<link rel="manifest" href="gestionale.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="gestionale-icon-192.png">
+<link rel="apple-touch-icon" href="gestionale-icon-180.png">
+<meta name="theme-color" content="#00B3E6">
+<style>
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;background:#00B3E6;color:#fff;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;padding:24px;text-align:center}
+img{width:160px;height:160px;border-radius:36px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+a{display:inline-block;background:#fff;color:#0083ad;text-decoration:none;font-weight:600;padding:16px 28px;border-radius:14px;font-size:18px}
+p{margin:0;max-width:30ch;opacity:.95}
+</style>
+</head><body>
+<img src="gestionale-icon-512.png" alt="Gestionale Skinem">
+<a id="go" href="#">Apri il gestionale</a>
+<p>Per l'icona sul tablet: menu ⋮ di Chrome → Aggiungi a schermata Home.</p>
+<script>
+var EXEC='https://script.google.com/macros/s/AKfycbw82ymRhf5sd0akDl_6hgZjnSKmRvQPHj68bvFI4VS_SWKr5Qv06RfvocdhG_tWjseM/exec';
+document.getElementById('go').href=EXEC;
+if(/[?&]app=1/.test(location.search)||window.matchMedia('(display-mode: standalone)').matches){location.replace(EXEC);}
+</script>
+</body></html>
