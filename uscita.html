@@ -47,7 +47,6 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-
 .hero{position:relative;aspect-ratio:4/4.2;max-height:56dvh;width:100%;overflow:hidden;background:var(--chip)}
 .hero img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 60%,rgba(0,0,0,.45) 100%)}
-.nohero .p0 .in{padding-top:40px}
 .hero .lg-sk{position:absolute;left:24px;bottom:22px;z-index:1;background:#fff;height:22px;width:120px}
 .p0 .in{padding:24px 24px 0;display:flex;flex-direction:column;flex:1;padding-bottom:max(24px,env(safe-area-inset-bottom))}
 .k{margin:0;font-size:12px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--brand-ink)}
@@ -220,11 +219,9 @@ textarea:focus,input:focus{outline:none;border-color:var(--brand)}
 var ENDPOINT = "https://script.google.com/macros/s/AKfycbzFWP-Zbsp6ULBIX4cWTnPZlOZDSri-ZdV83yM9uk4Mme7q0XNn5xKGxmD5rTJTC99CSA/exec"; // indirizzo dello script Google che scrive nel foglio "Skinem · Risposte uscita centri"
 var CENTRI = {
   casabianca: { nome:"Skinem Casabianca", luogo:"Viale Casabianca, 30 · Lido di Fermo (FM)", wa:"393500581871", ig:"skinem_casabianca", mappa:"Viale Casabianca 30, Lido di Fermo FM", recensione:"" },
-  psg:        { nome:"Centro Skinem Porto San Giorgio", luogo:"Porto San Giorgio (FM)", wa:"", ig:"", mappa:"Skinem Porto San Giorgio", recensione:"" },
-  laboutique: { nome:"La Boutique Centro Anti-age", luogo:"Via Dalmazia, 30 · Porto San Giorgio (FM)", wa:"393890039532", ig:"", mappa:"Via Dalmazia 30, 63822 Porto San Giorgio FM", recensione:"", skinem:false, foto:"" }
+  psg:        { nome:"Centro Skinem Porto San Giorgio", luogo:"Porto San Giorgio (FM)", wa:"", ig:"", mappa:"Skinem Porto San Giorgio", recensione:"" }
 };
-/* Nuovo centro: copia una riga, cambia sigla e dati, e in foglio: metti l'URL /exec del foglio del centro.
-   Centri non Skinem: skinem:false toglie logo e foto Skinem; foto:"<link>" mette una foto del centro in copertina. */
+/* Nuovo centro: copia una riga, cambia sigla e dati, e in foglio: metti l'URL /exec del foglio del centro */
 /* =============================================== */
 
 (function(){
@@ -237,11 +234,6 @@ var CENTRI = {
   var app=document.getElementById('app'), bar=document.getElementById('bar');
   var cur=0, LAST=pages.length-1;
 
-  var hero=document.querySelector('.hero');
-  if(C.skinem===false){
-    [].forEach.call(document.querySelectorAll('.lg-sk'),function(e){e.remove()});
-    if(C.foto){var im=hero.querySelector('img');im.src=C.foto;im.alt=C.nome}else{hero.remove();hero=null;app.classList.add('nohero');app.classList.remove('cover-on')}
-  }
   document.getElementById('cName').textContent=C.nome;
   document.title=C.nome+' · Come ti senti';
   for(var i=1;i<LAST;i++){bar.appendChild(document.createElement('i'))}
@@ -264,7 +256,7 @@ var CENTRI = {
 
   function go(n){
     pages[cur].classList.remove('on');cur=Math.max(0,Math.min(LAST,n));pages[cur].classList.add('on');
-    app.classList.toggle('cover-on',cur===0&&!!hero);
+    app.classList.toggle('cover-on',cur===0);
     bar.hidden=(cur===LAST);
     [].forEach.call(bar.children,function(b,i){b.classList.toggle('on',i<cur)});
     window.scrollTo(0,0);
