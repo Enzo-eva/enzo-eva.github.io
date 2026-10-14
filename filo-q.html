@@ -191,7 +191,7 @@ for(var n=0;n<=10;n++){(function(n){var b=document.createElement('button');b.cla
 nps.style.gridTemplateColumns='repeat(6,1fr)';
 function send(d){try{fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d)})}catch(e){}}
 function fine(){
-  send({centro:'Prova Filo · '+C.nome,operatrice:'',sensazione:A.q1||'',notato:A.q2||'',spiegazione:(A.q3||'')+(A.q3_testo?' — '+A.q3_testo:''),prossimo:'',consiglio:A.voto,commento:'',nome:nome});
+  send({centro:'Prova Filo · '+C.nome,operatrice:(qs.get('op')||'').slice(0,40),sensazione:A.q1||'',notato:A.q2||'',spiegazione:(A.q3||'')+(A.q3_testo?' — '+A.q3_testo:''),prossimo:'',consiglio:A.voto,commento:'',nome:nome});
   if(nome)document.getElementById('thx').innerHTML='Grazie, '+esc(nome)+'. <b>Ci vediamo presto.</b>';
   if(A.voto>=9){var u=location.href.split('?')[0]+'?t=amica&nome='+encodeURIComponent(nome||'');
     document.getElementById('boxAmica').hidden=false;
