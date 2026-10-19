@@ -101,15 +101,6 @@ footer b{color:var(--fg);letter-spacing:.14em}
     </div>
 
     <div class="q">
-      <div class="ql">Chi farà il corso?</div>
-      <div class="chips">
-        <input type="radio" name="partecipanti" id="p1" value="Solo io"><label for="p1">Solo io</label>
-        <input type="radio" name="partecipanti" id="p2" value="Io + 1 collaboratrice"><label for="p2">Io + 1</label>
-        <input type="radio" name="partecipanti" id="p3" value="Io + 2 o più collaboratrici"><label for="p3">Io + 2 o più</label>
-      </div>
-    </div>
-
-    <div class="q">
       <div class="ql">Quando preferisci essere contattata?</div>
       <div class="chips">
         <input type="radio" name="orario" id="h1" value="Mattina"><label for="h1">Mattina</label>
@@ -147,7 +138,7 @@ footer b{color:var(--fg);letter-spacing:.14em}
       'Voglio essere messa in contatto con l\u2019ingegnere.',
       '',
       line('Centro','centro'), line('Titolare','titolare'), line('Città','citta'), line('Telefono','telefono'),
-      line('Partecipanti','partecipanti'), line('Orario preferito','orario')
+      line('Orario preferito','orario')
     ].join('\n');
     document.getElementById('done').style.display='block';
     window.location.href='https://wa.me/'+WA+'?text='+encodeURIComponent(t);
