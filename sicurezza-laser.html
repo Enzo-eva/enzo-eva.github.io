@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta property="og:title" content="Laser in regola · Sicurezza laser">
-<meta property="og:description" content="Questionario di 2 minuti: 1 ora online + verifica con foto.">
+<meta property="og:description" content="Corso sicurezza laser online con l'ingegnere, a prezzo riservato.">
 <meta property="og:image" content="https://link.skinem.it/sicurezza-laser-anteprima.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -32,6 +32,9 @@ h1 b{font-weight:600;color:var(--brand)}
 .step .n{flex:0 0 32px;height:32px;border-radius:50%;background:var(--brand);color:#fff;font-weight:600;display:grid;place-items:center}
 .step b{display:block;font-weight:600}
 .step span{color:var(--soft);font-size:15px}
+.price{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--brand);border-radius:16px;padding:16px 18px;margin-top:16px}
+.price span{font-size:15px;color:var(--soft)}
+.price b{font-size:28px;font-weight:600;color:var(--brand-ink);white-space:nowrap}
 .note{font-size:14px;color:var(--soft);border-left:3px solid var(--brand);padding:4px 0 4px 12px;margin:18px 0 6px}
 h2{font-weight:600;font-size:22px;margin:34px 0 6px}
 .sub{color:var(--soft);font-size:15px;margin-bottom:14px}
@@ -76,98 +79,43 @@ footer b{color:var(--fg);letter-spacing:.14em}
   <p class="lead">Per chi ha un laser epilazione non basta il corso d'uso della macchina: serve anche la formazione sulla sicurezza laser con certificazione (D.Lgs. 81/08 e CEI 76-17) e la nomina dell'Esperto Sicurezza Laser, quello che spesso chiamano TSL.</p>
 
   <div class="steps">
-    <div class="step"><div class="n">1</div><div><b>Rispondi al questionario</b><span>Due minuti, direttamente dal telefono.</span></div></div>
-    <div class="step"><div class="n">2</div><div><b>Mandaci le foto</b><span>Il nostro ingegnere verifica il laser e la cabina.</span></div></div>
-    <div class="step"><div class="n">3</div><div><b>1 ora di corso online</b><span>Senza muoverti dal centro. Sistemiamo subito quello che serve.</span></div></div>
+    <div class="step"><div class="n">1</div><div><b>Lasci i tuoi dati qui sotto</b><span>Un minuto, direttamente dal telefono.</span></div></div>
+    <div class="step"><div class="n">2</div><div><b>Ti mettiamo in contatto con l'ingegnere</b><span>È il nostro consulente per la sicurezza laser: ti scrive lui e ti chiede tutto quello che serve.</span></div></div>
+    <div class="step"><div class="n">3</div><div><b>Corso online in call</b><span>Lo fai con l'ingegnere senza muoverti dal centro, invece del corso in presenza.</span></div></div>
   </div>
-  <p class="note">L'aggiornamento del DVR resta a carico del datore di lavoro: ti diciamo noi cosa va inserito.</p>
+
+  <div class="price"><span>Prezzo riservato alle clienti Skinem</span><b>400 €</b></div>
+  <p class="note">Abbiamo ottenuto questo prezzo per chi ha un nostro laser, così non devi spostarti né chiudere il centro.</p>
 
   <form id="f" novalidate>
-    <h2>Il questionario</h2>
-    <p class="sub">Le risposte arrivano a Enzo su WhatsApp.</p>
+    <h2>Voglio mettermi in regola</h2>
+    <p class="sub">I tuoi dati arrivano a Enzo su WhatsApp, che li passa all'ingegnere.</p>
 
     <div class="q">
-      <div class="ql">Il tuo centro</div>
       <div class="grid2">
         <input type="text" name="centro" placeholder="Nome del centro" autocomplete="organization" required>
         <input type="text" name="titolare" placeholder="Il tuo nome" autocomplete="name" required>
         <input type="text" name="citta" placeholder="Città" autocomplete="address-level2">
-        <input type="tel" name="telefono" placeholder="Telefono" autocomplete="tel">
+        <input type="tel" name="telefono" placeholder="Telefono" autocomplete="tel" required>
       </div>
     </div>
 
     <div class="q">
-      <label for="modello">Che laser hai?</label>
-      <input type="text" id="modello" name="modello" placeholder="Marca e modello (es. Laser Extreme)">
-      <div class="chips" style="margin-top:10px">
-        <input type="radio" name="tipo" id="t1" value="Diodo"><label for="t1">Diodo</label>
-        <input type="radio" name="tipo" id="t2" value="Alessandrite"><label for="t2">Alessandrite</label>
-        <input type="radio" name="tipo" id="t3" value="Nd:YAG"><label for="t3">Nd:YAG</label>
-        <input type="radio" name="tipo" id="t4" value="Non so"><label for="t4">Non so</label>
-      </div>
-    </div>
-
-    <div class="q">
-      <div class="ql">Chi lo usa?</div>
+      <div class="ql">Chi farà il corso?</div>
       <div class="chips">
-        <input type="radio" name="operatori" id="o1" value="Solo io"><label for="o1">Solo io</label>
-        <input type="radio" name="operatori" id="o2" value="Io + 1 collaboratrice"><label for="o2">Io + 1</label>
-        <input type="radio" name="operatori" id="o3" value="Io + 2 o più collaboratrici"><label for="o3">Io + 2 o più</label>
-        <input type="radio" name="operatori" id="o4" value="Solo le collaboratrici"><label for="o4">Solo collaboratrici</label>
+        <input type="radio" name="partecipanti" id="p1" value="Solo io"><label for="p1">Solo io</label>
+        <input type="radio" name="partecipanti" id="p2" value="Io + 1 collaboratrice"><label for="p2">Io + 1</label>
+        <input type="radio" name="partecipanti" id="p3" value="Io + 2 o più collaboratrici"><label for="p3">Io + 2 o più</label>
       </div>
     </div>
 
     <div class="q">
-      <div class="ql">Cosa hai già?</div>
-      <div class="row"><span>Corso d'uso della macchina</span><div class="chips">
-        <input type="radio" name="c_uso" id="a1" value="Sì"><label for="a1">Sì</label>
-        <input type="radio" name="c_uso" id="a2" value="No"><label for="a2">No</label>
-        <input type="radio" name="c_uso" id="a3" value="Non so"><label for="a3">?</label></div></div>
-      <div class="row"><span>Formazione rischi laser certificata</span><div class="chips">
-        <input type="radio" name="c_rischi" id="b1" value="Sì"><label for="b1">Sì</label>
-        <input type="radio" name="c_rischi" id="b2" value="No"><label for="b2">No</label>
-        <input type="radio" name="c_rischi" id="b3" value="Non so"><label for="b3">?</label></div></div>
-      <div class="row"><span>DVR aggiornato con il laser</span><div class="chips">
-        <input type="radio" name="c_dvr" id="c1" value="Sì"><label for="c1">Sì</label>
-        <input type="radio" name="c_dvr" id="c2" value="No"><label for="c2">No</label>
-        <input type="radio" name="c_dvr" id="c3" value="Non so"><label for="c3">?</label></div></div>
-      <div class="row"><span>Esperto Sicurezza Laser (TSL) nominato</span><div class="chips">
-        <input type="radio" name="c_esl" id="d1" value="Sì"><label for="d1">Sì</label>
-        <input type="radio" name="c_esl" id="d2" value="No"><label for="d2">No</label>
-        <input type="radio" name="c_esl" id="d3" value="Non so"><label for="d3">?</label></div></div>
-    </div>
-
-    <div class="q">
-      <div class="ql">La cabina del laser</div>
-      <div class="row"><span>Ha finestre?</span><div class="chips">
-        <input type="radio" name="finestre" id="e1" value="Sì"><label for="e1">Sì</label>
-        <input type="radio" name="finestre" id="e2" value="No"><label for="e2">No</label></div></div>
-      <div class="row"><span>Cartello di pericolo laser sulla porta</span><div class="chips">
-        <input type="radio" name="cartello" id="g1" value="Sì"><label for="g1">Sì</label>
-        <input type="radio" name="cartello" id="g2" value="No"><label for="g2">No</label></div></div>
-      <div class="row"><span>Occhiali protettivi per operatrice e cliente</span><div class="chips">
-        <input type="radio" name="occhiali" id="h1" value="Sì"><label for="h1">Sì</label>
-        <input type="radio" name="occhiali" id="h2" value="No"><label for="h2">No</label></div></div>
-    </div>
-
-    <div class="q">
-      <div class="ql">Chi vuoi come Esperto Sicurezza Laser?</div>
+      <div class="ql">Quando preferisci essere contattata?</div>
       <div class="chips">
-        <input type="radio" name="ruolo_esl" id="r1" value="Voglio diventarlo io"><label for="r1">Voglio diventarlo io</label>
-        <input type="radio" name="ruolo_esl" id="r2" value="Preferisco un consulente esterno"><label for="r2">Un consulente esterno</label>
-        <input type="radio" name="ruolo_esl" id="r3" value="Non so, ne parliamo"><label for="r3">Ne parliamo</label>
+        <input type="radio" name="orario" id="h1" value="Mattina"><label for="h1">Mattina</label>
+        <input type="radio" name="orario" id="h2" value="Pausa pranzo"><label for="h2">Pausa pranzo</label>
+        <input type="radio" name="orario" id="h3" value="Sera"><label for="h3">Sera</label>
       </div>
-    </div>
-
-    <div class="q">
-      <div class="ql">Dopo l'invio, mandaci su WhatsApp queste foto</div>
-      <ul class="photos">
-        <li><i>📷</i>Il laser intero, di fronte</li>
-        <li><i>🏷️</i>L'etichetta con marca, modello e matricola (di solito sul retro)</li>
-        <li><i>🚪</i>La cabina vista dalla porta</li>
-        <li><i>⚠️</i>La porta della cabina dall'esterno</li>
-        <li><i>🕶️</i>Gli occhiali protettivi che usate</li>
-      </ul>
     </div>
 
     <div class="cta">
@@ -178,7 +126,7 @@ footer b{color:var(--fg);letter-spacing:.14em}
 
   <div class="done" id="done">
     <h3>Grazie! 🙌</h3>
-    <p>Ora, nella chat di WhatsApp che si è aperta, allega le foto della lista. Ti ricontattiamo noi per fissare l'ora di corso online.</p>
+    <p>Invia il messaggio nella chat di WhatsApp che si è aperta: passiamo subito i tuoi dati all'ingegnere, che ti contatterà per organizzare il corso.</p>
   </div>
 
   <footer><b>SKINEM</b><br>Enzo Evandri · formazione e tecnologie per centri estetici</footer>
@@ -192,24 +140,14 @@ footer b{color:var(--fg);letter-spacing:.14em}
   function line(label,n){var x=v(n); return label+': '+(x||'—');}
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    if(!v('centro')||!v('titolare')){err.textContent='Inserisci almeno il nome del centro e il tuo nome.'; f.elements['centro'].focus(); return;}
+    if(!v('centro')||!v('titolare')||!v('telefono')){err.textContent='Inserisci nome del centro, il tuo nome e il telefono.'; f.elements['centro'].focus(); return;}
     err.textContent='';
     var t=[
-      '*Questionario sicurezza laser*',
+      '*Corso sicurezza laser*',
+      'Voglio essere messa in contatto con l\u2019ingegnere.',
       '',
       line('Centro','centro'), line('Titolare','titolare'), line('Città','citta'), line('Telefono','telefono'),
-      '',
-      line('Laser','modello'), line('Tipo','tipo'), line('Chi lo usa','operatori'),
-      '',
-      '*Cosa ho già*',
-      line('Corso d’uso','c_uso'), line('Formazione rischi laser','c_rischi'), line('DVR aggiornato','c_dvr'), line('ESL/TSL nominato','c_esl'),
-      '',
-      '*Cabina*',
-      line('Finestre','finestre'), line('Cartello laser','cartello'), line('Occhiali protettivi','occhiali'),
-      '',
-      line('Esperto Sicurezza Laser','ruolo_esl'),
-      '',
-      'Ora ti mando le foto del laser e della cabina.'
+      line('Partecipanti','partecipanti'), line('Orario preferito','orario')
     ].join('\n');
     document.getElementById('done').style.display='block';
     window.location.href='https://wa.me/'+WA+'?text='+encodeURIComponent(t);
