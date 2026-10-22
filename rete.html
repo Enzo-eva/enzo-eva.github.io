@@ -19,10 +19,14 @@ p{margin:0;max-width:32ch;opacity:.95}
 </head><body>
 <img src="rete-icon-512.png" alt="Rete">
 <a id="go" href="#">Apri Rete</a>
-<p>Per l'icona su iPhone: tasto Condividi di Safari → Aggiungi alla schermata Home.</p>
+<p id="istr">Per l'icona: Condividi → Aggiungi alla schermata Home. Se compare "Apri come app web", spegnilo. Poi torna qui e tocca il tasto sotto.</p>
+<button id="fatto" style="background:transparent;border:1px solid #fff;color:#fff;border-radius:12px;padding:12px 18px;font:inherit;font-size:15px">Ho messo l'icona: d'ora in poi apri Rete subito</button>
 <script>
 var EXEC='https://script.google.com/a/macros/skinem.it/s/AKfycbx-NwvFmw1Zpw6Yhb0gI-E4CAS0TXbhxy8TUDbiXS8YqKmw3hx3F5Lxdox-ijO40p1J/exec';
 document.getElementById('go').href=EXEC;
-if(/[?&]app=1/.test(location.search)||window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone){location.replace(EXEC);}
+var setup=/[?&]setup/.test(location.search),k='rete-icona';
+function ok(){try{return localStorage.getItem(k)==='1'}catch(e){return false}}
+document.getElementById('fatto').onclick=function(){try{localStorage.setItem(k,'1')}catch(e){}location.replace(EXEC)};
+if(!setup&&(ok()||/[?&]app=1/.test(location.search)||window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone)){location.replace(EXEC);}
 </script>
 </body></html>
