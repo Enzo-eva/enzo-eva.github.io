@@ -4,29 +4,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Rete</title>
-<link rel="manifest" href="rete.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="rete-icon-192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="https://link.skinem.it/rete-icon-180.png?v=2">
-<link rel="apple-touch-icon-precomposed" sizes="180x180" href="https://link.skinem.it/rete-icon-180.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="https://link.skinem.it/rete-icon-180.png?v=3">
 <meta name="apple-mobile-web-app-title" content="Rete">
 <meta name="theme-color" content="#00B3E6">
 <style>
-body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;background:#00B3E6;color:#fff;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;padding:24px;text-align:center}
-img{width:160px;height:160px;border-radius:36px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#00B3E6;color:#fff;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;padding:24px;text-align:center}
+img{width:150px;height:150px;border-radius:34px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
 a{display:inline-block;background:#fff;color:#0083ad;text-decoration:none;font-weight:600;padding:16px 28px;border-radius:14px;font-size:18px}
 p{margin:0;max-width:32ch;opacity:.95}
 </style>
 </head><body>
 <img src="rete-icon-512.png" alt="Rete">
-<a id="go" href="#">Apri Rete</a>
-<p id="istr">Per l'icona: Condividi → Aggiungi alla schermata Home. Se compare "Apri come app web", spegnilo. Poi torna qui e tocca il tasto sotto.</p>
-<button id="fatto" style="background:transparent;border:1px solid #fff;color:#fff;border-radius:12px;padding:12px 18px;font:inherit;font-size:15px">Ho messo l'icona: d'ora in poi apri Rete subito</button>
+<a id="go" href="#" hidden>Apri Rete</a>
+<p id="msg">Apri Rete dal tuo link personale.</p>
 <script>
-var EXEC='https://script.google.com/a/macros/skinem.it/s/AKfycbx-NwvFmw1Zpw6Yhb0gI-E4CAS0TXbhxy8TUDbiXS8YqKmw3hx3F5Lxdox-ijO40p1J/exec';
-document.getElementById('go').href=EXEC;
-var setup=/[?&]setup/.test(location.search),k='rete-icona';
-function ok(){try{return localStorage.getItem(k)==='1'}catch(e){return false}}
-document.getElementById('fatto').onclick=function(){try{localStorage.setItem(k,'1')}catch(e){}location.replace(EXEC)};
-if(!setup&&(ok()||/[?&]app=1/.test(location.search)||window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone)){location.replace(EXEC);}
+// La chiave sta solo nel link personale di Enzo (dopo il #), mai in questa pagina.
+var EXEC='https://script.google.com/macros/s/AKfycbx-NwvFmw1Zpw6Yhb0gI-E4CAS0TXbhxy8TUDbiXS8YqKmw3hx3F5Lxdox-ijO40p1J/exec';
+var m=location.hash.match(/k=([A-Za-z0-9]+)/);
+if(m){
+  var url=EXEC+'?k='+m[1];
+  var go=document.getElementById('go');go.href=url;go.hidden=false;
+  if(/[?&]setup/.test(location.search)){
+    document.getElementById('msg').textContent="Per l'icona: Condividi → Aggiungi alla schermata Home. Poi apri Rete dall'icona.";
+  }else{
+    document.getElementById('msg').textContent='';
+    location.replace(url);
+  }
+}
 </script>
 </body></html>
