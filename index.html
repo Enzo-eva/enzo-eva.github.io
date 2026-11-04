@@ -48,10 +48,10 @@ p{margin:0;max-width:60ch}
 .hero{position:relative;border-radius:var(--r);overflow:hidden;min-height:min(80vh,700px);display:flex;flex-direction:column;background:var(--grigio);box-shadow:var(--ombra)}
 .ecg{display:block;width:calc(100% + 44px);max-width:none;margin:0 -22px;height:clamp(100px,20vw,160px);overflow:visible}
 .small-claim{font-size:1.05rem;letter-spacing:.04em;color:rgba(255,255,255,.88);max-width:30ch}
-.small-claim em{font-style:normal;color:var(--celeste)}
+.small-claim em{font-style:normal;color:#A6EAFC}
 .ecg path{fill:none;stroke-linecap:round;stroke-linejoin:round}
 .ecg-base{stroke:rgba(255,255,255,.14);stroke-width:2}
-.ecg-run{stroke:var(--celeste);stroke-width:2.5;stroke-dasharray:.28 .72;stroke-dashoffset:1;animation:battito 3.2s linear infinite;filter:drop-shadow(0 0 6px rgba(0,179,230,.7))}
+.ecg-run{stroke:#5FD6F8;stroke-width:2.5;stroke-dasharray:.28 .72;stroke-dashoffset:1;animation:battito 3.2s linear infinite;filter:drop-shadow(0 0 6px rgba(0,179,230,.7))}
 @keyframes battito{to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){.ecg-run{animation:none;stroke-dasharray:none}}
 .top{position:relative;z-index:2;display:flex;align-items:center;gap:20px;padding:28px clamp(22px,5vw,56px) 0;color:var(--bianco);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase}
@@ -125,6 +125,13 @@ p{margin:0;max-width:60ch}
 
 @keyframes galleggia{0%,100%{translate:0 0}50%{translate:0 -10px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.quote blockquote{animation:none}}
+
+/* grigio chiaro sospeso */
+.hero,.band{background:linear-gradient(160deg,#808080 0%,#6E6E6C 100%);box-shadow:0 60px 90px -40px rgba(40,44,48,.55),0 24px 40px -24px rgba(40,44,48,.35),inset 0 1px 0 rgba(255,255,255,.18);animation:sospeso 9s ease-in-out infinite}
+.band{animation-delay:-3s}
+.hero{margin:6px 4px 28px}
+@keyframes sospeso{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){.hero,.band{animation:none}}
 </style>
 </head>
 <body>
