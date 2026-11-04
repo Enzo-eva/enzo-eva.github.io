@@ -53,7 +53,9 @@ p{margin:0;max-width:62ch}
 .muted{color:#7A7A79}
 
 /* ---------- bottoni ---------- */
-.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btns{display:inline-grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:12px;align-self:flex-start;max-width:100%}
+.btns .btn{justify-content:center;text-align:center}
+@media (max-width:560px){.btns{display:grid;grid-auto-flow:row;align-self:stretch;width:100%}}
 .btn{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 24px;border-radius:0;font:600 .9rem/1 var(--f);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border:1.5px solid var(--celeste);color:var(--grigio);background:transparent;cursor:pointer;transition:background .2s,color .2s}
 .btn:hover{background:var(--mist)}
 .btn.pri{background:var(--celeste-light);border-color:var(--celeste-light);color:var(--grigio)}
