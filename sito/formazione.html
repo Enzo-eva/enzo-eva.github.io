@@ -22,6 +22,7 @@
   --ink:#333332;          /* titoli scuri */
   --mist:#EDF8FC;         /* bianco velato di celeste per le fasce */
   --line:#DCE7EC;
+  --grey-bg:#F5F5F4;   /* grigio chiarissimo per la fascia laser */
   --white:#FFFFFF;
   --f:"Larke Neue","Avenir Next","Helvetica Neue",Arial,sans-serif;
   --wrap:1180px;
@@ -106,6 +107,8 @@ body.menu-open{overflow:hidden}
 /* ---------- sezioni ---------- */
 .sec{padding-block:clamp(64px,9vw,120px)}
 .sec.tint{background:var(--mist)}
+.sec.grey{background:var(--grey-bg)}
+.sec.grey .spec{color:var(--grigio);border-color:var(--line)}
 .sec.blue{background:var(--celeste);color:var(--white)}
 .sec.blue h2,.sec.blue h3,.sec.blue .k{color:var(--white)}
 .sec.blue h2 b{color:var(--white)}
