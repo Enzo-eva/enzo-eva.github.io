@@ -45,13 +45,13 @@ p{margin:0;max-width:60ch}
 .pills{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
 
 /* hero */
-.hero{position:relative;border-radius:var(--r);overflow:hidden;min-height:min(80vh,700px);display:flex;flex-direction:column;background:var(--grigio);box-shadow:var(--ombra)}
+.hero{position:relative;border-radius:var(--r);overflow:hidden;min-height:min(62vh,540px);display:flex;flex-direction:column;background:var(--grigio);box-shadow:var(--ombra)}
 .ecg{display:block;width:calc(100% + 44px);max-width:none;margin:0 -22px;height:clamp(100px,20vw,160px);overflow:visible}
 .small-claim{font-size:1.05rem;letter-spacing:.04em;color:rgba(255,255,255,.88);max-width:30ch}
 .small-claim em{font-style:normal;color:#A6EAFC}
 .ecg path{fill:none;stroke-linecap:round;stroke-linejoin:round}
 .ecg-base{stroke:rgba(255,255,255,.14);stroke-width:2}
-.ecg-run{stroke:#5FD6F8;stroke-width:2.5;stroke-dasharray:.28 .72;stroke-dashoffset:1;animation:battito 3.2s linear infinite;filter:drop-shadow(0 0 6px rgba(0,179,230,.7))}
+.ecg-run{stroke:var(--celeste);stroke-width:2.5;stroke-dasharray:.28 .72;stroke-dashoffset:1;animation:battito 3.2s linear infinite;}
 @keyframes battito{to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){.ecg-run{animation:none;stroke-dasharray:none}}
 .top{position:relative;z-index:2;display:flex;align-items:center;gap:20px;padding:28px clamp(22px,5vw,56px) 0;color:var(--bianco);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase}
@@ -126,12 +126,9 @@ p{margin:0;max-width:60ch}
 @keyframes galleggia{0%,100%{translate:0 0}50%{translate:0 -10px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.quote blockquote{animation:none}}
 
-/* grigio chiaro sospeso */
-.hero,.band{background:linear-gradient(160deg,#808080 0%,#6E6E6C 100%);box-shadow:0 60px 90px -40px rgba(40,44,48,.55),0 24px 40px -24px rgba(40,44,48,.35),inset 0 1px 0 rgba(255,255,255,.18);animation:sospeso 9s ease-in-out infinite}
-.band{animation-delay:-3s}
-.hero{margin:6px 4px 28px}
-@keyframes sospeso{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@media (prefers-reduced-motion:reduce){.hero,.band{animation:none}}
+/* tavola grigio scuro sospesa: ombra ampia e lontana, nessun movimento */
+.hero,.band{background:var(--grigio);box-shadow:0 70px 70px -50px rgba(30,32,34,.55),0 30px 30px -30px rgba(30,32,34,.25)}
+.hero{margin:6px 6px 40px}
 </style>
 </head>
 <body>
@@ -141,11 +138,8 @@ p{margin:0;max-width:60ch}
 <section class="hero">
   <header class="top"><nav class="links" aria-label="Menu"><a href="#cosmetica">Marchi</a><a href="#microneedling">Microneedling</a><a href="#tecnologie">Tecnologie</a><a href="#contatti">Contatti</a></nav></header>
   <div class="hero-txt">
-    <p class="eyebrow light">Evolver</p>
     <h1>Enzo Evandri</h1>
     <svg class="ecg" viewBox="0 0 800 160" preserveAspectRatio="none" aria-hidden="true"><path class="ecg-base" d="M0 90 H250 L270 90 L282 70 L294 90 L320 90 L332 104 L350 20 L368 140 L382 90 L410 90 L430 74 L452 90 H800"/><path class="ecg-run" pathLength="1" d="M0 90 H250 L270 90 L282 70 L294 90 L320 90 L332 104 L350 20 L368 140 L382 90 L410 90 L430 74 L452 90 H800"/></svg>
-    <p class="small-claim">Prima di tutto, <em>ascolto.</em></p>
-    <div class="pills"><a class="pill" href="https://wa.me/393460356595?text=Ciao%20Enzo%2C%20vorrei%20fissare%20una%20chiacchierata%20conoscitiva." target="_blank" rel="noopener">Una chiacchierata <i></i></a></div>
   </div>
 </section>
 
