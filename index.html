@@ -46,12 +46,17 @@ p{margin:0;max-width:60ch}
 
 /* hero */
 .hero{position:relative;border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;background:var(--grigio);box-shadow:var(--ombra)}
-.hero-bg{display:block;width:100%;height:min(50vh,440px);object-fit:cover;object-position:50% 35%;margin-top:-62px;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent);mask-image:linear-gradient(180deg,#000 70%,transparent)}
+.ecg{display:block;width:100%;height:clamp(110px,22vw,170px);margin:28px 0 6px;overflow:visible}
+.ecg path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ecg-base{stroke:rgba(255,255,255,.14);stroke-width:2}
+.ecg-run{stroke:var(--celeste);stroke-width:2.5;stroke-dasharray:.28 .72;stroke-dashoffset:1;animation:battito 3.2s linear infinite;filter:drop-shadow(0 0 6px rgba(0,179,230,.7))}
+@keyframes battito{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.ecg-run{animation:none;stroke-dasharray:none}}
 .top{position:relative;z-index:2;display:flex;align-items:center;gap:20px;padding:28px clamp(22px,5vw,56px) 0;color:var(--bianco);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase}
 .top .links{margin-left:auto;display:flex;gap:22px}
 .top .links a{text-decoration:none;opacity:.9}
 @media (max-width:760px){.top .links{display:none}}
-.hero-txt{position:relative;z-index:2;margin-top:-30px;padding:0 22px clamp(40px,7vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px}
+.hero-txt{position:relative;z-index:2;margin-top:0;padding:0 22px clamp(40px,7vw,72px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px}
 .hero-txt p{color:rgba(255,255,255,.9);font-size:1.08rem;margin:0 auto}
 
 /* sezioni */
@@ -126,11 +131,11 @@ p{margin:0;max-width:60ch}
 
 <section class="hero">
   <header class="top"><span>Enzo Evandri</span><nav class="links" aria-label="Menu"><a href="#cosmetica">Marchi</a><a href="#microneedling">Microneedling</a><a href="#tecnologie">Tecnologie</a><a href="#contatti">Contatti</a></nav></header>
-  <img class="hero-bg" src="v-hero2.webp" alt="">
+  <svg class="ecg" viewBox="0 0 800 160" preserveAspectRatio="none" aria-hidden="true"><path class="ecg-base" d="M0 90 H250 L270 90 L282 70 L294 90 L320 90 L332 104 L350 20 L368 140 L382 90 L410 90 L430 74 L452 90 H800"/><path class="ecg-run" pathLength="1" d="M0 90 H250 L270 90 L282 70 L294 90 L320 90 L332 104 L350 20 L368 140 L382 90 L410 90 L430 74 L452 90 H800"/></svg>
   <div class="hero-txt">
     <p class="eyebrow light">Per chi guida un centro estetico</p>
-    <h1>Le clienti non scelgono un trattamento. <em>Scelgono chi lo fa.</em></h1>
-    <p>E tu, oggi, cosa stai dando loro da scegliere?</p>
+    <h1>Al tuo centro non serve un ritocco. <em>Serve un intervento a cuore aperto.</em></h1>
+    <p>Le clienti non scelgono un trattamento: scelgono chi lo fa. Partiamo da lì.</p>
     <div class="pills"><a class="pill" href="https://wa.me/393460356595?text=Ciao%20Enzo%2C%20vorrei%20fissare%20una%20chiacchierata%20conoscitiva." target="_blank" rel="noopener">Una chiacchierata <i></i></a></div>
   </div>
 </section>
