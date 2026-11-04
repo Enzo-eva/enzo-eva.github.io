@@ -37,7 +37,7 @@ h3{font-size:1.1rem;font-weight:400;letter-spacing:.05em;line-height:1.25}
 .eyebrow.light{color:rgba(255,255,255,.9)}
 h2.light{color:var(--bianco)}
 p{margin:0;max-width:60ch}
-.pill{display:inline-flex;align-items:center;gap:18px;min-height:58px;padding:0 32px 0 28px;border-radius:999px;background:var(--bianco);color:var(--ink);text-decoration:none;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;box-shadow:0 18px 36px -20px rgba(40,44,48,.5);transition:transform .2s}
+.pill{display:inline-flex;align-items:center;justify-content:space-between;gap:18px;width:260px;max-width:100%;min-height:58px;padding:0 32px 0 28px;border-radius:999px;background:var(--bianco);color:var(--ink);text-decoration:none;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;box-shadow:0 18px 36px -20px rgba(40,44,48,.5);transition:transform .2s}
 .pill i{display:block;width:36px;height:1.5px;background:currentColor;transition:width .25s}
 .pill:hover{transform:translateY(-3px)}.pill:hover i{width:52px}
 .pill.dark{background:var(--grigio);color:var(--bianco)}
@@ -90,12 +90,13 @@ p{margin:0;max-width:60ch}
 /* binario macchine */
 .rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:26px clamp(22px,5vw,60px) 46px;scrollbar-width:none}
 .rail::-webkit-scrollbar{display:none}
-.prod{flex:0 0 min(78%,300px);scroll-snap-align:start;border-radius:22px;padding:16px 16px 26px;display:flex;flex-direction:column;gap:10px;text-align:center;background:var(--bianco);text-decoration:none;color:var(--grigio);box-shadow:0 20px 44px -26px rgba(40,44,48,.45),0 0 0 1px rgba(47,47,46,.08);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.prod{flex:0 0 min(58%,220px);scroll-snap-align:start;border-radius:20px;padding:12px 12px 20px;display:flex;flex-direction:column;gap:6px;text-align:center;background:var(--bianco);text-decoration:none;color:var(--grigio);box-shadow:0 20px 44px -26px rgba(40,44,48,.45),0 0 0 1px rgba(47,47,46,.08);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .prod:hover{transform:translateY(-8px)}
-.prod img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px}
+.prod img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px}
 .prod img.contain{object-fit:contain}
 .prod .area{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--celeste);margin-top:8px}
-.prod p{font-size:.95rem;margin:0 auto}
+.prod p{font-size:.88rem;line-height:1.45;margin:0 auto}
+.prod h3{font-size:1rem}
 .hint{padding:0 clamp(22px,5vw,60px);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:#8a8a88}
 
 /* elenco a trattini */
@@ -124,7 +125,7 @@ p{margin:0;max-width:60ch}
 
 <section class="hero">
   <img class="hero-bg" src="bv-cabina.webp" alt="">
-  <header class="top"><span>Enzo Evandri</span><nav class="links" aria-label="Menu"><a href="#cosmetica">Cosmetica</a><a href="#microneedling">Microneedling</a><a href="#tecnologie">Tecnologie</a><a href="#contatti">Contatti</a></nav></header>
+  <header class="top"><span>Enzo Evandri</span><nav class="links" aria-label="Menu"><a href="#cosmetica">Marchi</a><a href="#microneedling">Microneedling</a><a href="#tecnologie">Tecnologie</a><a href="#contatti">Contatti</a></nav></header>
   <div class="hero-txt">
     <p class="eyebrow light">Evolver · Estetica professionale</p>
     <h1>Enzo Evandri</h1>
@@ -145,11 +146,11 @@ p{margin:0;max-width:60ch}
 <section class="white" id="cosmetica">
   <div class="white-head">
     <p class="eyebrow">Per la cabina e per casa</p>
-    <h2>Cosmetica professionale</h2>
-    <p>Due linee professionali, viso e corpo, con protocolli di cabina e prodotti domiciliari.</p>
+    <h2>I marchi</h2>
+    <p>Bruno Vassari e il mondo Skinem: protocolli di cabina, tecnologie e prodotti domiciliari.</p>
     <div class="two">
       <a class="card" href="brunovassari.html"><img src="bv-ritratto.webp" alt="" width="352" height="502"><span class="cap"><b>Bruno Vassari</b>Barcellona, dal 1984. Linee viso e corpo in 55 paesi.<span class="go">Presentazione <i></i></span></span></a>
-      <a class="card" href="https://link.skinem.it/vetrina.html" target="_blank" rel="noopener"><img src="v-cabina.webp" alt="" width="486" height="600"><span class="cap"><b>Cosmetica Skinem</b>Cabina viso, Method Body System, attivi HD e domiciliari.<span class="go">Vetrina <i></i></span></span></a>
+      <a class="card" href="https://link.skinem.it/vetrina.html" target="_blank" rel="noopener"><img src="v-cabina.webp" alt="" width="486" height="600"><span class="cap"><b>Il mondo Skinem</b>Metodo, tecnologie, arredo e cosmetica professionale.<span class="go">Vetrina <i></i></span></span></a>
     </div>
   </div>
 </section>
