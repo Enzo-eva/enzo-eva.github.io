@@ -137,6 +137,14 @@ p{margin:0;max-width:60ch}
 #persona{padding-top:14px}
 @keyframes giu{0%,100%{translate:0 -6px;opacity:.5}50%{translate:0 2px;opacity:1}}
 @media (prefers-reduced-motion:reduce){.scroll{animation:none}}
+
+/* formazione */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:26px clamp(22px,5vw,60px) 10px}
+@media (max-width:760px){.trio{grid-template-columns:1fr}}
+.tcard{background:var(--perla);border-radius:22px;padding:24px 22px 26px;display:flex;flex-direction:column;gap:10px;text-align:left;box-shadow:0 20px 40px -30px rgba(40,44,48,.4)}
+.tcard .n{font-size:.78rem;letter-spacing:.18em;color:var(--celeste)}
+.tcard h3{font-size:1.2rem;font-weight:400;letter-spacing:.06em}
+.tcard p{font-size:.98rem;color:var(--grigio);margin:0}
 </style>
 </head>
 <body>
@@ -144,7 +152,7 @@ p{margin:0;max-width:60ch}
 <div class="page">
 
 <section class="hero">
-  <header class="top"><nav class="links" aria-label="Menu"><a href="#cosmetica">Marchi</a><a href="#microneedling">Microneedling</a><a href="#tecnologie">Tecnologie</a><a href="#contatti">Contatti</a></nav></header>
+  <header class="top"><nav class="links" aria-label="Menu"><a href="#cosmetica">Marchi</a><a href="#microneedling">Microneedling</a><a href="#tecnologie">Tecnologie</a><a href="#formazione">Formazione</a><a href="#contatti">Contatti</a></nav></header>
   <div class="hero-txt">
     <p class="eyebrow light">Evolver</p>
     <h1>Enzo Evandri</h1>
@@ -207,13 +215,22 @@ p{margin:0;max-width:60ch}
   <p class="hint">Scorri per vederle tutte →</p>
 </section>
 
-<section class="sec" id="servizi">
-  <p class="eyebrow">Al tuo fianco</p>
-  <h2>Formazione e servizi</h2>
-  <div class="dash-list">
-    <div><i></i><span><b>Formazione in cabina</b><span>Protocolli, anamnesi e vendita, sulle tue clienti e con il tuo team.</span></span></div>
-    <div><i></i><span><b>Consulenza per il centro</b><span>Listino, numeri, clienti e organizzazione.</span></span></div>
-    <a href="https://link.skinem.it/sicurezza-laser.html" target="_blank" rel="noopener"><i></i><span><b>Corso sicurezza laser</b><span>Online con l’ingegnere, per mettere in regola il laser.</span></span></a>
+<section class="white" id="formazione">
+  <div class="white-head">
+    <p class="eyebrow">Quello che faccio</p>
+    <h2>Formazione</h2>
+    <p>Lavoro dentro il tuo centro, in cabina, con le tue clienti. Tre livelli, da scegliere o da combinare.</p>
+  </div>
+  <div class="trio">
+    <div class="tcard"><span class="n">01</span><h3>One to one</h3><p>Formazione diretta con te, titolare. Numeri, listino, organizzazione e le scelte che fanno crescere il centro.</p></div>
+    <div class="tcard"><span class="n">02</span><h3>Il centro</h3><p>Formazione in cabina con il tuo team: protocolli, anamnesi, valutazione pre-trattamento e consiglio domiciliare.</p></div>
+    <div class="tcard"><span class="n">03</span><h3>Le persone</h3><p>Come accogliere la cliente, ascoltarla e farla sentire vista davvero: la comunicazione che la fa tornare.</p></div>
+  </div>
+  <div class="white-head" style="margin-top:8px">
+    <div class="dash-list" style="max-width:none">
+      <a href="https://link.skinem.it/sicurezza-laser.html" target="_blank" rel="noopener"><i></i><span><b>Corso sicurezza laser</b><span>Online con l’ingegnere, per mettere in regola il laser.</span></span></a>
+    </div>
+    <div class="pills" style="justify-content:flex-start;margin:18px 0 10px"><a class="pill dark" href="https://wa.me/393460356595?text=Ciao%20Enzo%2C%20vorrei%20parlare%20della%20formazione." target="_blank" rel="noopener">Parliamone <i></i></a></div>
   </div>
 </section>
 
