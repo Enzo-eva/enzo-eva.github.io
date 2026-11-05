@@ -147,11 +147,22 @@ p{margin:0;max-width:60ch}
 .tcard p{font-size:.98rem;color:var(--grigio);margin:0}
 .trio.quattro{grid-template-columns:repeat(2,1fr)}
 @media (max-width:760px){.trio.quattro{grid-template-columns:1fr}}
+
+/* trasparenza: sotto la tavola si intravede il fondo */
+.page{position:relative}
+.fondo{position:absolute;inset:0 0 auto 0;height:calc(100svh + 40px);z-index:0;pointer-events:none;overflow:hidden}
+.fondo span{position:absolute;border-radius:50%;filter:blur(40px)}
+.fondo .a{width:70vw;height:70vw;max-width:620px;max-height:620px;left:-14vw;top:6vh;background:rgba(0,179,230,.38)}
+.fondo .b{width:60vw;height:60vw;max-width:540px;max-height:540px;right:-12vw;top:42vh;background:rgba(87,87,86,.45)}
+.fondo .c{width:40vw;height:40vw;max-width:360px;max-height:360px;left:30vw;top:-8vh;background:rgba(255,255,255,.9)}
+.hero{position:relative;z-index:1;background:linear-gradient(170deg,rgba(74,74,73,.78) 0%,rgba(52,52,51,.86) 100%)!important;-webkit-backdrop-filter:blur(18px) saturate(1.1);backdrop-filter:blur(18px) saturate(1.1);border:1px solid rgba(255,255,255,.14)}
+.floor{position:relative;z-index:1}
 </style>
 </head>
 <body>
 
 <div class="page">
+<div class="fondo" aria-hidden="true"><span class="a"></span><span class="b"></span><span class="c"></span></div>
 
 <section class="hero">
   <header class="top"><nav class="links" aria-label="Menu"><a href="#cosmetica">Marchi</a><a href="#microneedling">Microneedling</a><a href="#tecnologie">Tecnologie</a><a href="#formazione">Formazione</a><a href="#contatti">Contatti</a></nav></header>
