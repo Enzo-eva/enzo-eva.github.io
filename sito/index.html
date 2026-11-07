@@ -177,6 +177,19 @@ p{margin:0;max-width:60ch}
 @media (max-width:640px){.facts{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.facts div{animation:none}}
 
+/* modello di business (dal catalogo) */
+.model{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(30px,5vw,70px);align-items:center;padding:clamp(40px,6vw,80px) clamp(10px,4vw,60px) clamp(70px,9vw,120px)}
+.model>*{min-width:0}
+.model-pic img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:45% center;border-radius:var(--r);box-shadow:var(--ombra-s);animation:galleggia 9s ease-in-out infinite}
+.model-txt{display:flex;flex-direction:column;gap:18px}
+.values{display:grid;gap:16px;margin-top:14px}
+.value{background:var(--bianco);border-radius:22px;padding:26px 28px;box-shadow:var(--ombra-s);display:flex;flex-direction:column;gap:8px}
+.value h3{font-size:1.25rem;letter-spacing:.08em}
+.value h3 span{color:var(--celeste);margin-right:4px}
+.value p{font-size:.98rem}
+@media (max-width:860px){.model{grid-template-columns:1fr}.model-pic img{aspect-ratio:5/4}}
+@media (prefers-reduced-motion:reduce){.model-pic img{animation:none}}
+
 </style>
 </head>
 <body>
@@ -226,6 +239,20 @@ p{margin:0;max-width:60ch}
     <a class="pill" href="#centro"><i></i>Scopri il metodo Skinem</a>
   </div>
   <div class="photo"><img src="img/t-hd.jpg" alt="Trattamento viso con Skinem HD"></div>
+</section>
+
+<!-- MODELLO DI BUSINESS -->
+<section class="model" id="modello">
+  <div class="model-pic"><img src="img/modello.jpg" alt="Operatrice Skinem in cabina durante un trattamento viso"></div>
+  <div class="model-txt">
+    <p class="eyebrow">Il nostro modello di business</p>
+    <h2>Concretezza, supporto, <em>clientela e guadagno</em></h2>
+    <div class="values">
+      <div class="value"><h3><span>/</span>Semplice</h3><p>Un piano già collaudato e testato che semplifica ogni tuo gesto. È il motivo principale per entrare in un brand affermato, che mette a disposizione tutta la sua esperienza.</p></div>
+      <div class="value"><h3><span>/</span>Soddisfacente</h3><p>Skinem è costruita sul miglioramento della vita di tutte le parti coinvolte: dai nostri ospiti ai nostri clienti, ai nostri partner. Il nostro modello aiuta ognuno a sentirsi soddisfatto e realizzato.</p></div>
+      <div class="value"><h3><span>/</span>Strategico</h3><p>Skinem va oltre la bellezza: siamo posizionati per rispondere alla domanda crescente di benessere e cura di sé, con un'attività progettata per adattarsi alle esigenze degli ospiti e dei partner.</p></div>
+    </div>
+  </div>
 </section>
 
 <!-- PER IL TUO CENTRO -->
@@ -304,7 +331,7 @@ p{margin:0;max-width:60ch}
 <footer class="foot">
   <img src="img/logo-grigio.png" alt="Skinem" width="640" height="122">
   <p>Skinem Group SRLS · Via Palermo 25, 63822 Porto San Giorgio (FM)<br>WhatsApp +39 346 035 6595 · commerciale@skinem.it</p>
-  <p class="small">Vendita riservata ai professionisti dell'estetica · © 2026 Skinem®</p>
+  <p class="small">P.IVA 02080450436 · Vendita riservata ai professionisti dell'estetica · © 2026 Skinem®</p>
 </footer>
 </div>
 
