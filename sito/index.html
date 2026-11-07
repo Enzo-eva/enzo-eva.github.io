@@ -168,6 +168,15 @@ p{margin:0;max-width:60ch}
 .rise.pre{transform:translateY(34px);opacity:.35}
 @media (prefers-reduced-motion:reduce){.stagger .card,.two .card,.photo,.quote blockquote{animation:none}.rise.pre{transform:none;opacity:1}}
 
+/* numeri */
+.facts{margin-top:44px;width:100%;max-width:900px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.facts div{background:var(--bianco);border-radius:22px;padding:34px 24px;display:flex;flex-direction:column;gap:10px;align-items:center;box-shadow:var(--ombra-s);animation:galleggia 7s ease-in-out infinite}
+.facts div:nth-child(2){animation-delay:-2.3s}.facts div:nth-child(3){animation-delay:-4.6s}
+.facts strong{font-weight:100;font-size:clamp(2.8rem,6vw,4rem);line-height:1;color:var(--celeste);font-variant-numeric:tabular-nums}
+.facts span{font-size:.95rem;line-height:1.4;max-width:22ch}
+@media (max-width:640px){.facts{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.facts div{animation:none}}
+
 </style>
 </head>
 <body>
@@ -195,15 +204,16 @@ p{margin:0;max-width:60ch}
   <a class="pill dark" href="https://wa.me/393460356595" target="_blank" rel="noopener"><i></i>Scrivici su WhatsApp</a>
 </div>
 
-<!-- VOCE -->
+<!-- NATO IN CABINA -->
 <section class="sec center">
-  <p class="eyebrow">Chi c'è dietro Skinem</p>
-  <h2>L'ho provato <em>prima io</em></h2>
-  <p class="lead narrow">Ogni tecnologia, ogni prodotto e ogni protocollo Skinem nasce in cabina, sulle clienti dei miei due centri.</p>
-  <figure class="quote">
-    <blockquote>Nel 2019 volevo una tecnologia che non passasse di moda e tenesse l'estetista in cabina, a lavorare con le mani. Così ho progettato Skinem HD e il metodo per usarla.</blockquote>
-    <figcaption><img src="img/enzo.jpg" alt=""><span class="who">Enzo Evandri</span><span class="role">Fondatore Skinem · 25 anni nell'estetica</span></figcaption>
-  </figure>
+  <p class="eyebrow">Skinem Group</p>
+  <h2>Progettato <em>in cabina</em></h2>
+  <p class="lead narrow">Ogni tecnologia, ogni prodotto e ogni protocollo Skinem viene sviluppato e verificato nei nostri centri, sul lavoro quotidiano in cabina, prima di arrivare nel tuo.</p>
+  <div class="facts">
+    <div><strong>2019</strong><span>Nasce Skinem HD e il suo protocollo</span></div>
+    <div><strong>8</strong><span>Tecnologie per viso, corpo ed epilazione</span></div>
+    <div><strong>0</strong><span>Contratti, royalty e minimi d'ordine</span></div>
+  </div>
 </section>
 
 <!-- METODO -->
@@ -285,7 +295,7 @@ p{margin:0;max-width:60ch}
   <div class="col">
     <p class="eyebrow">Trova Skinem</p>
     <h2>Parliamo del <em>tuo centro</em></h2>
-    <p>Vuoi provare le tecnologie Skinem o capire come entrare? Scrivimi: vengo a vedere il tuo centro e partiamo da lì.</p>
+    <p>Vuoi provare le tecnologie Skinem o capire come entrare? Scrivici: veniamo a vedere il tuo centro e partiamo da lì.</p>
     <a class="pill dark" href="https://wa.me/393460356595" target="_blank" rel="noopener"><i></i>Scrivici su WhatsApp</a>
   </div>
 </section>
