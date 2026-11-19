@@ -78,17 +78,15 @@
   <div class="tavola">
     <div class="lab">Strumento per la cabina</div>
     <h1>Fase</h1>
-    <p>Inserisci quello che la cliente ti racconta. Ricevi il percorso: tecnologie, tempi, parole da usare.</p>
+    <p>Scegli quello che la cliente ti racconta, senza nomi. Ricevi il percorso: tecnologie, tempi, parole da usare.</p>
   </div>
 
   <form id="f" autocomplete="off">
     <div class="card">
       <div class="lab"><span class="num">01</span>Cliente</div>
       <h2>Chi hai davanti</h2>
-      <div class="row">
-        <div><label class="f">Nome</label><input type="text" id="nome" placeholder="Es. Laura"></div>
-        <div style="flex:.6"><label class="f">Età</label><input type="number" id="eta" min="14" max="90" placeholder="42"></div>
-      </div>
+      <label class="f">Età (facoltativa)</label><input type="number" id="eta" min="14" max="90" placeholder="42">
+      <div class="hint">Niente nome né dati personali: la pagina non salva e non invia nulla. Chiudi e tutto sparisce.</div>
     </div>
 
     <div class="card">
@@ -231,7 +229,7 @@ function build(){
   const err = document.getElementById("err"); err.textContent="";
   const fase = sel("fase")[0];
   if(!fase){ err.textContent="Scegli la fase di vita della cliente."; return; }
-  const nome = document.getElementById("nome").value.trim() || "la cliente";
+  const nome = "la cliente";
   const eta = parseInt(document.getElementById("eta").value)||null;
   const sint = sel("sint"), cond = sel("cond"), zona = sel("zona")[0]||"entrambi";
   const has = k => cond.includes(k), hs = k => sint.includes(k);
