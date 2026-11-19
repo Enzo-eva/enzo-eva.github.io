@@ -70,6 +70,16 @@
   .leg span{display:flex;align-items:center;gap:6px}.leg i{width:9px;height:9px;border-radius:50%;display:inline-block}
   .foot{font-size:12px;color:var(--muto);text-align:center;margin-top:20px;padding:0 10px}
   .ok{font-size:13px;color:var(--si);text-align:center;margin-top:8px;min-height:18px}
+  .esame{display:grid;grid-template-columns:1fr 64px 52px 52px;gap:6px;align-items:center;padding:7px 0;border-top:1px solid #f0f0ee}
+  .esame span{font-size:14px;line-height:1.25}.esame span small{display:block;color:var(--muto);font-size:11px}
+  .esame input{padding:9px 6px!important;border-radius:12px!important;text-align:center;font-size:14px}
+  .eh{display:grid;grid-template-columns:1fr 64px 52px 52px;gap:6px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muto);text-align:center}
+  .eh :first-child{text-align:left}
+  .grp{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--celeste);margin:16px 0 2px}
+  details summary{cursor:pointer;list-style:none}details summary::-webkit-details-marker{display:none}
+  .ris{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #eeeeec;font-size:14px}
+  .ris:first-of-type{border-top:0}.ris .v{font-weight:500;white-space:nowrap}
+  .ris .v.out{color:var(--no)}.ris .v.in{color:var(--si)}
 </style>
 </head>
 <body>
@@ -159,6 +169,16 @@
       </div>
     </div>
 
+    <div class="card">
+      <details>
+        <summary><div class="lab"><span class="num">06</span>Esami del sangue · facoltativo</div>
+        <h2 style="margin-bottom:4px">Se ha portato le analisi ＋</h2></summary>
+        <div class="hint" style="margin-bottom:10px">Copia dal referto il valore e l'intervallo di riferimento del laboratorio (min e max), che cambia da laboratorio a laboratorio e, per gli ormoni, in base al giorno del ciclo. Compila solo quello che c'è.</div>
+        <div class="eh"><span>Esame</span><span>Valore</span><span>Min</span><span>Max</span></div>
+        <div class="grp">Grassi nel sangue</div><div class="esame" data-k="col" data-n="Colesterolo totale" data-u="mg/dl"><span>Colesterolo totale<small>mg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="hdl" data-n="Colesterolo HDL" data-u="mg/dl"><span>Colesterolo HDL<small>mg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="ldl" data-n="Colesterolo LDL" data-u="mg/dl"><span>Colesterolo LDL<small>mg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="trig" data-n="Trigliceridi" data-u="mg/dl"><span>Trigliceridi<small>mg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="grp">Zuccheri</div><div class="esame" data-k="gli" data-n="Glicemia" data-u="mg/dl"><span>Glicemia<small>mg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="ins" data-n="Insulina" data-u="µU/ml"><span>Insulina<small>µU/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="grp">Tiroide</div><div class="esame" data-k="tsh" data-n="TSH" data-u="µUI/ml"><span>TSH<small>µUI/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="ft3" data-n="FT3" data-u="pg/ml"><span>FT3<small>pg/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="ft4" data-n="FT4" data-u="ng/dl"><span>FT4<small>ng/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="grp">Ormoni femminili</div><div class="esame" data-k="fsh" data-n="FSH" data-u="mUI/ml"><span>FSH<small>mUI/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="lh" data-n="LH" data-u="mUI/ml"><span>LH<small>mUI/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="e2" data-n="Estradiolo" data-u="pg/ml"><span>Estradiolo<small>pg/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="prog" data-n="Progesterone" data-u="ng/ml"><span>Progesterone<small>ng/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="prl" data-n="Prolattina" data-u="ng/ml"><span>Prolattina<small>ng/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="amh" data-n="AMH" data-u="ng/ml"><span>AMH<small>ng/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="grp">Androgeni</div><div class="esame" data-k="testo" data-n="Testosterone" data-u="ng/ml"><span>Testosterone<small>ng/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="shbg" data-n="SHBG" data-u="nmol/l"><span>SHBG<small>nmol/l</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="dhea" data-n="DHEA-S" data-u="µg/dl"><span>DHEA-S<small>µg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="grp">Altro</div><div class="esame" data-k="cort" data-n="Cortisolo" data-u="µg/dl"><span>Cortisolo<small>µg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="ferr" data-n="Ferritina" data-u="ng/ml"><span>Ferritina<small>ng/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="vitd" data-n="Vitamina D" data-u="ng/ml"><span>Vitamina D<small>ng/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div>
+      </details>
+    </div>
+
     <button class="btn" type="submit">Crea il percorso</button>
     <div class="hint" id="err" style="text-align:center;color:var(--no)"></div>
   </form>
@@ -232,6 +252,17 @@ function build(){
   const nome = "la cliente";
   const eta = parseInt(document.getElementById("eta").value)||null;
   const sint = sel("sint"), cond = sel("cond"), zona = sel("zona")[0]||"entrambi";
+  const num = v => { v=(v||"").replace(",",".").trim(); return v===""?null:parseFloat(v); };
+  const esami = [...document.querySelectorAll(".esame")].map(r=>({k:r.dataset.k,n:r.dataset.n,u:r.dataset.u,
+    v:num(r.querySelector(".ev").value),min:num(r.querySelector(".emin").value),max:num(r.querySelector(".emax").value)}))
+    .filter(e=>e.v!==null && !isNaN(e.v));
+  esami.forEach(e=>{ e.st = (e.min!==null && e.v<e.min) ? "basso" : (e.max!==null && e.v>e.max) ? "alto" : (e.min!==null||e.max!==null) ? "ok" : "?"; });
+  const E = k => esami.find(e=>e.k===k);
+  const fuori = k => { const e=E(k); return e && (e.st==="alto"||e.st==="basso"); };
+  const alto = k => { const e=E(k); return e && e.st==="alto"; };
+  const basso = k => { const e=E(k); return e && e.st==="basso"; };
+  if((fuori("tsh")||fuori("ft3")||fuori("ft4")) && !cond.includes("tiroide")) cond.push("tiroide");
+  if((alto("gli")||alto("ins")) && !cond.includes("diabete")) cond.push("diabete");
   const has = k => cond.includes(k), hs = k => sint.includes(k);
 
   // fase effettiva
@@ -281,7 +312,7 @@ function build(){
     if(["luteale","premestruale"].includes(key) && ["vacuum","fir"].includes(t)) s+=2;
     if(["follicolare","ovulatoria"].includes(key) && ["micro","rf","hd","laser"].includes(t)) s+=1;
     if(key==="mestruale" && t==="fir") s+=2;
-    if(has("pcos") && ["laser","lipo","vacuum"].includes(t)) s+=1;
+    if((has("pcos")||alto("testo")||alto("dhea")) && ["laser","lipo","vacuum"].includes(t)) s+=1;
     if(hs("stress") && t==="fir") s+=1;
     if(st[t].lv===1) s-=2;
     score[t]=s;
@@ -360,6 +391,18 @@ function build(){
   if(hs("vampate") && !["peri","meno"].includes(fase)) med.push("Vampate fuori dalla menopausa: suggerisci un controllo.");
   if(eta && eta>=43 && fase==="ciclo") med.push(`Ha ${eta} anni: chiedi se il ciclo è cambiato negli ultimi mesi. Potrebbe essere entrata in perimenopausa.`);
   if(has("febbre")) med.push("Febbre o infezione: oggi niente seduta.");
+  const noteE=[];
+  const fuoriList = esami.filter(e=>e.st==="alto"||e.st==="basso");
+  if(fuoriList.length) med.push("Esami fuori dall'intervallo del laboratorio ("+fuoriList.map(e=>e.n).join(", ")+"): la cliente ne parli con il suo medico. Tu non commentare i valori.");
+  if(alto("col")||alto("ldl")||alto("trig")||basso("hdl")) noteE.push("Grassi nel sangue fuori range: è un tema di salute, non di estetica. Nel percorso corpo insisti su movimento e drenaggio, calore moderato.");
+  if(fuori("tsh")||fuori("ft3")||fuori("ft4")) noteE.push("Tiroide fuori range: ritenzione e pelle secca possono dipendere da qui. Niente lavoro sul collo e risultati più lenti finché non è seguita.");
+  if(alto("gli")||alto("ins")) noteE.push("Zuccheri fuori range: adipe addominale più resistente. Temperature moderate e percorso corpo più lungo.");
+  if(alto("fsh") && (eta||0)>=40 && !["peri","meno"].includes(fase)) noteE.push("FSH sopra il range: chiedile se il medico le ha parlato di perimenopausa. Se sì, cambia la fase e rifai il percorso.");
+  if(alto("testo")||alto("dhea")) noteE.push("Androgeni sopra il range: spiegano spesso pelle grassa, brufoli e peli. Laser e trattamenti pelle grassa in primo piano, con il medico che la segue.");
+  if(alto("prl")) noteE.push("Prolattina sopra il range: da vedere con il medico prima di un percorso intenso.");
+  if(alto("cort")) noteE.push("Cortisolo sopra il range: lo stress pesa sul corpo. Dai spazio a FIR e trattamenti di benessere.");
+  if(basso("ferr")) noteE.push("Ferritina bassa: stanchezza e capelli più deboli. Sedute brevi, senza affaticarla.");
+  if(basso("vitd")) noteE.push("Vitamina D bassa: pelle e umore ne risentono. Ne parli con il medico.");
 
   // render
   const F = FASI[key]||FASI[fase];
@@ -370,7 +413,7 @@ function build(){
 
   let h = `
   <div class="card dark">
-    <div class="lab">Percorso di ${esc(cap)}${eta?` · ${eta} anni`:""}${giorno&&fase==="ciclo"?` · giorno ${giorno}`:""}</div>
+    <div class="lab">Percorso cliente${eta?` · ${eta} anni`:""}${giorno&&fase==="ciclo"?` · giorno ${giorno}`:""}</div>
     <div class="fase-big">${F.t}</div>
     <p>${F.p}</p>
   </div>`;
@@ -393,6 +436,13 @@ function build(){
   h += `<div class="card"><div class="lab">Come parlarle</div><h2>Le parole giuste</h2>
         <div class="say">${parole[key]||parole[fase]}</div>
         <ul class="l">${regole.map(c=>`<li>${c}</li>`).join("")}</ul></div>`;
+  if(esami.length){
+    const lab={alto:"sopra",basso:"sotto",ok:"nel range","?":"manca il range"};
+    h += `<div class="card"><div class="lab">Esami portati</div><h2>Cosa dicono per la cabina</h2>`+
+      esami.map(e=>`<div class="ris"><span>${e.n}</span><span class="v ${e.st==="ok"?"in":e.st==="?"?"":"out"}">${e.v} ${e.u} · ${lab[e.st]}</span></div>`).join("")+
+      (noteE.length?`<ul class="l" style="margin-top:12px">${noteE.map(c=>`<li>${c}</li>`).join("")}</ul>`:"")+
+      `<div class="hint">Confronto solo con l'intervallo scritto sul referto. Non è una diagnosi: i valori li legge il medico.</div></div>`;
+  }
   if(med.length) h += `<div class="card"><div class="lab">Attenzione</div><h2>Quando inviare al medico</h2><div class="alert"><ul>${med.map(c=>`<li>${c}</li>`).join("")}</ul></div></div>`;
   h += `<button class="btn" type="button" id="copia">Copia la scheda</button><div class="ok" id="okc"></div>
         <button class="btn" type="button" id="nuova" style="background:#fff">Nuova cliente</button>`;
@@ -403,11 +453,12 @@ function build(){
 
   // testo da copiare
   const strip = s => s.replace(/<[^>]+>/g,"");
-  let txt = `PERCORSO — ${cap}${eta?` (${eta} anni)`:""}\nFase: ${F.t}\n\n`;
+  let txt = `PERCORSO CLIENTE${eta?` (${eta} anni)`:""}\nFase: ${F.t}\n\n`;
   if(top.length) txt += `Da dove partire: ${top.map(t=>TECH[t].n).join(", ")}\n\n`;
   txt += "Semaforo:\n"+lista.map(t=>`- ${TECH[t].n}: ${stTxt[st[t].lv]}${st[t].why.length?" — "+st[t].why.join(" "):""}`).join("\n");
   txt += "\n\nQuando:\n"+cal.map(c=>"- "+strip(c)).join("\n");
   txt += "\n\nA casa:\n"+hc.map(c=>"- "+c).join("\n");
+  if(esami.length) txt += "\n\nEsami:\n"+esami.map(e=>`- ${e.n}: ${e.v} ${e.u} (${e.st==="ok"?"nel range":e.st==="?"?"range non inserito":e.st+" il range"})`).join("\n");
   if(med.length) txt += "\n\nMedico:\n"+med.map(c=>"- "+c).join("\n");
   document.getElementById("copia").onclick = async ()=>{
     const ok=document.getElementById("okc");
@@ -422,7 +473,7 @@ function build(){
     document.getElementById("f").reset();
     document.querySelectorAll(".chip.on").forEach(c=>c.classList.remove("on"));
     document.querySelector('.chips[data-name="zona"] .chip[data-v="entrambi"]').classList.add("on");
-    toggleCiclo(); out.classList.add("hide"); window.scrollTo({top:0,behavior:"smooth"});
+    document.querySelectorAll("details").forEach(d=>d.open=false); toggleCiclo(); out.classList.add("hide"); window.scrollTo({top:0,behavior:"smooth"});
   };
 }
 function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
