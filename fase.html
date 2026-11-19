@@ -11,473 +11,322 @@
   @font-face{font-family:"Larke";src:url(font/larke-100.woff2) format("woff2");font-weight:100 300}
   @font-face{font-family:"Larke";src:url(font/larke-400.woff2) format("woff2");font-weight:400}
   @font-face{font-family:"Larke";src:url(font/larke-600.woff2) format("woff2");font-weight:500 600}
-  :root{
-    --perla:#F1F1F0; --antracite:#575756; --scuro:#3f3f3e; --celeste:#00B3E6; --fumetto:#D6F1FA;
-    --bianco:#fff; --testo:#3b3b3a; --muto:#8a8a88; --r:28px;
-    --si:#2e9e6b; --cau:#d9962b; --no:#c9483f;
-  }
+  :root{--perla:#F1F1F0;--antracite:#575756;--scuro:#3f3f3e;--celeste:#00B3E6;--fumetto:#D6F1FA;--testo:#3b3b3a;--muto:#8a8a88;--r:28px;--si:#2e9e6b;--cau:#d9962b;--no:#c9483f}
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--perla);color:var(--testo);font-family:"Larke","Jost",system-ui,sans-serif;font-weight:300;font-size:16px;line-height:1.5}
-  .wrap{max-width:560px;margin:0 auto;padding:16px 14px 60px}
+  .wrap{max-width:900px;margin:0 auto;padding:16px 14px 50px}
   .lab{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muto);font-weight:400}
-  h1,h2,h3{font-weight:300;letter-spacing:.14em;text-transform:uppercase;margin:0}
-  /* apertura */
-  .tavola{position:relative;border-radius:var(--r);overflow:hidden;padding:44px 24px 40px;color:#f4f4f3;
-    background:rgba(72,72,71,.92);box-shadow:0 28px 40px -26px rgba(0,0,0,.45);margin-bottom:22px}
-  .tavola::before,.tavola::after{content:"";position:absolute;border-radius:50%;filter:blur(40px);opacity:.35;z-index:0}
+  h1,h2{font-weight:300;letter-spacing:.14em;text-transform:uppercase;margin:0}
+  .tavola{position:relative;border-radius:var(--r);overflow:hidden;padding:36px 24px 32px;color:#f4f4f3;background:rgba(72,72,71,.93);box-shadow:0 28px 40px -26px rgba(0,0,0,.45);margin-bottom:18px}
+  .tavola::before,.tavola::after{content:"";position:absolute;border-radius:50%;filter:blur(40px);opacity:.35}
   .tavola::before{width:200px;height:200px;background:var(--celeste);top:-60px;right:-50px}
   .tavola::after{width:180px;height:180px;background:#9fd8e8;bottom:-80px;left:-40px}
-  .tavola>*{position:relative;z-index:1}
-  .tavola h1{font-size:26px;letter-spacing:.3em;margin:10px 0 12px}
-  .tavola p{margin:0;color:#d9d9d7;font-size:15px}
-  .tavola .lab{color:#bfe9f6}
-  /* riquadri */
-  .card{background:var(--bianco);border-radius:var(--r);padding:22px 20px;margin-bottom:14px}
-  .card.dark{background:var(--antracite);color:#f1f1f0}
-  .card.dark .lab{color:#bfe9f6}
-  .card h2{font-size:15px;margin:6px 0 14px}
-  .num{display:inline-block;color:var(--celeste);font-weight:400;margin-right:6px}
-  label.f{display:block;font-size:13px;color:var(--muto);margin:10px 0 6px;letter-spacing:.04em}
-  input[type=text],input[type=number]{width:100%;border:1px solid #e2e2e0;background:#fafafa;border-radius:16px;padding:12px 14px;font:inherit;font-weight:400;color:var(--testo)}
-  .row{display:flex;gap:10px}.row>div{flex:1}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{border:1px solid #e0e0de;background:#fafafa;border-radius:999px;padding:9px 14px;font:inherit;font-size:14px;color:var(--testo);cursor:pointer}
-  .chip.on{background:var(--fumetto);border-color:var(--celeste);color:var(--scuro);font-weight:400}
-  .hint{font-size:13px;color:var(--muto);margin-top:10px}
-  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:999px;background:var(--fumetto);color:var(--scuro);
-    font:inherit;font-weight:400;letter-spacing:.16em;text-transform:uppercase;font-size:14px;padding:16px 18px;cursor:pointer;margin-top:6px}
+  .tavola>*{position:relative}
+  .tavola h1{font-size:26px;letter-spacing:.3em;margin:8px 0 8px}
+  .tavola p{margin:0;color:#d9d9d7;font-size:14px}.tavola .lab{color:#bfe9f6}
+  .card{background:#fff;border-radius:var(--r);padding:22px 20px;margin-bottom:14px}
+  .card h2{font-size:15px;margin:6px 0 4px}
+  .num{color:var(--celeste);font-weight:400;margin-right:6px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+  label.f{display:block;font-size:13px;color:var(--muto);margin:12px 0 6px}
+  input[type=text],input[type=number],input[type=date],select{width:100%;border:1px solid #e2e2e0;background:#fafafa;border-radius:16px;padding:12px 14px;font:inherit;font-weight:400;color:var(--testo);-webkit-appearance:none;appearance:none;min-height:48px}
+  select{background-image:linear-gradient(45deg,transparent 50%,#8a8a88 50%),linear-gradient(135deg,#8a8a88 50%,transparent 50%);background-position:calc(100% - 20px) 21px,calc(100% - 15px) 21px;background-size:5px 5px;background-repeat:no-repeat;padding-right:34px}
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .ck{display:flex;gap:10px;align-items:flex-start;background:#fafafa;border:1px solid #ececea;border-radius:16px;padding:11px 13px;font-size:14px;line-height:1.35;cursor:pointer}
+  .ck input{width:18px;height:18px;margin:1px 0 0;accent-color:#00B3E6;flex:0 0 18px}
+  .ck.full{grid-column:1/-1}
+  .hint{font-size:13px;color:var(--muto);margin-top:8px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:999px;background:var(--fumetto);color:var(--scuro);font:inherit;font-weight:400;letter-spacing:.16em;text-transform:uppercase;font-size:14px;padding:16px 18px;cursor:pointer;margin-top:10px}
   .btn::before{content:"";width:18px;height:1.5px;background:var(--scuro)}
-  .hide{display:none}
-  /* risultato */
-  .fase-big{font-size:22px;letter-spacing:.18em;text-transform:uppercase;margin:8px 0 8px}
-  .card.dark p{color:#e3e3e1;margin:0}
-  .tech{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid #eeeeec}
+  .btn.w{background:#fff;border:1px solid #e2e2e0}
+  .stato{border-radius:20px;padding:14px 16px;font-weight:400;margin:4px 0 14px}
+  .stato.ok{background:#e9f6ef;color:#20714c}.stato.cau{background:#fff3df;color:#8a5a10}.stato.no{background:#fde9e6;color:#9b3129}
+  .fase-big{font-size:21px;letter-spacing:.16em;text-transform:uppercase;margin:6px 0}
+  .tech{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-top:1px solid #eeeeec}
   .tech:first-of-type{border-top:0}
   .dot{flex:0 0 12px;height:12px;border-radius:50%;margin-top:6px}
   .dot.s{background:var(--si)}.dot.c{background:var(--cau)}.dot.n{background:var(--no)}
-  .tech b{font-weight:500}
-  .tech small{display:block;color:var(--muto);font-size:13px;line-height:1.4;margin-top:2px}
-  .top{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;scroll-snap-type:x mandatory}
-  .top .mini{flex:0 0 72%;scroll-snap-align:start;background:var(--perla);border-radius:22px;padding:16px}
-  .top .mini .n{color:var(--celeste);font-size:12px;letter-spacing:.2em}
-  .top .mini b{display:block;font-weight:500;margin:4px 0}
-  .top .mini small{color:var(--muto);font-size:13px}
+  .tech b{font-weight:500}.tech small{display:block;color:var(--muto);font-size:13px;line-height:1.4}
+  .star{color:var(--celeste);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-left:6px}
   ul.l{margin:0;padding-left:18px}ul.l li{margin:6px 0}
-  .say{background:var(--perla);border-radius:20px;padding:14px 16px;margin:8px 0;font-style:italic}
-  .alert{background:#fff4f2;border:1px solid #f1cdc8;border-radius:20px;padding:14px 16px}
-  .alert ul{margin:6px 0 0;padding-left:18px}
-  .leg{display:flex;gap:14px;font-size:12px;color:var(--muto);margin-bottom:6px}
-  .leg span{display:flex;align-items:center;gap:6px}.leg i{width:9px;height:9px;border-radius:50%;display:inline-block}
-  .foot{font-size:12px;color:var(--muto);text-align:center;margin-top:20px;padding:0 10px}
-  .ok{font-size:13px;color:var(--si);text-align:center;margin-top:8px;min-height:18px}
-  .esame{display:grid;grid-template-columns:1fr 64px 52px 52px;gap:6px;align-items:center;padding:7px 0;border-top:1px solid #f0f0ee}
-  .esame span{font-size:14px;line-height:1.25}.esame span small{display:block;color:var(--muto);font-size:11px}
-  .esame input{padding:9px 6px!important;border-radius:12px!important;text-align:center;font-size:14px}
-  .eh{display:grid;grid-template-columns:1fr 64px 52px 52px;gap:6px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muto);text-align:center}
-  .eh :first-child{text-align:left}
-  .grp{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--celeste);margin:16px 0 2px}
-  details summary{cursor:pointer;list-style:none}details summary::-webkit-details-marker{display:none}
-  .ris{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #eeeeec;font-size:14px}
-  .ris:first-of-type{border-top:0}.ris .v{font-weight:500;white-space:nowrap}
-  .ris .v.out{color:var(--no)}.ris .v.in{color:var(--si)}
+  .say{background:var(--perla);border-radius:20px;padding:14px 16px;margin:10px 0;font-style:italic}
+  .hide{display:none}
+  .foot{font-size:12px;color:var(--muto);text-align:center;margin-top:18px;padding:0 10px}
+  .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.res-grid .card{margin:0}
+  @media(max-width:680px){.grid,.checks,.res-grid{grid-template-columns:1fr}}
+  @media print{.noprint,.btn{display:none!important}body{background:#fff}.card{border:1px solid #ddd}.tavola{box-shadow:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <div class="tavola">
-    <div class="lab">Strumento per la cabina</div>
+    <div class="lab">Valutazione pre-seduta</div>
     <h1>Fase</h1>
-    <p>Scegli quello che la cliente ti racconta, senza nomi. Ricevi il percorso: tecnologie, tempi, parole da usare.</p>
+    <p>Non salva e non invia dati: chiudi la pagina e tutto sparisce.</p>
   </div>
 
-  <form id="f" autocomplete="off">
+  <div class="noprint" id="form">
     <div class="card">
-      <div class="lab"><span class="num">01</span>Cliente</div>
-      <h2>Chi hai davanti</h2>
-      <label class="f">Età (facoltativa)</label><input type="number" id="eta" min="14" max="90" placeholder="42">
-      <div class="hint">Niente nome né dati personali: la pagina non salva e non invia nulla. Chiudi e tutto sparisce.</div>
-    </div>
-
-    <div class="card">
-      <div class="lab"><span class="num">02</span>Fase di vita</div>
-      <h2>In che momento è</h2>
-      <div class="chips" data-name="fase" data-single>
-        <button type="button" class="chip" data-v="ciclo">Ciclo regolare</button>
-        <button type="button" class="chip" data-v="irregolare">Ciclo irregolare</button>
-        <button type="button" class="chip" data-v="pillola">Pillola / anello / spirale ormonale</button>
-        <button type="button" class="chip" data-v="gravidanza">Gravidanza</button>
-        <button type="button" class="chip" data-v="allattamento">Allattamento</button>
-        <button type="button" class="chip" data-v="peri">Perimenopausa (ciclo che cambia)</button>
-        <button type="button" class="chip" data-v="meno">Menopausa</button>
-      </div>
-      <div id="boxCiclo" class="hide">
-        <div class="row" style="margin-top:6px">
-          <div><label class="f">Oggi è il giorno n° del ciclo</label><input type="number" id="giorno" min="1" max="60" placeholder="Es. 9"></div>
-          <div id="boxLen"><label class="f">Durata media ciclo</label><input type="number" id="durata" min="21" max="40" value="28"></div>
-        </div>
-        <div class="hint">Giorno 1 = primo giorno delle mestruazioni.</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="lab"><span class="num">03</span>Cosa nota lei</div>
-      <h2>Inestetismi e sensazioni</h2>
-      <div class="chips" data-name="sint">
-        <button type="button" class="chip" data-v="ritenzione">Gonfiore / ritenzione</button>
-        <button type="button" class="chip" data-v="gambe">Gambe pesanti / cellulite</button>
-        <button type="button" class="chip" data-v="addome">Adipe addome e fianchi</button>
-        <button type="button" class="chip" data-v="lassita_corpo">Rilassamento corpo</button>
-        <button type="button" class="chip" data-v="rilassamento">Rilassamento viso</button>
-        <button type="button" class="chip" data-v="secca">Pelle secca / spenta</button>
-        <button type="button" class="chip" data-v="grassa">Pelle grassa / brufoli</button>
-        <button type="button" class="chip" data-v="macchie">Macchie</button>
-        <button type="button" class="chip" data-v="peli">Peli in eccesso</button>
-        <button type="button" class="chip" data-v="stress">Stanchezza / stress / sonno</button>
-        <button type="button" class="chip" data-v="vampate">Vampate di calore</button>
-        <button type="button" class="chip" data-v="peso">Peso cambiato in fretta</button>
+      <div class="lab"><span class="num">01</span>Cliente e ciclo</div>
+      <div class="grid">
+        <div><label class="f">Codice cliente (niente nomi)</label><input type="text" id="codice" placeholder="Es. Cliente 001"></div>
+        <div><label class="f">Età (facoltativa)</label><input type="number" id="eta" min="14" max="90" placeholder="Es. 42"></div>
+        <div><label class="f">Situazione del ciclo</label>
+          <select id="situ">
+            <option value="ciclo">Naturale e regolare</option>
+            <option value="irregolare">Irregolare / non lo sa</option>
+            <option value="pillola">Contraccezione ormonale</option>
+            <option value="peri">Perimenopausa (ciclo che cambia)</option>
+            <option value="meno">Menopausa</option>
+            <option value="allattamento">Allattamento</option>
+            <option value="gravidanza">Gravidanza</option>
+          </select></div>
+        <div><label class="f">Obiettivo</label>
+          <select id="obi">
+            <option value="adipe">Adipe localizzato</option>
+            <option value="gambe">Gambe pesanti e ritenzione</option>
+            <option value="tono">Rilassamento e tono del corpo</option>
+            <option value="viso">Rilassamento del viso</option>
+            <option value="pelle">Pelle del viso: spenta, grassa, macchie</option>
+            <option value="peli">Epilazione</option>
+            <option value="relax">Relax e benessere</option>
+          </select></div>
+        <div id="bLast"><label class="f">Primo giorno ultima mestruazione</label><input type="date" id="last"></div>
+        <div id="bLen"><label class="f">Durata abituale del ciclo (giorni)</label><input type="number" id="len" min="21" max="40" value="28"></div>
       </div>
     </div>
 
     <div class="card">
-      <div class="lab"><span class="num">04</span>Scheda anamnestica</div>
-      <h2>Cosa dichiara</h2>
-      <div class="chips" data-name="cond">
-        <button type="button" class="chip" data-v="pcos">Ovaio policistico</button>
-        <button type="button" class="chip" data-v="tiroide">Problemi di tiroide</button>
-        <button type="button" class="chip" data-v="tos">Terapia ormonale menopausa</button>
-        <button type="button" class="chip" data-v="endometriosi">Endometriosi</button>
-        <button type="button" class="chip" data-v="diabete">Diabete / insulino-resistenza</button>
-        <button type="button" class="chip" data-v="pacemaker">Pacemaker / dispositivi impiantati</button>
-        <button type="button" class="chip" data-v="metalli">Protesi o placche metalliche</button>
-        <button type="button" class="chip" data-v="tumori">Tumori in corso o recenti</button>
-        <button type="button" class="chip" data-v="varici">Varici / problemi circolatori</button>
-        <button type="button" class="chip" data-v="lesioni">Pelle con lesioni o infiammazioni</button>
-        <button type="button" class="chip" data-v="foto">Farmaci fotosensibilizzanti / isotretinoina</button>
-        <button type="button" class="chip" data-v="anticoag">Anticoagulanti</button>
-        <button type="button" class="chip" data-v="febbre">Febbre o infezione in corso</button>
+      <div class="lab"><span class="num">02</span>Dati facoltativi</div>
+      <div class="hint">Solo se la cliente li porta. Vale sempre l'intervallo scritto sul suo referto; l'app non li interpreta, segnala solo se sono fuori.</div>
+      <div class="grid">
+        <div><label class="f">Colesterolo totale (mg/dl)</label><input type="number" id="col" placeholder="Facoltativo"></div>
+        <div><label class="f">Trigliceridi (mg/dl)</label><input type="number" id="trig" placeholder="Facoltativo"></div>
+        <div><label class="f">Glicemia a digiuno (mg/dl)</label><input type="number" id="gli" placeholder="Facoltativo"></div>
+        <div><label class="f">TSH (µUI/ml)</label><input type="text" inputmode="decimal" id="tsh" placeholder="Facoltativo"></div>
+        <div style="grid-column:1/-1"><label class="f">Temperature basali degli ultimi giorni (°C, al risveglio, separate da virgola)</label><input type="text" inputmode="decimal" id="temp" placeholder="Es. 36.3, 36.35, 36.3, 36.6, 36.65, 36.7"></div>
       </div>
     </div>
 
     <div class="card">
-      <div class="lab"><span class="num">05</span>Obiettivo</div>
-      <h2>Dove vuole lavorare</h2>
-      <div class="chips" data-name="zona" data-single>
-        <button type="button" class="chip on" data-v="entrambi">Viso e corpo</button>
-        <button type="button" class="chip" data-v="viso">Solo viso</button>
-        <button type="button" class="chip" data-v="corpo">Solo corpo</button>
+      <div class="lab"><span class="num">03</span>Come sta oggi</div>
+      <div class="checks">
+        <label class="ck"><input type="checkbox" name="sym" value="gonfiore">Gonfiore</label>
+        <label class="ck"><input type="checkbox" name="sym" value="gambe">Gambe pesanti</label>
+        <label class="ck"><input type="checkbox" name="sym" value="crampi">Crampi / dolore al basso ventre</label>
+        <label class="ck"><input type="checkbox" name="sym" value="stanca">Stanchezza / stress</label>
+        <label class="ck"><input type="checkbox" name="sym" value="sensibile">Sensibilità al tatto</label>
+        <label class="ck"><input type="checkbox" name="sym" value="vampate">Vampate di calore</label>
       </div>
     </div>
 
     <div class="card">
-      <details>
-        <summary><div class="lab"><span class="num">06</span>Esami del sangue · facoltativo</div>
-        <h2 style="margin-bottom:4px">Se ha portato le analisi ＋</h2></summary>
-        <div class="hint" style="margin-bottom:10px">Copia dal referto il valore e l'intervallo di riferimento del laboratorio (min e max), che cambia da laboratorio a laboratorio e, per gli ormoni, in base al giorno del ciclo. Compila solo quello che c'è.</div>
-        <div class="eh"><span>Esame</span><span>Valore</span><span>Min</span><span>Max</span></div>
-        <div class="grp">Grassi nel sangue</div><div class="esame" data-k="col" data-n="Colesterolo totale" data-u="mg/dl"><span>Colesterolo totale<small>mg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="hdl" data-n="Colesterolo HDL" data-u="mg/dl"><span>Colesterolo HDL<small>mg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="ldl" data-n="Colesterolo LDL" data-u="mg/dl"><span>Colesterolo LDL<small>mg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="trig" data-n="Trigliceridi" data-u="mg/dl"><span>Trigliceridi<small>mg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="grp">Zuccheri</div><div class="esame" data-k="gli" data-n="Glicemia" data-u="mg/dl"><span>Glicemia<small>mg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="ins" data-n="Insulina" data-u="µU/ml"><span>Insulina<small>µU/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="grp">Tiroide</div><div class="esame" data-k="tsh" data-n="TSH" data-u="µUI/ml"><span>TSH<small>µUI/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="ft3" data-n="FT3" data-u="pg/ml"><span>FT3<small>pg/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="ft4" data-n="FT4" data-u="ng/dl"><span>FT4<small>ng/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="grp">Ormoni femminili</div><div class="esame" data-k="fsh" data-n="FSH" data-u="mUI/ml"><span>FSH<small>mUI/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="lh" data-n="LH" data-u="mUI/ml"><span>LH<small>mUI/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="e2" data-n="Estradiolo" data-u="pg/ml"><span>Estradiolo<small>pg/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="prog" data-n="Progesterone" data-u="ng/ml"><span>Progesterone<small>ng/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="prl" data-n="Prolattina" data-u="ng/ml"><span>Prolattina<small>ng/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="amh" data-n="AMH" data-u="ng/ml"><span>AMH<small>ng/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="grp">Androgeni</div><div class="esame" data-k="testo" data-n="Testosterone" data-u="ng/ml"><span>Testosterone<small>ng/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="shbg" data-n="SHBG" data-u="nmol/l"><span>SHBG<small>nmol/l</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="dhea" data-n="DHEA-S" data-u="µg/dl"><span>DHEA-S<small>µg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="grp">Altro</div><div class="esame" data-k="cort" data-n="Cortisolo" data-u="µg/dl"><span>Cortisolo<small>µg/dl</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="ferr" data-n="Ferritina" data-u="ng/ml"><span>Ferritina<small>ng/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div><div class="esame" data-k="vitd" data-n="Vitamina D" data-u="ng/ml"><span>Vitamina D<small>ng/ml</small></span><input inputmode="decimal" class="ev" placeholder="valore"><input inputmode="decimal" class="emin" placeholder="min"><input inputmode="decimal" class="emax" placeholder="max"></div>
-      </details>
+      <div class="lab"><span class="num">04</span>Sicurezza</div>
+      <div class="hint">Non sostituisce le controindicazioni del fabbricante né l'anamnesi firmata.</div>
+      <div class="checks">
+        <label class="ck full"><input type="checkbox" id="acuto">Sintomi improvvisi: gonfiore di una sola gamba, dolore al petto, fiato corto</label>
+        <label class="ck"><input type="checkbox" id="incinta">Gravidanza possibile</label>
+        <label class="ck"><input type="checkbox" id="cuore">Problemi cardiaci o pacemaker / dispositivi impiantati</label>
+        <label class="ck"><input type="checkbox" id="vene">Varici, trombosi passate, problemi circolatori</label>
+        <label class="ck"><input type="checkbox" id="pelle">Lesioni, infezioni o dolore nella zona</label>
+        <label class="ck"><input type="checkbox" id="tumori">Tumori in corso o recenti</label>
+        <label class="ck"><input type="checkbox" id="farmaci">Anticoagulanti o farmaci che sensibilizzano al sole</label>
+        <label class="ck"><input type="checkbox" id="tiroide">Problemi di tiroide</label>
+        <label class="ck"><input type="checkbox" id="metalli">Protesi o placche metalliche</label>
+        <label class="ck full"><input type="checkbox" id="scheda">Ho controllato la scheda tecnica del macchinario che userò</label>
+      </div>
     </div>
 
-    <button class="btn" type="submit">Crea il percorso</button>
-    <div class="hint" id="err" style="text-align:center;color:var(--no)"></div>
-  </form>
+    <button class="btn" id="go">Crea il percorso</button>
+  </div>
 
-  <div id="out" class="hide" style="margin-top:22px"></div>
+  <div id="out" class="hide"></div>
 
-  <div class="foot">Strumento di supporto per l'estetista: non fa diagnosi e non sostituisce il medico. Regole di partenza da verificare sempre con le schede tecniche delle macchine e con l'anamnesi firmata dalla cliente.</div>
+  <div class="foot">Strumento di supporto per l'estetista: non fa diagnosi e non sostituisce il medico.</div>
 </div>
 
 <script>
-const TECH = {
-  micro:   {n:"Microneedling", d:"Penne SkinNate", area:"viso", tags:["rilassamento","macchie","secca","grassa"]},
-  rf:      {n:"Radiofrequenza", d:"Viso e corpo", area:"entrambi", tags:["rilassamento","lassita_corpo","secca"]},
-  hd:      {n:"Skinem HD", d:"Protocollo viso e corpo", area:"entrambi", tags:["rilassamento","secca","lassita_corpo"]},
-  microdermo:{n:"Microdermoabrasione", d:"Viso", area:"viso", tags:["grassa","secca","macchie"]},
-  fir:     {n:"Dermatherm FIR", d:"Calore infrarosso, benessere", area:"corpo", tags:["stress","ritenzione","gambe"]},
-  lipo:    {n:"Lipolaser", d:"Placche", area:"corpo", tags:["addome","gambe"]},
-  vacuum:  {n:"Vacuum / Endomassaggio", d:"Drenaggio e rimodellamento", area:"corpo", tags:["ritenzione","gambe","addome"]},
-  polar:   {n:"Polar Shape", d:"8 placche caldo/freddo, LED, EMS", area:"corpo", tags:["addome","lassita_corpo","gambe"]},
-  laser:   {n:"Laser epilazione", d:"Viso e corpo", area:"entrambi", tags:["peli"]}
+const $=id=>document.getElementById(id);
+const TECH={
+  micro:{n:"Microneedling",d:"Penne SkinNate",area:"viso",obi:["viso","pelle"]},
+  rf:{n:"Radiofrequenza",d:"Viso e corpo",area:"entrambi",obi:["viso","tono"]},
+  hd:{n:"Skinem HD",d:"Protocollo viso e corpo",area:"entrambi",obi:["viso","tono","pelle"]},
+  microdermo:{n:"Microdermoabrasione",d:"Viso",area:"viso",obi:["pelle"]},
+  fir:{n:"Dermatherm FIR",d:"Calore infrarosso",area:"corpo",obi:["relax","gambe"]},
+  lipo:{n:"Lipolaser",d:"Placche",area:"corpo",obi:["adipe"]},
+  vacuum:{n:"Vacuum / Endomassaggio",d:"Drenaggio e rimodellamento",area:"corpo",obi:["gambe","adipe"]},
+  polar:{n:"Polar Shape",d:"8 placche caldo/freddo, LED, EMS",area:"corpo",obi:["adipe","tono"]},
+  laser:{n:"Laser epilazione",d:"Viso e corpo",area:"entrambi",obi:["peli"]}
 };
-const ALL = Object.keys(TECH);
-
-// chips
-document.querySelectorAll(".chips").forEach(g=>{
-  const single = g.hasAttribute("data-single");
-  g.addEventListener("click", e=>{
-    const b = e.target.closest(".chip"); if(!b) return;
-    if(single){ g.querySelectorAll(".chip").forEach(x=>x.classList.remove("on")); b.classList.add("on"); }
-    else b.classList.toggle("on");
-    if(g.dataset.name==="fase") toggleCiclo();
-  });
-});
-const sel = n => [...document.querySelectorAll(`.chips[data-name="${n}"] .chip.on`)].map(b=>b.dataset.v);
-function toggleCiclo(){
-  const f = sel("fase")[0];
-  document.getElementById("boxCiclo").classList.toggle("hide", !(f==="ciclo"||f==="irregolare"));
-  document.getElementById("boxLen").classList.toggle("hide", f!=="ciclo");
-}
-
+const ALL=Object.keys(TECH);
 const MESI=["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
-const fd = d => d.getDate()+" "+MESI[d.getMonth()];
-const add = n => { const d=new Date(); d.setDate(d.getDate()+n); return d; };
+const fd=d=>d.getDate()+" "+MESI[d.getMonth()];
+const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+const num=v=>{v=(v||"").toString().replace(",",".").trim();return v===""?null:parseFloat(v);};
 
-function fasePeriodo(g,L){
-  if(g<=5) return "mestruale";
-  if(g<=L-15) return "follicolare";
-  if(g<=L-12) return "ovulatoria";
-  if(g<=L-6) return "luteale";
-  return "premestruale";
+function aggiornaCiclo(){
+  const s=$("situ").value;
+  $("bLast").classList.toggle("hide",!["ciclo","irregolare","peri"].includes(s));
+  $("bLen").classList.toggle("hide",s!=="ciclo");
 }
+$("situ").addEventListener("change",aggiornaCiclo);
 
-const FASI = {
-  mestruale:{t:"Fase mestruale", p:"Estrogeni e progesterone sono al minimo. Pelle più reattiva, soglia del dolore più bassa, energia giù. Lavoro dolce: benessere, calore, coccola."},
-  follicolare:{t:"Fase follicolare", p:"Gli estrogeni salgono: la pelle ripara meglio, il dolore si sente meno, l'umore è alto. È la finestra migliore per i trattamenti intensi."},
-  ovulatoria:{t:"Fase ovulatoria", p:"Picco di estrogeni: pelle luminosa e tonica. Ancora un buon momento per i trattamenti viso più impegnativi."},
-  luteale:{t:"Fase luteale", p:"Sale il progesterone: più ritenzione, pelle più grassa, fame e stanchezza. Spazio a drenaggio, rimodellamento e benessere."},
-  premestruale:{t:"Fase premestruale", p:"Ritenzione al massimo, pelle incline a brufoli, più sensibilità. Drenaggio e trattamenti rilassanti; rimanda quelli aggressivi sul viso."},
-  pillola:{t:"Ormoni stabilizzati", p:"Con la contraccezione ormonale il ciclo naturale è sospeso: il corpo è più costante. Attenzione alle macchie: la pelle è più sensibile alla luce."},
-  gravidanza:{t:"Gravidanza", p:"Il corpo sta lavorando per due. Niente tecnologie: solo manualità dolci, ascolto e cosmetici compatibili."},
-  allattamento:{t:"Allattamento", p:"Ormoni ancora in assestamento, pelle e tessuti in recupero. Si lavora solo con l'ok del medico, mai sul seno."},
-  peri:{t:"Perimenopausa", p:"Gli estrogeni oscillano e iniziano a calare: collagene in diminuzione, adipe che si sposta sull'addome, sonno e umore altalenanti. È il momento di prevenire."},
-  meno:{t:"Menopausa", p:"Estrogeni bassi e stabili: pelle più sottile e secca, meno collagene, adipe addominale, tono muscolare in calo. Percorsi lunghi e costanti danno i risultati migliori."},
-  irregolare:{t:"Ciclo irregolare", p:"Senza un ritmo regolare non si può programmare sulla fase. Si lavora sull'obiettivo e si suggerisce un controllo dal medico o dal ginecologo."}
+const FASI={
+  mestruale:["Mestruazioni","Pelle più reattiva, dolore più sentito, energia bassa. Lavoro dolce: benessere e calore, niente addome."],
+  follicolare:["Fase follicolare","Gli estrogeni salgono: la pelle ripara meglio e il fastidio si sente meno. Finestra migliore per i trattamenti intensi."],
+  ovulatoria:["Periodo ovulatorio","Pelle luminosa e tonica: ancora un buon momento per il viso."],
+  luteale:["Fase luteale","Sale il progesterone: più ritenzione e pelle più grassa. Spazio a drenaggio, rimodellamento e benessere."],
+  premestruale:["Fase premestruale","Ritenzione al massimo e pelle incline a brufoli. Drenaggio e relax; rimanda i trattamenti aggressivi sul viso."],
+  ritardo:["Ciclo in ritardo","Il ciclo è oltre la durata abituale. Prima di qualsiasi tecnologia chiedile se può essere incinta."],
+  pillola:["Ormoni stabilizzati","Con la contraccezione ormonale il corpo è costante tutto il mese. Attenzione alle macchie: la pelle è più sensibile alla luce."],
+  irregolare:["Ciclo irregolare","Senza un ritmo non si programma sulla fase: si adatta la seduta a come sta oggi."],
+  peri:["Perimenopausa","Gli estrogeni oscillano e calano: meno collagene, adipe che si sposta sull'addome, sonno altalenante. È il momento di prevenire."],
+  meno:["Menopausa","Estrogeni bassi: pelle più sottile e secca, meno tono, adipe addominale. Percorsi lunghi e costanti."],
+  allattamento:["Allattamento","Ormoni ancora in assestamento. Si lavora solo con l'ok del medico, mai sul seno."],
+  gravidanza:["Gravidanza","Niente tecnologie: solo manualità dolci e cosmetici compatibili."]
+};
+const PAROLE={
+  mestruale:"«Come ti senti in questi giorni? Oggi facciamo una seduta che ti rimette in pace; quella intensa la spostiamo di qualche giorno.»",
+  follicolare:"«Questi sono i giorni in cui la tua pelle lavora meglio. Mettiamo qui la seduta più importante.»",
+  ovulatoria:"«Ti vedo luminosa: è un buon momento per spingere un po' di più.»",
+  luteale:"«Ti senti più gonfia? È normale, è il tuo corpo che trattiene. Oggi lavoriamo per alleggerirti.»",
+  premestruale:"«Giorni un po' pesanti, vero? Non è colpa tua, è una fase. Oggi pensiamo a farti stare bene.»",
+  ritardo:"«Prima di iniziare ti faccio una domanda che faccio a tutte: c'è la possibilità che tu sia incinta?»",
+  pillola:"«Con la pillola la pelle prende le macchie più facilmente: ti seguo io con protezione e tempi giusti.»",
+  irregolare:"«Visto che il ciclo è imprevedibile, a ogni seduta mi dici come stai e adatto io il lavoro.»",
+  peri:"«Hai notato che il tuo corpo sta cambiando? Non è una colpa, è una fase. Possiamo accompagnarla invece di subirla.»",
+  meno:"«Il corpo ha cambiato le regole, quindi cambiamo anche noi il modo di lavorare. Con costanza i risultati arrivano.»",
+  allattamento:"«Il tuo corpo sta ancora tornando a sé. Chiediamo un ok al medico e poi costruiamo il percorso.»",
+  gravidanza:"«Adesso la priorità siete voi due. Ti coccolo con mani e prodotti sicuri, poi ripartiamo insieme.»"
 };
 
-function build(){
-  const err = document.getElementById("err"); err.textContent="";
-  const fase = sel("fase")[0];
-  if(!fase){ err.textContent="Scegli la fase di vita della cliente."; return; }
-  const nome = "la cliente";
-  const eta = parseInt(document.getElementById("eta").value)||null;
-  const sint = sel("sint"), cond = sel("cond"), zona = sel("zona")[0]||"entrambi";
-  const num = v => { v=(v||"").replace(",",".").trim(); return v===""?null:parseFloat(v); };
-  const esami = [...document.querySelectorAll(".esame")].map(r=>({k:r.dataset.k,n:r.dataset.n,u:r.dataset.u,
-    v:num(r.querySelector(".ev").value),min:num(r.querySelector(".emin").value),max:num(r.querySelector(".emax").value)}))
-    .filter(e=>e.v!==null && !isNaN(e.v));
-  esami.forEach(e=>{ e.st = (e.min!==null && e.v<e.min) ? "basso" : (e.max!==null && e.v>e.max) ? "alto" : (e.min!==null||e.max!==null) ? "ok" : "?"; });
-  const E = k => esami.find(e=>e.k===k);
-  const fuori = k => { const e=E(k); return e && (e.st==="alto"||e.st==="basso"); };
-  const alto = k => { const e=E(k); return e && e.st==="alto"; };
-  const basso = k => { const e=E(k); return e && e.st==="basso"; };
-  if((fuori("tsh")||fuori("ft3")||fuori("ft4")) && !cond.includes("tiroide")) cond.push("tiroide");
-  if((alto("gli")||alto("ins")) && !cond.includes("diabete")) cond.push("diabete");
-  const has = k => cond.includes(k), hs = k => sint.includes(k);
+$("go").addEventListener("click",()=>{
+  const situ=$("situ").value, obi=$("obi").value, eta=num($("eta").value);
+  const sym=[...document.querySelectorAll('input[name=sym]:checked')].map(x=>x.value);
+  const c=id=>$(id).checked, hs=k=>sym.includes(k);
+  const oggi=new Date(); oggi.setHours(12,0,0,0);
 
-  // fase effettiva
-  let key = fase, giorno=null, L=28, cicloInfo=null;
-  if(fase==="ciclo"||fase==="irregolare"){
-    giorno = parseInt(document.getElementById("giorno").value)||null;
-    if(fase==="ciclo"){ L = parseInt(document.getElementById("durata").value)||28; }
-    if(fase==="ciclo" && giorno){ key = fasePeriodo(Math.min(giorno,L), L); }
+  // fase
+  let key=situ, giorno=null, L=num($("len").value)||28, lastD=null;
+  if($("last").value && ["ciclo","irregolare","peri"].includes(situ)){
+    lastD=new Date($("last").value+"T12:00:00");
+    giorno=Math.floor((oggi-lastD)/86400000)+1;
   }
-  if(fase==="ciclo" && !giorno){ err.textContent="Inserisci il giorno del ciclo di oggi."; return; }
-
-  // stati tecnologie
-  const st = {}; ALL.forEach(t=>st[t]={lv:0,why:[]});
-  const rule=(list,lv,why)=>list.forEach(t=>{ if(lv>st[t].lv) st[t].lv=lv; if(!st[t].why.includes(why)) st[t].why.push(why); });
-
-  if(fase==="gravidanza") rule(ALL,2,"In gravidanza niente tecnologie.");
-  if(fase==="allattamento"){ rule(ALL,1,"Solo con l'ok del medico, mai sul seno."); rule(["laser","polar"],2,"Rimandare a fine allattamento."); }
-  if(key==="mestruale"){
-    rule(["micro","laser"],1,"Pelle più reattiva e più dolore: meglio spostare alla fase follicolare.");
-    rule(["vacuum","polar","lipo"],1,"Evita l'addome in questi giorni.");
+  if(situ==="ciclo" && giorno>0){
+    key = giorno>L+5 ? "ritardo" : giorno<=5 ? "mestruale" : giorno<=L-15 ? "follicolare" : giorno<=L-12 ? "ovulatoria" : giorno<=L-6 ? "luteale" : "premestruale";
   }
-  if(key==="premestruale"){
-    rule(["micro"],1,"Pelle più incline a brufoli: rimanda alla fase follicolare.");
-    rule(["laser"],1,"Più sensibilità: valuta se spostare.");
-  }
-  if(fase==="pillola"||has("tos")) rule(["laser","micro"],1,"Rischio macchie: test spot e SPF 50 obbligatorio.");
-  if(has("tiroide")) rule(["rf","hd","polar"],1,"Non lavorare sul collo, sopra la tiroide.");
-  if(has("endometriosi")) rule(["polar","vacuum","lipo"],1,"Evita addome e basso ventre.");
-  if(has("diabete")){ rule(["polar","fir"],1,"Sensibilità al caldo e al freddo ridotta: temperature moderate, controlla la pelle."); rule(["micro"],1,"Guarigione più lenta: intensità bassa."); }
-  if(has("pacemaker")){ rule(["rf","polar"],2,"Controindicato con dispositivi elettronici impiantati."); rule(["hd","lipo","fir","laser"],1,"Verifica la scheda tecnica della macchina."); }
-  if(has("metalli")) rule(["rf","polar","hd"],1,"Mai sulla zona con protesi o placche metalliche.");
-  if(has("tumori")) rule(ALL,2,"Solo con autorizzazione scritta dell'oncologo.");
-  if(has("varici")){ rule(["vacuum"],1,"Mai sulle vene visibili, aspirazione bassa."); rule(["fir","polar"],1,"Calore moderato sulle gambe."); }
-  if(has("lesioni")){ rule(["micro","microdermo"],2,"Non su pelle con lesioni o infiammazioni attive."); rule(["laser"],1,"Non sulle zone irritate."); }
-  if(has("foto")) rule(["laser","micro","microdermo"],2,"Con questi farmaci si rimanda: chiedere al medico quando riprendere.");
-  if(has("anticoag")){ rule(["micro"],2,"Rischio sanguinamento."); rule(["vacuum","microdermo"],1,"Rischio lividi: intensità bassa."); }
-  if(has("febbre")) rule(ALL,2,"Rimanda la seduta a quando sta bene.");
-  if(hs("vampate")) rule(["fir","polar"],1,"Ha le vampate: poco calore, preferisci il freddo.");
 
-  // punteggio consigliate
-  const score = {};
-  ALL.forEach(t=>{
-    const T=TECH[t]; let s=0;
-    if(zona!=="entrambi" && T.area!=="entrambi" && T.area!==zona){ score[t]=-99; return; }
-    T.tags.forEach(g=>{ if(hs(g)) s+=3; });
-    if(["peri","meno"].includes(fase) && ["rf","micro","hd","polar"].includes(t)) s+=2;
-    if(["luteale","premestruale"].includes(key) && ["vacuum","fir"].includes(t)) s+=2;
-    if(["follicolare","ovulatoria"].includes(key) && ["micro","rf","hd","laser"].includes(t)) s+=1;
-    if(key==="mestruale" && t==="fir") s+=2;
-    if((has("pcos")||alto("testo")||alto("dhea")) && ["laser","lipo","vacuum"].includes(t)) s+=1;
-    if(hs("stress") && t==="fir") s+=1;
-    if(st[t].lv===1) s-=2;
-    score[t]=s;
-  });
-  const top = ALL.filter(t=>st[t].lv<2 && score[t]>0).sort((a,b)=>score[b]-score[a]).slice(0,3);
+  // temperatura basale
+  let notaTemp=null;
+  const temps=($("temp").value||"").split(/[,;\s]+/).map(num).filter(v=>v && v>34 && v<40);
+  if(temps.length>=6){
+    const m=a=>a.reduce((x,y)=>x+y,0)/a.length;
+    const diff=m(temps.slice(-3))-m(temps.slice(0,3));
+    notaTemp = diff>=0.2 ? `Le temperature si sono alzate di circa ${diff.toFixed(1)} °C: l'ovulazione è probabilmente già avvenuta (seconda metà del ciclo).`
+                         : "Nessun rialzo termico evidente: probabilmente l'ovulazione non è ancora avvenuta.";
+  } else if(temps.length){ notaTemp="Servono almeno 6 giorni di temperature per vedere l'andamento: una sola misura non dice la fase."; }
 
-  // calendario
+  if(notaTemp && notaTemp.startsWith("Le temperature") && ["mestruale","follicolare"].includes(key)) notaTemp+=" Non torna con la data del ciclo: ricontrolla la data o le temperature.";
+  // esami (riferimenti indicativi standard)
+  const ES=[["col","Colesterolo totale","mg/dl",null,200],["trig","Trigliceridi","mg/dl",null,150],["gli","Glicemia","mg/dl",70,100],["tsh","TSH","µUI/ml",0.4,4.0]];
+  const esami=ES.map(([k,n,u,mi,ma])=>{const v=num($(k).value);if(v===null||isNaN(v))return null;
+    const st=(mi!==null&&v<mi)?"sotto":(ma!==null&&v>ma)?"sopra":"nella norma";return{k,n,u,v,st};}).filter(Boolean);
+  const fuori=k=>esami.some(e=>e.k===k&&e.st!=="nella norma");
+  const tir=c("tiroide")||fuori("tsh"), zuc=fuori("gli");
+
+  // semaforo
+  const st={};ALL.forEach(t=>st[t]={lv:0,why:[]});
+  const R=(list,lv,why)=>list.forEach(t=>{if(lv>st[t].lv)st[t].lv=lv;if(!st[t].why.includes(why))st[t].why.push(why);});
+  const zonaObi = ["viso","pelle"].includes(obi)?"viso":["peli"].includes(obi)?"entrambi":"corpo";
+  if(situ==="gravidanza"||c("incinta")) R(ALL,2,"Gravidanza: niente tecnologie.");
+  if(key==="ritardo") R(ALL,1,"Ciclo in ritardo: escludi prima una gravidanza.");
+  if(situ==="allattamento"){R(ALL,1,"Solo con l'ok del medico, mai sul seno.");R(["laser","polar"],2,"Rimandare a fine allattamento.");}
+  if(key==="mestruale"||hs("crampi")){R(["micro","laser"],1,"Pelle più reattiva e più dolore: meglio spostare di qualche giorno.");R(["vacuum","polar","lipo"],1,"Evita l'addome oggi.");}
+  if(key==="premestruale"){R(["micro"],1,"Pelle incline a brufoli: meglio in fase follicolare.");R(["laser"],1,"Più sensibilità: valuta se spostare.");}
+  if(hs("sensibile")) R(["micro","laser","vacuum"],1,"È sensibile al tatto: intensità bassa.");
+  if(situ==="pillola") R(["laser","micro"],1,"Rischio macchie: test spot e SPF 50.");
+  if(hs("vampate")) R(["fir","polar"],1,"Ha le vampate: poco calore, meglio il freddo.");
+  if(tir) R(["rf","hd","polar"],1,"Tiroide: non lavorare sul collo.");
+  if(zuc) R(["polar","fir"],1,"Glicemia fuori: temperature moderate, controlla la pelle.");
+  if(c("cuore")){R(["rf","polar"],2,"Controindicato con dispositivi impiantati o problemi cardiaci.");R(["hd","lipo","fir","laser","vacuum"],1,"Verifica la scheda tecnica e chiedi l'ok del medico.");}
+  if(c("metalli")) R(["rf","polar","hd"],1,"Mai sulla zona con protesi o placche metalliche.");
+  if(c("vene")){R(["vacuum"],1,"Mai sulle vene visibili, aspirazione bassa.");R(["fir","polar"],1,"Calore moderato sulle gambe.");}
+  if(c("pelle")){R(["micro","microdermo"],2,"Non su lesioni o infezioni.");R(ALL,1,"Non trattare la zona con lesioni o dolore.");}
+  if(c("farmaci")){R(["laser","micro","microdermo"],2,"Con anticoagulanti o farmaci fotosensibilizzanti si rimanda.");R(["vacuum"],1,"Rischio lividi.");}
+  if(c("tumori")) R(ALL,2,"Solo con autorizzazione scritta dell'oncologo.");
+  if(c("acuto")) R(ALL,2,"Sintomi acuti: nessun trattamento.");
+
+  // priorità per obiettivo e fase
+  const sc={};ALL.forEach(t=>{let s=TECH[t].obi.includes(obi)?5:0;
+    if(["peri","meno"].includes(situ)&&["rf","micro","hd","polar"].includes(t))s+=1;
+    if(["luteale","premestruale"].includes(key)&&["vacuum","fir"].includes(t))s+=1;
+    if(["follicolare","ovulatoria"].includes(key)&&["micro","rf","hd","laser"].includes(t))s+=1;
+    if(hs("gonfiore")&&["vacuum","fir"].includes(t))s+=1;
+    if(hs("stanca")&&t==="fir")s+=1;
+    sc[t]=s-st[t].lv*3;});
+  const top=ALL.filter(t=>st[t].lv<2&&TECH[t].obi.includes(obi)).sort((a,b)=>sc[b]-sc[a]).slice(0,2);
+  const lista=ALL.filter(t=>TECH[t].area===zonaObi||TECH[t].area==="entrambi"||zonaObi==="entrambi").sort((a,b)=>(st[a].lv-st[b].lv)||(sc[b]-sc[a]));
+
+  // stato generale
+  let stato,cls;
+  if(c("acuto")){stato="NON TRATTARE — sintomi che richiedono il medico, anche con urgenza.";cls="no";}
+  else if(situ==="gravidanza"||c("incinta")||c("tumori")){stato="NIENTE TECNOLOGIE — solo manualità e benessere.";cls="no";}
+  else if(ALL.some(t=>st[t].lv>0)||!c("scheda")||key==="ritardo"){stato="SI PUÒ LAVORARE CON ATTENZIONE — leggi i punti gialli"+(!c("scheda")?" e controlla la scheda del macchinario.":".");cls="cau";}
+  else {stato="SI PUÒ PROCEDERE — percorso qui sotto.";cls="ok";}
+
+  // quando
   const cal=[];
-  if(fase==="ciclo"){
-    const g=Math.min(giorno,L);
-    let a,b;
-    if(key==="follicolare"){ a=0; b=(L-15)-g; }
-    else { a = g<6 ? 6-g : (L-g)+6; b = a+(L-15-6); }
-    cal.push(`<b>Trattamenti intensi viso</b> (microneedling, radiofrequenza, Skinem HD, laser): ${a===0?"da oggi":"dal "+fd(add(a))} al ${fd(add(Math.max(b,a)))}.`);
-    let la = (L-14)-g; if(la<0) la+=L;
-    cal.push(`<b>Drenaggio e rimodellamento</b> (vacuum, FIR, Polar Shape): spingi nella seconda metà del ciclo, dal ${fd(add(la))} circa.`);
-    cal.push(`<b>Durante il ciclo</b>: solo benessere e calore dolce, niente addome.`);
-    cal.push(`Fissa la prossima seduta viso intensa ogni ciclo nella stessa finestra: la pelle risponde meglio e la cliente sente meno fastidio.`);
-  } else if(fase==="irregolare"){
-    cal.push("Non programmare sulla fase: chiedi a ogni seduta se ha il ciclo o se si sente gonfia, e adatta la seduta del giorno.");
-    cal.push("Viso intenso: una seduta ogni 3–4 settimane. Corpo: 2 a settimana per 6–8 settimane.");
-  } else if(["peri","meno"].includes(fase)){
-    cal.push("<b>Viso</b>: ciclo di 6–8 sedute, una ogni 2–3 settimane, poi mantenimento mensile.");
-    cal.push("<b>Corpo</b>: 2 sedute a settimana per 8–10 settimane, poi mantenimento ogni 15 giorni.");
-    cal.push("I risultati arrivano con la costanza: spiegalo subito, così non si scoraggia.");
-  } else if(fase==="pillola"){
-    cal.push("Corpo costante tutto il mese: puoi programmare liberamente.");
-    cal.push("<b>Viso</b>: una seduta intensa ogni 3–4 settimane. <b>Corpo</b>: 2 a settimana per 6–8 settimane.");
-    cal.push("Laser e trattamenti viso: meglio d'autunno e d'inverno, con poca esposizione al sole.");
+  if(situ==="ciclo"&&lastD&&key!=="ritardo"){
+    let start=addD(lastD,5); while(addD(start,L-15-5)<oggi) start=addD(start,L);
+    const fine=addD(start,L-15-5); const da = start<oggi?oggi:start;
+    cal.push(`<b>Sedute intense</b> (viso, laser, radiofrequenza): ${da.getTime()===oggi.getTime()?"da oggi":"dal "+fd(da)} al ${fd(fine)}.`);
+    let lut=addD(lastD,L-14); while(addD(lut,13)<oggi) lut=addD(lut,L);
+    cal.push(`<b>Drenaggio e rimodellamento</b> (vacuum, FIR, Polar Shape): seconda metà del ciclo, dal ${fd(lut<oggi?oggi:lut)}.`);
+    cal.push(`<b>Prossimo ciclo previsto</b> intorno al ${fd(addD(lastD,Math.ceil((giorno)/L)*L))}: in quei giorni solo benessere.`);
+  } else if(["peri","meno"].includes(situ)){
+    cal.push("Viso: 6–8 sedute ogni 2–3 settimane, poi una al mese.");
+    cal.push("Corpo: 2 a settimana per 8–10 settimane, poi ogni 15 giorni.");
+  } else if(["gravidanza","allattamento"].includes(situ)||c("incinta")){
+    cal.push("Sedute di manualità e benessere quando se la sente. Il percorso con le tecnologie riparte dopo.");
   } else {
-    cal.push("Niente programma tecnologico: sedute di manualità e benessere quando se la sente.");
-    cal.push("Tieni il contatto: quando potrete ripartire, il percorso è pronto.");
+    cal.push("Viso: una seduta intensa ogni 3–4 settimane. Corpo: 2 a settimana per 6–8 settimane.");
+    if(situ==="irregolare") cal.push("A ogni seduta chiedi come sta e adatta: con gonfiore e crampi solo drenaggio e benessere.");
   }
-
-  // home care
-  const hc=[];
-  const gr = fase==="gravidanza"||fase==="allattamento";
-  if(hs("secca")||["peri","meno"].includes(fase)) hc.push("Pelle secca: ceramidi, acido ialuronico, oli nutrienti la sera.");
-  if(hs("grassa")) hc.push("Pelle grassa: detersione delicata, niacinamide; niente prodotti aggressivi che seccano.");
-  if(hs("macchie")||fase==="pillola"||has("tos")) hc.push("Macchie: vitamina C al mattino e SPF 50 tutti i giorni, anche d'inverno.");
-  if(hs("rilassamento")) hc.push(gr ? "Rilassamento: peptidi (niente retinolo in gravidanza e allattamento)." : "Rilassamento: peptidi e retinolo la sera, a scalare.");
-  if(hs("ritenzione")||hs("gambe")) hc.push("Ritenzione: gel drenanti freschi, acqua e camminate quotidiane.");
-  if(hs("stress")) hc.push("Stress e sonno: rituale serale con automassaggio e respirazione, 5 minuti.");
-  if(!hc.length) hc.push("Detersione delicata, idratazione mattina e sera, SPF tutti i giorni.");
-
-  // parole
-  const parole = {
-    mestruale:`«Come ti senti in questi giorni? Oggi facciamo una seduta che ti rimette in pace, quella più intensa la spostiamo di qualche giorno: la pelle risponderà meglio.»`,
-    follicolare:`«Questi sono i giorni in cui la tua pelle lavora meglio. Approfittiamone: mettiamo qui la seduta più importante.»`,
-    ovulatoria:`«Ti vedo luminosa. È un buon momento per spingere un po' di più sul viso.»`,
-    luteale:`«Ti senti più gonfia in questi giorni? È normale, è il tuo corpo che trattiene. Oggi lavoriamo per alleggerirti.»`,
-    premestruale:`«Questi giorni sono un po' pesanti, vero? Non è colpa tua, è una fase. Oggi ci concentriamo sul farti stare bene.»`,
-    pillola:`«Con la pillola la pelle prende le macchie più facilmente. Ti seguo io: protezione e trattamenti nel momento giusto.»`,
-    gravidanza:`«Adesso la priorità siete voi due. Ti coccolo con mani e prodotti sicuri, e quando sarà il momento ripartiamo insieme.»`,
-    allattamento:`«Il tuo corpo sta ancora tornando a sé. Chiediamo un ok al tuo medico e poi costruiamo un percorso su misura.»`,
-    peri:`«Hai notato che il tuo corpo sta cambiando? Non è una colpa, è una fase. Possiamo accompagnarla invece di subirla.»`,
-    meno:`«Il corpo ha cambiato le regole, quindi cambiamo anche noi il modo di lavorare. Con costanza i risultati arrivano.»`,
-    irregolare:`«Il tuo ciclo è un po' imprevedibile? Allora a ogni seduta mi dici come ti senti e adatto io il lavoro. Ti consiglio anche un controllo dal ginecologo.»`
-  };
-  const regole = [
-    "Chiedi sempre il permesso: «Posso farti qualche domanda in più per costruire un percorso su di te?»",
-    "Non dire mai «hai gli ormoni sballati»: parla di fasi del corpo, non di problemi.",
-    "Ascolta più di quanto spieghi. Ripeti con parole tue quello che ti ha detto.",
-    "Non fare diagnosi. Se qualcosa non torna, inviare al medico è un segno di cura, non un rifiuto."
-  ];
 
   // medico
   const med=[];
-  if(fase==="irregolare") med.push("Ciclo irregolare: suggerisci una visita dal ginecologo, se non l'ha già fatta.");
-  if(fase==="gravidanza"||fase==="allattamento") med.push("Qualsiasi trattamento oltre la manualità va concordato con il medico.");
-  if(has("tumori")) med.push("Tumori: nessuna tecnologia senza autorizzazione scritta dell'oncologo.");
-  if(has("tiroide")) med.push("Tiroide: chiedi se è seguita e se i valori sono sotto controllo.");
-  if(has("pcos")) med.push("Ovaio policistico: assicurati che sia seguita; i risultati sul corpo saranno più lenti.");
-  if(hs("peli") && !has("pcos")) med.push("Peli in eccesso comparsi da poco: suggerisci un controllo, può avere una causa ormonale.");
-  if(hs("peso")) med.push("Peso cambiato in fretta senza motivo: suggerisci un controllo dal medico.");
-  if(hs("vampate") && !["peri","meno"].includes(fase)) med.push("Vampate fuori dalla menopausa: suggerisci un controllo.");
-  if(eta && eta>=43 && fase==="ciclo") med.push(`Ha ${eta} anni: chiedi se il ciclo è cambiato negli ultimi mesi. Potrebbe essere entrata in perimenopausa.`);
-  if(has("febbre")) med.push("Febbre o infezione: oggi niente seduta.");
-  const noteE=[];
-  const fuoriList = esami.filter(e=>e.st==="alto"||e.st==="basso");
-  if(fuoriList.length) med.push("Esami fuori dall'intervallo del laboratorio ("+fuoriList.map(e=>e.n).join(", ")+"): la cliente ne parli con il suo medico. Tu non commentare i valori.");
-  if(alto("col")||alto("ldl")||alto("trig")||basso("hdl")) noteE.push("Grassi nel sangue fuori range: è un tema di salute, non di estetica. Nel percorso corpo insisti su movimento e drenaggio, calore moderato.");
-  if(fuori("tsh")||fuori("ft3")||fuori("ft4")) noteE.push("Tiroide fuori range: ritenzione e pelle secca possono dipendere da qui. Niente lavoro sul collo e risultati più lenti finché non è seguita.");
-  if(alto("gli")||alto("ins")) noteE.push("Zuccheri fuori range: adipe addominale più resistente. Temperature moderate e percorso corpo più lungo.");
-  if(alto("fsh") && (eta||0)>=40 && !["peri","meno"].includes(fase)) noteE.push("FSH sopra il range: chiedile se il medico le ha parlato di perimenopausa. Se sì, cambia la fase e rifai il percorso.");
-  if(alto("testo")||alto("dhea")) noteE.push("Androgeni sopra il range: spiegano spesso pelle grassa, brufoli e peli. Laser e trattamenti pelle grassa in primo piano, con il medico che la segue.");
-  if(alto("prl")) noteE.push("Prolattina sopra il range: da vedere con il medico prima di un percorso intenso.");
-  if(alto("cort")) noteE.push("Cortisolo sopra il range: lo stress pesa sul corpo. Dai spazio a FIR e trattamenti di benessere.");
-  if(basso("ferr")) noteE.push("Ferritina bassa: stanchezza e capelli più deboli. Sedute brevi, senza affaticarla.");
-  if(basso("vitd")) noteE.push("Vitamina D bassa: pelle e umore ne risentono. Ne parli con il medico.");
+  if(c("acuto")) med.push("Sintomi acuti: invitala a sentire subito il medico o il 112 se peggiorano.");
+  if(esami.some(e=>e.st!=="nella norma")) med.push("Valori fuori dai riferimenti indicativi ("+esami.filter(e=>e.st!=="nella norma").map(e=>e.n).join(", ")+"): controlla l'intervallo sul referto e, se è fuori, invitala a parlarne con il medico.");
+  if(situ==="irregolare") med.push("Ciclo irregolare: se non l'ha già fatto, una visita dal ginecologo.");
+  if(key==="ritardo") med.push("Ciclo in ritardo: prima di trattare, chiarire una possibile gravidanza.");
+  if(eta&&eta>=43&&situ==="ciclo") med.push(`Ha ${eta} anni: chiedile se il ciclo è cambiato negli ultimi mesi. Potrebbe essere in perimenopausa.`);
+  if(c("tumori")) med.push("Tumori: nessuna tecnologia senza autorizzazione scritta dell'oncologo.");
+  if(c("cuore")) med.push("Cuore o dispositivi impiantati: serve l'ok del medico.");
 
   // render
-  const F = FASI[key]||FASI[fase];
-  const stLab = ["s","c","n"], stTxt=["Sì","Con cautela","No"];
-  const zonaOk = t => zona==="entrambi" || TECH[t].area==="entrambi" || TECH[t].area===zona;
-  const lista = ALL.filter(zonaOk).sort((a,b)=>st[a].lv-st[b].lv);
-  const cap = nome==="la cliente" ? "La cliente" : nome;
+  const F=FASI[key]||FASI[situ], cod=$("codice").value.trim().replace(/[<>&"]/g,"");
+  const lv=["s","c","n"], lt=["Sì","Con attenzione","No"];
+  let h=`<div class="card"><div class="lab">${cod?cod+" · ":""}${eta?eta+" anni · ":""}${giorno&&situ==="ciclo"?"giorno "+giorno+" del ciclo · ":""}${fd(oggi)}</div>
+    <div class="fase-big">${F[0]}</div><p style="margin:0">${F[1]}</p>
+    <div class="stato ${cls}" style="margin-top:14px">${stato}</div>
+    ${notaTemp?`<div class="hint">Temperatura basale: ${notaTemp}</div>`:""}</div>`;
+  h+=`<div class="card"><div class="lab">Tecnologie</div><h2 style="margin-bottom:8px">Cosa usare</h2>`+
+    lista.map(t=>`<div class="tech"><span class="dot ${lv[st[t].lv]}"></span><div><b>${TECH[t].n}</b>${top.includes(t)?'<span class="star">consigliata</span>':""} · <span style="color:var(--muto)">${lt[st[t].lv]}</span><small>${st[t].why.length?st[t].why.join(" "):TECH[t].d}</small></div></div>`).join("")+`</div>`;
+  h+=`<div class="res-grid"><div class="card"><div class="lab">Calendario</div><h2 style="margin-bottom:8px">Quando</h2><ul class="l">${cal.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+     <div class="card"><div class="lab">Come parlarle</div><h2>Le parole</h2><div class="say">${PAROLE[key]||PAROLE[situ]}</div><div class="hint">Chiedi il permesso, ascolta, parla di fasi e non di problemi. Non commentare mai gli esami.</div></div></div>`;
+  if(esami.length) h+=`<div class="card" style="margin-top:14px"><div class="lab">Dati portati</div><ul class="l">${esami.map(e=>`<li>${e.n}: <b style="font-weight:500">${e.v} ${e.u}</b> — ${e.st}${e.st!=="nella norma"?" (riferimento indicativo)":""}</li>`).join("")}</ul></div>`;
+  if(med.length) h+=`<div class="card" style="margin-top:14px"><div class="lab">Attenzione</div><h2 style="margin-bottom:8px">Quando mandarla dal medico</h2><ul class="l">${med.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+  h+=`<div class="noprint"><button class="btn" id="stampa">Stampa / salva PDF</button><button class="btn w" id="mod">Modifica i dati</button><button class="btn w" id="nuova">Nuova valutazione</button></div>`;
 
-  let h = `
-  <div class="card dark">
-    <div class="lab">Percorso cliente${eta?` · ${eta} anni`:""}${giorno&&fase==="ciclo"?` · giorno ${giorno}`:""}</div>
-    <div class="fase-big">${F.t}</div>
-    <p>${F.p}</p>
-  </div>`;
-
-  if(top.length){
-    h += `<div class="card"><div class="lab">Da dove partire</div><h2>Le tecnologie per lei</h2><div class="top">` +
-      top.map((t,i)=>`<div class="mini"><span class="n">0${i+1}</span><b>${TECH[t].n}</b><small>${TECH[t].d}${st[t].lv===1?" · con cautela":""}</small></div>`).join("") +
-      `</div></div>`;
-  } else if(fase!=="gravidanza" && !has("tumori") && !has("febbre")) {
-    h += `<div class="card"><div class="lab">Da dove partire</div><p style="margin:6px 0 0">Seleziona cosa nota la cliente (punto 03) per avere le tecnologie consigliate.</p></div>`;
-  }
-
-  h += `<div class="card"><div class="lab">Semaforo</div><h2>Tutte le tecnologie</h2>
-    <div class="leg"><span><i style="background:var(--si)"></i>Sì</span><span><i style="background:var(--cau)"></i>Con cautela</span><span><i style="background:var(--no)"></i>No</span></div>` +
-    lista.map(t=>`<div class="tech"><span class="dot ${stLab[st[t].lv]}"></span><div><b>${TECH[t].n}</b> · <span style="color:var(--muto)">${stTxt[st[t].lv]}</span><small>${st[t].why.length?st[t].why.join(" "):TECH[t].d}</small></div></div>`).join("") +
-    `</div>`;
-
-  h += `<div class="card"><div class="lab">Calendario</div><h2>Quando farlo</h2><ul class="l">${cal.map(c=>`<li>${c}</li>`).join("")}</ul></div>`;
-  h += `<div class="card"><div class="lab">A casa</div><h2>Cosa le consigli</h2><ul class="l">${hc.map(c=>`<li>${c}</li>`).join("")}</ul></div>`;
-  h += `<div class="card"><div class="lab">Come parlarle</div><h2>Le parole giuste</h2>
-        <div class="say">${parole[key]||parole[fase]}</div>
-        <ul class="l">${regole.map(c=>`<li>${c}</li>`).join("")}</ul></div>`;
-  if(esami.length){
-    const lab={alto:"sopra",basso:"sotto",ok:"nel range","?":"manca il range"};
-    h += `<div class="card"><div class="lab">Esami portati</div><h2>Cosa dicono per la cabina</h2>`+
-      esami.map(e=>`<div class="ris"><span>${e.n}</span><span class="v ${e.st==="ok"?"in":e.st==="?"?"":"out"}">${e.v} ${e.u} · ${lab[e.st]}</span></div>`).join("")+
-      (noteE.length?`<ul class="l" style="margin-top:12px">${noteE.map(c=>`<li>${c}</li>`).join("")}</ul>`:"")+
-      `<div class="hint">Confronto solo con l'intervallo scritto sul referto. Non è una diagnosi: i valori li legge il medico.</div></div>`;
-  }
-  if(med.length) h += `<div class="card"><div class="lab">Attenzione</div><h2>Quando inviare al medico</h2><div class="alert"><ul>${med.map(c=>`<li>${c}</li>`).join("")}</ul></div></div>`;
-  h += `<button class="btn" type="button" id="copia">Copia la scheda</button><div class="ok" id="okc"></div>
-        <button class="btn" type="button" id="nuova" style="background:#fff">Nuova cliente</button>`;
-
-  const out = document.getElementById("out");
-  out.innerHTML = h; out.classList.remove("hide");
-  out.scrollIntoView({behavior:"smooth"});
-
-  // testo da copiare
-  const strip = s => s.replace(/<[^>]+>/g,"");
-  let txt = `PERCORSO CLIENTE${eta?` (${eta} anni)`:""}\nFase: ${F.t}\n\n`;
-  if(top.length) txt += `Da dove partire: ${top.map(t=>TECH[t].n).join(", ")}\n\n`;
-  txt += "Semaforo:\n"+lista.map(t=>`- ${TECH[t].n}: ${stTxt[st[t].lv]}${st[t].why.length?" — "+st[t].why.join(" "):""}`).join("\n");
-  txt += "\n\nQuando:\n"+cal.map(c=>"- "+strip(c)).join("\n");
-  txt += "\n\nA casa:\n"+hc.map(c=>"- "+c).join("\n");
-  if(esami.length) txt += "\n\nEsami:\n"+esami.map(e=>`- ${e.n}: ${e.v} ${e.u} (${e.st==="ok"?"nel range":e.st==="?"?"range non inserito":e.st+" il range"})`).join("\n");
-  if(med.length) txt += "\n\nMedico:\n"+med.map(c=>"- "+c).join("\n");
-  document.getElementById("copia").onclick = async ()=>{
-    const ok=document.getElementById("okc");
-    try{ await navigator.clipboard.writeText(txt); ok.textContent="Copiata: incollala su WhatsApp o nella scheda cliente."; }
-    catch(e){
-      const ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta); ta.select();
-      try{ document.execCommand("copy"); ok.textContent="Copiata."; }catch(_){ ok.textContent="Copia non riuscita: tieni premuto per selezionare."; }
-      ta.remove();
-    }
-  };
-  document.getElementById("nuova").onclick = ()=>{
-    document.getElementById("f").reset();
-    document.querySelectorAll(".chip.on").forEach(c=>c.classList.remove("on"));
-    document.querySelector('.chips[data-name="zona"] .chip[data-v="entrambi"]').classList.add("on");
-    document.querySelectorAll("details").forEach(d=>d.open=false); toggleCiclo(); out.classList.add("hide"); window.scrollTo({top:0,behavior:"smooth"});
-  };
-}
-function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
-document.getElementById("f").addEventListener("submit", e=>{ e.preventDefault(); build(); });
+  const out=$("out"); out.innerHTML=h; out.classList.remove("hide"); $("form").classList.add("hide");
+  window.scrollTo({top:0,behavior:"smooth"});
+  $("stampa").onclick=()=>{try{window.print();}catch(e){}};
+  $("mod").onclick=()=>{out.classList.add("hide");$("form").classList.remove("hide");window.scrollTo({top:0});};
+  $("nuova").onclick=()=>{document.querySelectorAll("#form input").forEach(i=>{if(i.type==="checkbox")i.checked=false;else if(i.id!=="len")i.value="";});
+    $("len").value=28;$("situ").selectedIndex=0;$("obi").selectedIndex=0;aggiornaCiclo();out.classList.add("hide");$("form").classList.remove("hide");window.scrollTo({top:0});};
+});
+aggiornaCiclo();
 </script>
 </body>
 </html>
