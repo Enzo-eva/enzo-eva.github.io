@@ -445,7 +445,7 @@ $("goCli").addEventListener("click",()=>{
     h+=`<div class="card"><div class="lab">Il tuo percorso nel mese</div>`+o.piano.map(p=>`<div class="pm${p.w[3]?" on":""}"><div class="pg">Giorni ${p.g}</div><div><b>${p.cli}</b><small>${p.az.replace(/^./,m=>m.toUpperCase())} · ${p.w[2]}</small></div></div>`).join("")+`</div>`;
   }
   // bilancia
-  h+=`<div class="card"><div class="lab">La bilancia</div><p style="margin:4px 0 8px">${FRASE_BIL}</p>${o.pesata?`<div class="fase-big" style="font-size:17px">Pesati tra il ${fd(o.pesata[0])} e il ${fd(o.pesata[1])}</div>`:""}</div>`;
+  h+=`<div class="card"><div class="lab">La bilancia</div><p style="margin:4px 0 0">${FRASE_BIL} Il giorno giusto per pesarti te lo dice la tua estetista.</p></div>`;
   h+=`<button class="btn" id="toEst">Continua · parte dell'estetista</button><button class="btn w" id="backCli">Modifica le risposte</button>`;
   $("vMese").innerHTML=h; show("vMese");
   $("toEst").onclick=()=>show("vEst"); $("backCli").onclick=()=>show("vCli");
