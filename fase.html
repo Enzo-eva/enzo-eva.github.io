@@ -17,9 +17,9 @@
   .wrap{max-width:900px;margin:0 auto;padding:16px 14px 50px}
   .lab{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muto);font-weight:400}
   h1,h2{font-weight:300;letter-spacing:.14em;text-transform:uppercase;margin:0}
-  .hero{position:relative;border-radius:var(--r);overflow:hidden;margin-bottom:18px;box-shadow:0 26px 40px -28px rgba(61,51,96,.55);background:#A897D8}
-  .hero svg{display:block;width:100%;height:auto}
-  .hero .txt{position:absolute;left:24px;top:22px;right:24px;color:#fff}
+  .hero{display:flex;flex-direction:column-reverse;background:linear-gradient(135deg,#C9BCEB,#A694D9 55%,#8E7CC6)!important;position:relative;border-radius:var(--r);overflow:hidden;margin-bottom:18px;box-shadow:0 26px 40px -28px rgba(61,51,96,.55);background:#A897D8}
+  .hero svg{display:block;width:100%;height:auto;margin-top:-10px}
+  .hero .txt{position:relative;padding:24px 24px 0;color:#fff}
   .hero .lab{color:#F1ECFB}
   .hero h1{font-size:30px;letter-spacing:.32em;margin:6px 0 4px;font-weight:300}
   .hero p{margin:0;font-size:13px;color:#F4F0FC;max-width:330px}
@@ -66,20 +66,45 @@
   .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.res-grid .card{margin:0}
   @media(max-width:680px){.grid,.checks,.res-grid{grid-template-columns:1fr}}
   @media print{.noprint,.btn{display:none!important}body{background:#fff}.card{border:1px solid #ddd}.hero{box-shadow:none}}
+  .cli{font-size:18px}
+  .cli label.f{font-size:15px;color:var(--testo)}
+  .cli select,.cli input{font-size:18px;min-height:54px}
+  .cli .hint{font-size:15px}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+  .fig{border:1.5px solid #ECE6F6;border-radius:20px;padding:10px 4px 10px;text-align:center;background:#FBFAFE;font:inherit;color:inherit;cursor:pointer}
+  .fig.on{border-color:var(--celeste);background:var(--fumetto)}
+  .fig svg{width:100%;height:auto;max-height:200px}
+  .fig b{display:block;font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+  .fig small{display:block;font-size:12px;color:var(--muto);line-height:1.3;margin-top:2px}
+  .scala{display:grid;grid-template-columns:repeat(11,1fr);gap:4px}
+  .scala button{border:1px solid #E3DCF0;background:#FBFAFE;border-radius:12px;padding:12px 0;font:inherit;font-size:16px;color:var(--testo);cursor:pointer}
+  .scala button.on{background:var(--celeste);color:#fff;border-color:var(--celeste)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid #E3DCF0;background:#FBFAFE;border-radius:999px;padding:10px 16px;font:inherit;font-size:16px;color:var(--testo);cursor:pointer}
+  .chip.on{background:var(--fumetto);border-color:var(--celeste)}
+  .conf{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:8px;text-align:center}
+  .conf small{display:block;font-size:12px;color:var(--muto)}
+  .conf .vs{font-size:34px;color:var(--celeste);font-weight:300}
+  .pm{display:flex;gap:14px;align-items:flex-start;padding:12px 10px;border-radius:16px}
+  .pm+.pm{margin-top:4px}
+  .pm.on{background:var(--fumetto)}
+  .pm .pg{flex:0 0 88px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--celeste);padding-top:3px}
+  .pm b{font-weight:500}.pm small{display:block;color:var(--muto);font-size:14px}
+  @media(max-width:520px){.figs{grid-template-columns:repeat(2,1fr)}.scala button{padding:10px 0;font-size:14px}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <div class="hero">
-    <svg viewBox="0 -170 600 500" role="img" aria-label="Curve degli ormoni che cambiano durante il ciclo">
+    <svg viewBox="0 100 600 230" role="img" aria-label="Curve degli ormoni che cambiano durante il ciclo">
       <defs>
         <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C9BCEB"/><stop offset=".55" stop-color="#A694D9"/><stop offset="1" stop-color="#7D6BB8"/></linearGradient>
         <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="38"/></filter>
         <linearGradient id="est" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
         <linearGradient id="pro" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EBDDFB" stop-opacity=".5"/><stop offset="1" stop-color="#EBDDFB" stop-opacity="0"/></linearGradient>
       </defs>
-      <rect y="-170" width="600" height="500" fill="url(#bg)"/>
+      
       <circle cx="510" cy="-60" r="140" fill="#E9E1FA" opacity=".55" filter="url(#blur)"/>
       <circle cx="90" cy="300" r="120" fill="#6B58A8" opacity=".5" filter="url(#blur)"/>
       <circle cx="330" cy="180" r="90" fill="#F5D9F0" opacity=".35" filter="url(#blur)"/>
@@ -106,41 +131,72 @@
     </div>
   </div>
 
-  <div class="noprint" id="form">
+    <!-- ===== 1 · CON LA CLIENTE ===== -->
+  <div id="vCli" class="cli">
     <div class="card">
-      <div class="lab"><span class="num">01</span>Cliente e ciclo</div>
+      <div class="lab"><span class="num">01</span>Il tuo ciclo</div>
       <div class="grid">
-        <div><label class="f">Codice cliente (niente nomi)</label><input type="text" id="codice" placeholder="Es. Cliente 001"></div>
-        <div><label class="f">Età (facoltativa)</label><input type="number" id="eta" min="14" max="90" placeholder="Es. 42"></div>
-        <div><label class="f">Situazione del ciclo</label>
+        <div><label class="f">Come è il tuo ciclo?</label>
           <select id="situ">
             <option value="ciclo">Naturale e regolare</option>
-            <option value="irregolare">Irregolare / non lo sa</option>
-            <option value="pillola">Contraccezione ormonale</option>
-            <option value="peri">Perimenopausa (ciclo che cambia)</option>
+            <option value="irregolare">Irregolare / non lo so</option>
+            <option value="pillola">Prendo la pillola o simili</option>
+            <option value="peri">Sta cambiando (perimenopausa)</option>
             <option value="meno">Menopausa</option>
-            <option value="allattamento">Allattamento</option>
-            <option value="gravidanza">Gravidanza</option>
+            <option value="allattamento">Allatto</option>
+            <option value="gravidanza">Sono incinta</option>
           </select></div>
-        <div><label class="f">Obiettivo</label>
+        <div><label class="f">Cosa vuoi migliorare?</label>
           <select id="obi">
-            <option value="adipe">Corpo: adipe localizzato</option>
-            <option value="gambe">Corpo: gambe pesanti e ritenzione</option>
-            <option value="tono">Corpo: tono e rilassamento</option>
+            <option value="adipe">Adipe localizzato</option>
+            <option value="gambe">Gambe pesanti e ritenzione</option>
+            <option value="tono">Tono e rilassamento del corpo</option>
             <option value="viso">Viso</option>
           </select></div>
-        <div id="bLast"><label class="f">Primo giorno ultima mestruazione</label><input type="date" id="last"></div>
-        <div><label class="f">È la prima seduta?</label><select id="prima"><option value="no">No, è già in percorso</option><option value="si">Sì, prima seduta</option></select></div>
-        <div id="bLen"><label class="f">Durata abituale del ciclo (giorni)</label><input type="number" id="len" min="21" max="40" value="28"></div>
+        <div id="bLast"><label class="f">Primo giorno dell'ultimo ciclo</label><input type="date" id="last"></div>
+        <div id="bLen"><label class="f">Di solito quanti giorni dura?</label><input type="number" id="len" min="21" max="40" value="28"></div>
       </div>
     </div>
 
     <div class="card">
-      <div class="lab"><span class="num">02</span>Come sta oggi</div>
-      <div class="hint">Segna solo quello che riferisce lei: sono sensazioni, non diagnosi.</div>
+      <div class="lab"><span class="num">02</span>Come ti senti oggi</div>
+      <h2>Quale ti somiglia di più?</h2>
+      <div class="hint">Tocca la figura: non conta il giorno del ciclo, conta come ti senti.</div>
+      <div class="figs" id="figs"></div>
+      <label class="f" style="margin-top:18px">Senti dolore o fastidio? Da 0 (niente) a 10 (molto)</label>
+      <div class="scala" id="scalaDol"></div>
+      <label class="f" style="margin-top:18px">Altro che senti</label>
+      <div class="chips">
+        <button type="button" class="chip" data-s="crampi">Crampi</button>
+        <button type="button" class="chip" data-s="sensibile">Pelle sensibile</button>
+        <button type="button" class="chip" data-s="acne">Brufoli</button>
+        <button type="button" class="chip" data-s="seno">Seno teso</button>
+        <button type="button" class="chip" data-s="stanca">Stanchezza</button>
+        <button type="button" class="chip" data-s="vampate">Vampate</button>
+      </div>
+    </div>
+    <button class="btn" id="goCli">Vedi il tuo mese</button>
+    <div class="hint" id="errCli" style="text-align:center;color:var(--no);font-weight:400"></div>
+  </div>
+
+  <!-- ===== 2 · IL TUO MESE (vista cliente) ===== -->
+  <div id="vMese" class="cli hide"></div>
+
+  <!-- ===== 3 · SOLO ESTETISTA ===== -->
+  <div id="vEst" class="hide">
+    <div class="card" style="background:var(--antracite);color:#fff">
+      <div class="lab" style="color:#E6DEF6">Solo estetista</div>
+      <p style="margin:6px 0 0">Da qui in poi compili tu. Gonfiore e dolore sono già presi da quello che ha scelto la cliente: correggili se serve.</p>
+    </div>
+    <div class="card">
+      <div class="lab"><span class="num">03</span>Dati e sensazioni</div>
       <div class="grid">
-        <div><label class="f">Gonfiore percepito (0–10) *</label><input type="number" id="gonf" min="0" max="10" placeholder="Chiediglielo"></div>
-        <div><label class="f">Dolore o fastidio (0–10) *</label><input type="number" id="dolore" min="0" max="10" placeholder="Chiediglielo"></div>
+        <div><label class="f">Codice cliente (niente nomi)</label><input type="text" id="codice" placeholder="Es. Cliente 001"></div>
+        <div><label class="f">Età (facoltativa)</label><input type="number" id="eta" min="14" max="90" placeholder="Es. 42"></div>
+        <div><label class="f">È la prima seduta?</label><select id="prima"><option value="no">No, è già in percorso</option><option value="si">Sì, prima seduta</option></select></div>
+        <div></div>
+        <div><label class="f">Gonfiore percepito (0–10) *</label><input type="number" id="gonf" min="0" max="10"></div>
+        <div><label class="f">Dolore o fastidio (0–10) *</label><input type="number" id="dolore" min="0" max="10"></div>
       </div>
       <label class="f">Dove sente il gonfiore</label>
       <div class="checks" style="margin-top:0">
@@ -148,28 +204,18 @@
         <label class="ck"><input type="checkbox" name="sede" value="gambe">Gambe</label>
         <label class="ck full"><input type="checkbox" name="sede" value="altro">Altre zone</label>
       </div>
-      <label class="f">Altro che riferisce</label>
-      <div class="checks" style="margin-top:0">
-        <label class="ck"><input type="checkbox" name="sym" value="crampi">Crampi / dolore al basso ventre</label>
-        <label class="ck"><input type="checkbox" name="sym" value="sensibile">Pelle o corpo sensibili al tatto</label>
-        <label class="ck"><input type="checkbox" name="sym" value="acne">Brufoli / acne</label>
-        <label class="ck"><input type="checkbox" name="sym" value="seno">Tensione al seno</label>
-        <label class="ck"><input type="checkbox" name="sym" value="stanca">Stanchezza / stress</label>
-        <label class="ck"><input type="checkbox" name="sym" value="vampate">Vampate di calore</label>
-      </div>
     </div>
 
     <div class="card">
-      <div class="lab"><span class="num">03</span>Misure e dati facoltativi</div>
-      <div class="hint">Le misure si confrontano solo in condizioni simili, meglio nella stessa fase del ciclo: l'app ti dice quando ripeterle.</div>
+      <div class="lab"><span class="num">04</span>Misure e dati facoltativi</div>
       <div class="grid">
         <div><label class="f">Peso (kg)</label><input type="text" inputmode="decimal" id="peso" placeholder="Facoltativo"></div>
         <div><label class="f">Vita (cm)</label><input type="text" inputmode="decimal" id="vita" placeholder="Facoltativo"></div>
         <div><label class="f">Fianchi (cm)</label><input type="text" inputmode="decimal" id="fianchi" placeholder="Facoltativo"></div>
         <div><label class="f">Coscia (cm)</label><input type="text" inputmode="decimal" id="coscia" placeholder="Facoltativo"></div>
-        <div style="grid-column:1/-1"><label class="f">Temperature basali degli ultimi giorni (°C, al risveglio, separate da virgola)</label><input type="text" inputmode="decimal" id="temp" placeholder="Es. 36.3, 36.35, 36.3, 36.6, 36.65, 36.7"></div>
+        <div style="grid-column:1/-1"><label class="f">Temperature basali degli ultimi giorni (°C, separate da virgola)</label><input type="text" inputmode="decimal" id="temp" placeholder="Es. 36.3, 36.35, 36.3, 36.6, 36.65, 36.7"></div>
       </div>
-      <div class="hint" style="margin-top:14px">Esami del sangue, solo se li porta. Non misurano il grasso localizzato e non scelgono il macchinario: servono solo a capire se mandarla dal medico.</div>
+      <div class="hint" style="margin-top:14px">Esami, solo se li porta: non scelgono le azioni, servono solo a capire se mandarla dal medico.</div>
       <div class="grid">
         <div><label class="f">Colesterolo totale (mg/dl)</label><input type="number" id="col" placeholder="Facoltativo"></div>
         <div><label class="f">Trigliceridi (mg/dl)</label><input type="number" id="trig" placeholder="Facoltativo"></div>
@@ -179,7 +225,7 @@
     </div>
 
     <div class="card">
-      <div class="lab"><span class="num">04</span>Anamnesi</div>
+      <div class="lab"><span class="num">05</span>Anamnesi</div>
       <div class="hint">Senza anamnesi l'app non dà risultati (R1). Spunta solo quello che la cliente dichiara.</div>
       <div class="checks">
         <label class="ck full"><input type="checkbox" id="acuto">Sintomi improvvisi: gonfiore di una sola gamba, dolore al petto, fiato corto</label>
@@ -195,10 +241,13 @@
       </div>
     </div>
 
+    
     <button class="btn" id="go">Crea la seduta</button>
+    <button class="btn w" id="backMese">Torna al mese della cliente</button>
     <div class="hint" id="err" style="text-align:center;color:var(--no);font-weight:400"></div>
   </div>
 
+  <!-- ===== 4 · SEDUTA (estetista) ===== -->
   <div id="out" class="hide"></div>
 
   <div class="foot">Strumento di supporto per l'estetista: non fa diagnosi, non è un protocollo clinico e non sostituisce il medico né il manuale del macchinario. I dati sul ciclo e sulla salute sono dati particolarmente protetti (GDPR): chiedi solo quelli che servono. Questa pagina non li salva.</div>
@@ -212,15 +261,32 @@ const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
 const num=v=>{v=(v||"").toString().replace(",",".").trim();return v===""?null:parseFloat(v);};
 const li=a=>`<ul class="l">${a.map(x=>`<li>${x}</li>`).join("")}</ul>`;
 const rr=r=>`<span class="rule">${r}</span>`;
+const show=id=>{["vCli","vMese","vEst","out"].forEach(v=>$(v).classList.toggle("hide",v!==id));window.scrollTo({top:0,behavior:"smooth"});};
 
-function aggiornaCiclo(){
-  const s=$("situ").value;
-  $("bLast").classList.toggle("hide",!["ciclo","irregolare","peri"].includes(s));
-  $("bLen").classList.toggle("hide",s!=="ciclo");
-}
+// ---------- FIGURE ----------
+const BODY=`<circle cx="60" cy="27" r="15"/>
+<path d="M54,43 C54,50 50,54 38,57 C32,59 31,66 33,80 C35,95 40,105 42,120 C43,132 36,145 33,160 C31,178 36,200 40,225 C43,250 45,270 46,288 L54,288 C54,265 55,240 56,220 C57,200 58,185 60,178 C62,185 63,200 64,220 C65,240 66,265 66,288 L74,288 C75,270 77,250 80,225 C84,200 89,178 87,160 C84,145 77,132 78,120 C80,105 85,95 87,80 C89,66 88,59 82,57 C70,54 66,50 66,43"/>
+<path d="M37,59 C29,64 27,82 26,102 C25,122 27,142 29,158"/><path d="M83,59 C91,64 93,82 94,102 C95,122 93,142 91,158"/>`;
+const halo=(x,y,rx,ry,o)=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="url(#HID)" opacity="${o||1}"/>`;
+let gid=0;
+const FIG={
+  leggera:{n:"Leggera",d:"Mi sento sgonfia, piena di energia",x:"",gonf:1,sede:[]},
+  pancia:{n:"Pancia",d:"Basso ventre gonfio o con crampi",x:halo(60,140,26,22)+`<path d="M50,150 l4,-4 l4,4 l4,-4 l4,4 l4,-4" fill="none" stroke="#8E7CC6" stroke-width="1.4"/>`,gonf:5,sede:["addome"]},
+  pesante:{n:"Pesante",d:"Gambe pesanti e gonfie",x:halo(44,245,13,34)+halo(76,245,13,34),gonf:6,sede:["gambe"]},
+  gonfia:{n:"Tutta gonfia",d:"Pancia, gambe e seno tesi",x:halo(60,138,28,24)+halo(44,245,13,34)+halo(76,245,13,34)+halo(50,84,10,8,.9)+halo(70,84,10,8,.9),gonf:8,sede:["addome","gambe","altro"]}
+};
+const svgFig=(k,small)=>{const id="hg"+(++gid);return `<svg viewBox="0 0 120 300" ${small?'style="width:70px"':""}><defs><radialGradient id="${id}"><stop offset="0" stop-color="#A694D9" stop-opacity=".75"/><stop offset="1" stop-color="#A694D9" stop-opacity="0"/></radialGradient></defs>${FIG[k].x.replace(/HID/g,id)}<g fill="none" stroke="#5A4D86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${BODY}</g></svg>`;};
+let figSel=null, dolSel=null; const symSel=new Set();
+$("figs").innerHTML=Object.keys(FIG).map(k=>`<button type="button" class="fig" data-k="${k}">${svgFig(k)}<b>${FIG[k].n}</b><small>${FIG[k].d}</small></button>`).join("");
+$("figs").addEventListener("click",e=>{const b=e.target.closest(".fig");if(!b)return;figSel=b.dataset.k;document.querySelectorAll(".fig").forEach(x=>x.classList.toggle("on",x===b));});
+$("scalaDol").innerHTML=[...Array(11).keys()].map(i=>`<button type="button" data-v="${i}">${i}</button>`).join("");
+$("scalaDol").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;dolSel=+b.dataset.v;[...$("scalaDol").children].forEach(x=>x.classList.toggle("on",x===b));});
+document.querySelectorAll(".chip[data-s]").forEach(b=>b.addEventListener("click",()=>{const s=b.dataset.s;symSel.has(s)?symSel.delete(s):symSel.add(s);b.classList.toggle("on");}));
+
+function aggiornaCiclo(){const s=$("situ").value;$("bLast").classList.toggle("hide",!["ciclo","irregolare","peri"].includes(s));$("bLen").classList.toggle("hide",s!=="ciclo");}
 $("situ").addEventListener("change",aggiornaCiclo);
 
-// AZIONI
+// ---------- TESTI ----------
 const AZ={
   calmare:["Calmare","il sistema nervoso: rilassare, rallentare il respiro."],
   arterioso:["Attivare il circolo arterioso","scaldare e ossigenare i tessuti."],
@@ -232,9 +298,8 @@ const AZ={
   rinnovare:["Rinnovare","la pelle del viso."],
   rinnovareDolce:["Rinnovare con delicatezza","la pelle del viso, senza stimoli forti."]
 };
-const ORDINE=["calmare","arterioso","drenare","drenareBreve","adipe","tonificare","rassodare","rinnovare","rinnovareDolce"]; // R15
-
-// [nome, fisiologia, cosa può notare]
+const ORDINE=["calmare","arterioso","drenare","drenareBreve","adipe","tonificare","rassodare","rinnovare","rinnovareDolce"];
+const AZCLI={calmare:"ti aiutiamo a rilassarti",arterioso:"riattiviamo la circolazione",drenare:"liberiamo i liquidi",drenareBreve:"prepariamo i tessuti",adipe:"lavoriamo sugli accumuli",tonificare:"tonifichiamo",rassodare:"rassodiamo la pelle",rinnovare:"rinnoviamo la pelle",rinnovareDolce:"rinnoviamo la pelle con dolcezza"};
 const FASI={
   mestruale:["Fase mestruale","Estrogeni e progesterone bassi, inizio del flusso.","Possibili crampi e stanchezza; il gonfiore dei giorni prima può durare ancora un po'."],
   follicolare:["Fase follicolare","Estrogeni in genere in aumento, temperatura basale relativamente bassa.","In alcune donne meno gonfiore e meno fastidi."],
@@ -243,7 +308,7 @@ const FASI={
   ritardo:["Ciclo in ritardo","Il ciclo è oltre la durata abituale.","Prima di tutto va chiarita una possibile gravidanza."],
   pillola:["Contraccezione ormonale","Il ciclo naturale è sospeso: nessuna fase dal calendario.","Decide come si sente oggi."],
   irregolare:["Ciclo irregolare","Il calendario non è affidabile: nessuna fase.","Decide come si sente oggi."],
-  peri:["Perimenopausa","Estrogeni che oscillano e calano: il calendario non è affidabile.","Possibili vampate, sonno altalenante, pelle più secca. Decide come si sente oggi."],
+  peri:["Perimenopausa","Estrogeni che oscillano e calano: il calendario non è affidabile.","Decide come si sente oggi."],
   meno:["Menopausa","Estrogeni bassi e stabili: nessuna fase del ciclo.","Decide come si sente oggi."],
   allattamento:["Allattamento","Ormoni in assestamento: nessuna fase.","Si lavora solo con l'ok del medico, mai sul seno."],
   gravidanza:["Gravidanza","Nessuna fase del ciclo.","Solo calmare con le mani."],
@@ -259,199 +324,212 @@ const PAROLE={
   gravidanza:"«Adesso la priorità siete voi due. Ti coccolo con le mani, poi ripartiamo insieme.»"
 };
 const SYMN={crampi:"crampi",sensibile:"sensibilità al tatto",acne:"brufoli",seno:"tensione al seno",stanca:"stanchezza",vampate:"vampate"};
+const FRASE_BIL="In certi giorni del mese la bilancia ti dice una bugia, perché gli ormoni ti fanno trattenere acqua. Per questo ti misuriamo con il centimetro e sempre nello stesso periodo del ciclo: così vediamo il risultato vero.";
 
-function striscia(g,L){
+function striscia(g,L,cli){
   const seg=[["Mestruale",1,5],["Follicolare",6,L-15],["Ovulazione*",L-14,L-12],["Luteale",L-11,L]];
   return `<div class="strip">`+seg.map(([n,a,b])=>`<div class="sg${g>=a&&g<=b?" on":""}" style="flex:${b-a+1}"><span>${n}</span><small>${a}–${b}</small></div>`).join("")+
-   `</div><div class="hint" style="font-size:12px">* Finestra solo illustrativa: l'ovulazione reale può cadere in giorni diversi. Ciclo di ${L} giorni.</div>`;
+   `</div><div class="hint" style="font-size:12px">* ${cli?"Il giorno dell'ovulazione è indicativo: in ogni donna può cambiare.":"Finestra solo illustrativa: l'ovulazione reale può cadere in giorni diversi. Ciclo di "+L+" giorni."}</div>`;
 }
 
-$("go").addEventListener("click",()=>{
-  const err=$("err"); err.textContent="";
-  const gonfIn=num($("gonf").value), dolIn=num($("dolore").value);
-  // R1
-  if(!$("anam").checked || gonfIn===null || dolIn===null){
-    err.textContent="R1 · Senza anamnesi niente risultato: compila gonfiore e dolore (anche 0) e conferma l'anamnesi al punto 04.";
-    return;
-  }
-  const situ=$("situ").value, obi=$("obi").value, eta=num($("eta").value), prima=$("prima").value==="si";
-  const sym=[...document.querySelectorAll('input[name=sym]:checked')].map(x=>x.value);
-  const sede=[...document.querySelectorAll('input[name=sede]:checked')].map(x=>x.value);
-  const gonf=Math.min(10,Math.max(0,gonfIn)), dol=Math.min(10,Math.max(0,dolIn));
-  const c=id=>$(id).checked, hs=k=>sym.includes(k);
+// ---------- CALCOLO ----------
+function calc(opts){
+  const anamnesi=opts.anamnesi;
+  const situ=$("situ").value, obi=$("obi").value, viso=obi==="viso";
+  const gonf=Math.min(10,Math.max(0,opts.gonf)), dol=Math.min(10,Math.max(0,opts.dol));
+  const sym=opts.sym, sede=opts.sede, hs=k=>sym.includes(k);
+  const c=id=>anamnesi && $(id).checked;
   const oggi=new Date(); oggi.setHours(12,0,0,0);
-  const viso=obi==="viso";
-
-  // ---- fase
   let key=situ, giorno=null, L=num($("len").value)||28, lastD=null;
-  if($("last").value && ["ciclo","irregolare","peri"].includes(situ)){
-    lastD=new Date($("last").value+"T12:00:00");
-    giorno=Math.floor((oggi-lastD)/86400000)+1;
-  }
-  if(situ==="ciclo"){
-    if(!(giorno>0)) key="nodata"; // R2
-    else key = giorno>L+5 ? "ritardo" : giorno<=5 ? "mestruale" : giorno<=L-15 ? "follicolare" : giorno<=L-12 ? "ovulatoria" : "luteale";
-  }
-  const stimata = situ==="ciclo" && giorno>0 && key!=="ritardo";
-  const lutFine = key==="luteale" && giorno>=L-6;
+  if($("last").value && ["ciclo","irregolare","peri"].includes(situ)){lastD=new Date($("last").value+"T12:00:00");giorno=Math.floor((oggi-lastD)/86400000)+1;}
+  if(situ==="ciclo"){ if(!(giorno>0)) key="nodata"; else key=giorno>L+5?"ritardo":giorno<=5?"mestruale":giorno<=L-15?"follicolare":giorno<=L-12?"ovulatoria":"luteale"; }
+  const stimata=situ==="ciclo"&&giorno>0&&key!=="ritardo", lutFine=key==="luteale"&&giorno>=L-6;
+  // figura tipica della fase
+  let tipica=null;
+  if(stimata) tipica = key==="mestruale"?"pancia":(key==="follicolare"||key==="ovulatoria")?"leggera":lutFine?"gonfia":"pesante";
 
-  // temperatura
-  const temps=($("temp").value||"").split(/[,;\s]+/).map(num).filter(v=>v && v>34 && v<40);
-  let notaTemp=null, rialzo=null;
-  if(temps.length>=6){
-    const m=a=>a.reduce((x,y)=>x+y,0)/a.length;
-    const diff=m(temps.slice(-3))-m(temps.slice(0,3)); rialzo=diff>=0.2;
-    notaTemp = rialzo ? `rialzo di circa ${diff.toFixed(1).replace(".",",")} °C, compatibile con ovulazione già avvenuta.` : "nessun rialzo sostenuto: probabilmente l'ovulazione non è ancora avvenuta.";
-  } else if(temps.length) notaTemp="servono almeno 6 giorni di misure: una temperatura sola non dice la fase.";
-  let inc=null;
-  if(stimata){
-    inc="media — stima solo da calendario";
-    if(L!==28 || (giorno>=L-17 && giorno<=L-9)) inc="alta — vicino all'ovulazione o ciclo non di 28 giorni";
-    if(rialzo!==null){ const ok=(rialzo&&key==="luteale")||(!rialzo&&["mestruale","follicolare"].includes(key));
-      inc= ok?"più bassa — calendario e temperatura vanno d'accordo":"alta — calendario e temperatura non tornano: ricontrolla"; }
-  }
-
-  // esami
-  const ES=[["col","Colesterolo totale","mg/dl",null,200],["trig","Trigliceridi","mg/dl",null,150],["gli","Glicemia","mg/dl",70,100],["tsh","TSH","µUI/ml",0.4,4.0]];
-  const esami=ES.map(([k,n,u,mi,ma])=>{const v=num($(k).value);if(v===null||isNaN(v))return null;
-    const st=(mi!==null&&v<mi)?"sotto":(ma!==null&&v>ma)?"sopra":"nella norma";return{k,n,u,v,st};}).filter(Boolean);
-
-  // ---- REGOLE → azioni
-  let esito, cls, azioni=[], aspetta=[], perche=[];
-  const stop = c("acuto") ? "R3" : (situ==="gravidanza"||c("incinta")||c("tumori")) ? "R4" : key==="ritardo" ? "R5" : dol>=8 ? "R6" : null;
-  if(stop==="R3"){esito="Nessun trattamento";cls="no";perche.push([`Sintomi acuti: va subito dal medico.`,"R3"]);}
-  else if(stop==="R4"){esito="Solo calmare con le mani";cls="no";azioni=["calmare"];perche.push([`Gravidanza, possibile gravidanza o tumore: niente tecnologie.`,"R4"]);}
-  else if(stop==="R5"){esito="Prima chiarisci la gravidanza";cls="cau";azioni=["calmare"];perche.push([`Ciclo in ritardo: prima di tutto chiedi della gravidanza.`,"R5"]);}
-  else if(stop==="R6"){esito="Si rimanda";cls="no";perche.push([`Dolore ${dol}/10.`,"R6"]);}
+  let esito,azioni=[],aspetta=[],perche=[];
+  const stop=c("acuto")?"R3":(situ==="gravidanza"||c("incinta")||c("tumori"))?"R4":key==="ritardo"?"R5":dol>=8?"R6":null;
+  if(stop==="R3"){esito="Nessun trattamento";perche.push(["Sintomi acuti: va subito dal medico.","R3"]);}
+  else if(stop==="R4"){esito="Solo calmare con le mani";azioni=["calmare"];perche.push(["Gravidanza, possibile gravidanza o tumore: niente tecnologie.","R4"]);}
+  else if(stop==="R5"){esito="Prima chiarisci la gravidanza";azioni=["calmare"];perche.push(["Ciclo in ritardo: prima di tutto chiedi della gravidanza.","R5"]);}
+  else if(stop==="R6"){esito="Si rimanda";perche.push([`Dolore ${dol}/10.`,"R6"]);}
   else {
-    cls="ok";
-    // 3 · come si sente (comanda)
-    if(hs("crampi")||dol>=5){
-      esito="Seduta calmante"; azioni=viso?["calmare","rinnovareDolce"]:["calmare","arterioso"];
-      perche.push([`Oggi ${hs("crampi")?"ha crampi":"riferisce dolore "+dol+"/10"}: si calma e si attiva il circolo con dolcezza.`,"R7"]);
-      if(!viso) aspetta.push(["Adipe e lavoro sull'addome","R7"]);
-    } else if(gonf>=5 && !viso){
-      esito="Seduta circolo"; azioni=["arterioso","drenare"];
-      perche.push([`Oggi si sente gonfia (${gonf}/10): prima circolo arterioso, poi drenaggio.`,"R8"]);
-      aspetta.push(["Lavoro sull'adipe: su un tessuto gonfio non si lavora","R16"]);
-    } else {
-      // 4 · fase
-      if(gonf<5 && lutFine) perche.push([`Oggi si sente sgonfia (${gonf}/10): si segue l'obiettivo anche negli ultimi giorni della luteale.`,"R9"]);
+    if(hs("crampi")||dol>=5){esito="Seduta calmante";azioni=viso?["calmare","rinnovareDolce"]:["calmare","arterioso"];perche.push([`Oggi ${hs("crampi")?"ha crampi":"riferisce dolore "+dol+"/10"}: si calma e si attiva il circolo con dolcezza.`,"R7"]);if(!viso)aspetta.push(["Adipe e lavoro sull'addome","R7"]);}
+    else if(gonf>=5&&!viso){esito="Seduta circolo";azioni=["arterioso","drenare"];perche.push([`Oggi si sente gonfia (${gonf}/10): prima circolo arterioso, poi drenaggio.`,"R8"]);aspetta.push(["Lavoro sull'adipe: su un tessuto gonfio non si lavora","R16"]);}
+    else {
+      if(gonf<5&&lutFine) perche.push([`Oggi si sente sgonfia (${gonf}/10): si segue l'obiettivo anche negli ultimi giorni della luteale.`,"R9"]);
       else if(stimata) perche.push([`Gonfiore ${gonf}/10: si segue la fase.`,"R9"]);
-      if(!stimata){
-        perche.push([key==="nodata"?"Manca la data dell'ultimo ciclo: decide come si sente.":"Nessuna fase dal calendario: decide come si sente.", key==="nodata"?"R2":"R14"]);
-      }
-      const k = stimata ? (key==="mestruale"?"mest":(key==="follicolare"||key==="ovulatoria")?"foll":lutFine&&gonf>=5?"lutF":"lutI") : "foll";
-      if(k==="mest"){ esito="Seduta calmante"; azioni=viso?["calmare","rinnovareDolce"]:["calmare","arterioso"]; perche.push(["Fase mestruale: calmare e attivare il circolo con dolcezza.","R10"]); if(!viso) aspetta.push(["Adipe e addome","R10"]); }
+      if(!stimata) perche.push([key==="nodata"?"Manca la data dell'ultimo ciclo: decide come si sente.":"Nessuna fase dal calendario: decide come si sente.",key==="nodata"?"R2":"R14"]);
+      const k=stimata?(key==="mestruale"?"mest":(key==="follicolare"||key==="ovulatoria")?"foll":"lutI"):"foll";
+      if(k==="mest"){esito="Seduta calmante";azioni=viso?["calmare","rinnovareDolce"]:["calmare","arterioso"];perche.push(["Fase mestruale: calmare e attivare il circolo con dolcezza.","R10"]);if(!viso)aspetta.push(["Adipe e addome","R10"]);}
       else if(k==="foll"){
-        if(viso){esito="Seduta viso"; azioni=["rassodare","rinnovare"];}
-        else if(obi==="gambe"){esito="Seduta gambe"; azioni=["arterioso","drenare","tonificare"];}
-        else if(obi==="tono"){esito="Seduta tono"; azioni=["drenareBreve","tonificare","rassodare"];}
-        else {esito="Seduta adipe"; azioni=["drenareBreve","adipe","tonificare","rassodare"];}
+        if(viso){esito="Seduta viso";azioni=["rassodare","rinnovare"];}
+        else if(obi==="gambe"){esito="Seduta gambe";azioni=["arterioso","drenare","tonificare"];}
+        else if(obi==="tono"){esito="Seduta tono";azioni=["drenareBreve","tonificare","rassodare"];}
+        else {esito="Seduta adipe";azioni=["drenareBreve","adipe","tonificare","rassodare"];}
         if(stimata) perche.push([FASI[key][0]+": si lavora sull'obiettivo"+(key==="ovulatoria"?", ascoltando un eventuale fastidio al basso ventre":"")+".","R11"]);
-      }
-      else if(k==="lutI"){
-        if(viso){esito="Seduta viso"; azioni=["rassodare","rinnovareDolce"];}
-        else if(obi==="gambe"){esito="Seduta gambe"; azioni=["arterioso","drenare"];}
-        else {esito=obi==="tono"?"Seduta tono":"Seduta adipe"; azioni=obi==="tono"?["drenare","tonificare","rassodare"]:["drenare","adipe","tonificare"];}
+      } else {
+        if(viso){esito="Seduta viso";azioni=["rassodare","rinnovareDolce"];}
+        else if(obi==="gambe"){esito="Seduta gambe";azioni=["arterioso","drenare"];}
+        else {esito=obi==="tono"?"Seduta tono":"Seduta adipe";azioni=obi==="tono"?["drenare","tonificare","rassodare"]:["drenare","adipe","tonificare"];}
         perche.push([lutFine?"Ultimi giorni della luteale ma è sgonfia: drenaggio pieno, poi obiettivo.":"Prima parte della luteale: più drenaggio, poi obiettivo.","R12"]);
       }
-      if(viso && hs("acne")) {azioni=azioni.map(a=>a==="rinnovare"?"rinnovareDolce":a); perche.push(["Brufoli: rinnovare solo con delicatezza, mai sui brufoli infiammati.","R7"]);}
+      if(viso&&hs("acne")){azioni=azioni.map(a=>a==="rinnovare"?"rinnovareDolce":a);perche.push(["Brufoli: rinnovare solo con delicatezza, mai sui brufoli infiammati.","R7"]);}
     }
-    azioni=[...new Set(azioni)].sort((a,b)=>ORDINE.indexOf(a)-ORDINE.indexOf(b)); // R15
+    azioni=[...new Set(azioni)].sort((a,b)=>ORDINE.indexOf(a)-ORDINE.indexOf(b));
   }
 
-  // attenzioni da anamnesi (senza macchine)
-  const att=[];
-  if(situ==="allattamento") att.push("Allattamento: solo con l'ok del medico, mai sul seno.");
-  if(situ==="pillola"&&viso) att.push("Pillola: pelle più sensibile alla luce, protezione solare.");
-  if(c("cuore")) att.push("Cuore o dispositivi impiantati: niente stimolazioni senza l'ok del medico.");
-  if(c("vene")) att.push("Varici o problemi circolatori: drenaggio delicato, niente calore forte sulle gambe, mai sulle vene visibili.");
-  if(c("pelle")) att.push("Lesioni o infezioni: non lavorare su quella zona.");
-  if(c("farmaci")) att.push("Anticoagulanti o farmaci fotosensibilizzanti: niente stimoli forti sulla pelle, rischio lividi.");
-  if(c("tiroide")||esami.some(e=>e.k==="tsh"&&e.st!=="nella norma")) att.push("Tiroide: non lavorare sul collo.");
-  if(c("metalli")) att.push("Protesi o placche metalliche: non lavorare su quella zona.");
-  if(hs("seno")) att.push("Tensione al seno: evita la zona.");
-  if(hs("vampate")) att.push("Vampate: poco calore.");
-  if(hs("sensibile")) att.push("Sensibile al tatto: intensità bassa.");
-
-  // ---- bilancia e misure (R17–R24)
-  const bil=[]; let bilOk;
+  // bilancia
+  const bil=[]; let bilOk, pesata=null;
   if(stimata){
-    const fuoriFase = key==="mestruale" || giorno>=L-6;
-    bilOk = !fuoriFase && gonf<5;
-    const k=Math.floor((giorno-1)/L); let w0=addD(lastD,k*L+5), w1=addD(lastD,k*L+12);
-    const from = bilOk ? oggi : addD(oggi,1);
-    if(w1<from){w0=addD(w0,L);w1=addD(w1,L);} if(w0<from) w0=from;
+    const fuoriFase=key==="mestruale"||giorno>=L-6; bilOk=!fuoriFase&&gonf<5;
+    const k=Math.floor((giorno-1)/L); let w0=addD(lastD,k*L+5),w1=addD(lastD,k*L+12);
+    const from=bilOk?oggi:addD(oggi,1); if(w1<from){w0=addD(w0,L);w1=addD(w1,L);} if(w0<from)w0=from; pesata=[w0,w1];
     if(fuoriFase) bil.push([`Oggi non pesarla: ${key==="mestruale"?"giorni del ciclo":"ultimi giorni della luteale"}. Se lo chiede, scrivi il peso ma non confrontarlo.`,"R20"]);
-    else if(gonf>=5) bil.push([`Oggi si sente gonfia: peso e misure di oggi non valgono come confronto.`,"R18"]);
+    else if(gonf>=5) bil.push(["Oggi si sente gonfia: peso e misure di oggi non valgono come confronto.","R18"]);
     else bil.push(["Oggi puoi pesarla: a digiuno, alla stessa ora delle altre volte.","R21"]);
     bil.push([`Prossima pesata utile: tra il ${fd(w0)} e il ${fd(w1)} (giorni 6–13 del ciclo).`,"R21"]);
-    bil.push([`Ripeti le misure con il centimetro intorno al ${fd(addD(lastD,(k+1)*L+giorno-1-k*L))}, stesso giorno del prossimo ciclo.`,"R17"]);
+    bil.push([`Ripeti le misure con il centimetro intorno al ${fd(addD(lastD,L+giorno-1))}, stesso giorno del prossimo ciclo.`,"R17"]);
   } else {
-    bilOk = gonf<5;
-    bil.push([gonf>=5?"Oggi si sente gonfia: peso e misure di oggi non valgono come confronto.":"Puoi pesarla: a digiuno, stessa ora, stesse condizioni delle altre volte.", gonf>=5?"R18":"R21"]);
+    bilOk=gonf<5;
+    bil.push([gonf>=5?"Oggi si sente gonfia: peso e misure di oggi non valgono come confronto.":"Puoi pesarla: a digiuno, stessa ora, stesse condizioni delle altre volte.",gonf>=5?"R18":"R21"]);
     bil.push(["Ripeti peso e misure ogni 4 settimane, nelle stesse condizioni.","R17"]);
   }
   bil.push(["Se il peso sale ma i centimetri scendono, conta il centimetro: è acqua, non grasso.","R22"]);
   bil.push(["Il risultato si legge prima con centimetro e foto, poi con la bilancia.","R23"]);
-  const mis=[["peso","Peso","kg"],["vita","Vita","cm"],["fianchi","Fianchi","cm"],["coscia","Coscia","cm"]].map(([k,n,u])=>{const v=num($(k).value);return v?`${n}: ${String(v).replace(".",",")} ${u}`:null;}).filter(Boolean);
-
-  // medico R19
-  const med=[];
-  if(c("acuto")) med.push("Sintomi acuti: subito dal medico, o il 112 se peggiorano.");
-  if(esami.some(e=>e.st!=="nella norma")) med.push("Esami fuori dai riferimenti ("+esami.filter(e=>e.st!=="nella norma").map(e=>e.n).join(", ")+"): controlla l'intervallo sul referto e invitala a parlarne con il medico, senza commentare i valori.");
-  if(situ==="irregolare") med.push("Ciclo irregolare: se non l'ha già fatto, una visita dal ginecologo.");
-  if(gonf>=7 && sede.includes("gambe")) med.push("Gonfiore forte alle gambe: se è nuovo, non passa o è da una gamba sola, va visto dal medico.");
-  if(c("tumori")) med.push("Tumori: niente tecnologie senza autorizzazione scritta dell'oncologo.");
-  if(eta&&eta>=43&&situ==="ciclo") med.push(`Ha ${eta} anni: chiedile se il ciclo è cambiato negli ultimi mesi.`);
 
   // piano del mese
   const piano=[];
   if(stimata){
     const k=Math.floor((giorno-1)/L), d0=addD(lastD,k*L);
-    const w=(a,b)=>{let A=addD(d0,a-1),B=addD(d0,b-1); if(B<oggi){A=addD(A,L);B=addD(B,L);} return (A<=oggi?"da oggi":"dal "+fd(A))+" al "+fd(B);};
-    const ob=viso?"rassodare e rinnovare":obi==="gambe"?"circolo, drenaggio e tono":obi==="tono"?"tonificare e rassodare":"drenaggio breve, adipe, tono";
-    piano.push(`<b>Giorni 1–5</b> · calmare e circolo dolce ${rr("R10")}: ${w(1,5)}.`);
-    piano.push(`<b>Giorni 6–${L-12}</b> · ${ob} ${rr("R11")}: ${w(6,L-12)}.`);
-    piano.push(`<b>Giorni ${L-11}–${L-7}</b> · più drenaggio, poi obiettivo ${rr("R12")}: ${w(L-11,L-7)}.`);
-    piano.push(`<b>Giorni ${L-6}–${L}</b> · ${viso?"rinnovare con delicatezza":"circolo arterioso e drenaggio"} ${rr("R13")}: ${w(L-6,L)}.`);
+    const w=(a,b)=>{let A=addD(d0,a-1),B=addD(d0,b-1);if(B<oggi){A=addD(A,L);B=addD(B,L);}return [A,B,(A<=oggi?"da oggi":"dal "+fd(A))+" al "+fd(B),giorno>=a&&giorno<=b];};
+    const ob=viso?"rassodare e rinnovare la pelle":obi==="gambe"?"circolazione, drenaggio e tono":obi==="tono"?"tonificare e rassodare":"lavorare sugli accumuli e tonificare";
+    piano.push({g:"1–5",cli:"Ti ascoltiamo",az:"calmare e riattivare la circolazione con dolcezza",r:"R10",w:w(1,5)});
+    piano.push({g:`6–${L-12}`,cli:"Il momento di lavorare",az:ob,r:"R11",w:w(6,L-12)});
+    piano.push({g:`${L-11}–${L-7}`,cli:"Liberiamo e lavoriamo",az:"più drenaggio, poi l'obiettivo",r:"R12",w:w(L-11,L-7)});
+    piano.push({g:`${L-6}–${L}`,cli:"Leggerezza",az:viso?"rinnovare la pelle con dolcezza":"circolazione e drenaggio",r:"R13",w:w(L-6,L)});
+    piano.sort((p,q)=>p.w[0]-q.w[0]);
   }
+  return {situ,obi,viso,gonf,dol,sym,sede,key,giorno,L,lastD,stimata,lutFine,tipica,esito,azioni,aspetta,perche,bil,bilOk,pesata,piano,oggi};
+}
 
-  // ---- render
-  const F=FASI[key]||FASI[situ], cod=$("codice").value.trim().replace(/[<>&"]/g,"");
-  const riferisce=[`gonfiore ${gonf}/10${sede.length?" ("+sede.map(x=>x==="altro"?"altre zone":x).join(", ")+")":""}`,`dolore ${dol}/10`]; sym.forEach(s=>riferisce.push(SYMN[s]));
-  let h=`<div class="card"><div class="lab">Fase ${stimata?"stimata":""} · ${cod?cod+" · ":""}${eta?eta+" anni · ":""}${stimata?"giorno "+giorno+" · ":""}${fd(oggi)}</div>
+// ---------- VISTA CLIENTE ----------
+$("goCli").addEventListener("click",()=>{
+  $("errCli").textContent="";
+  if(!figSel||dolSel===null){$("errCli").textContent="Tocca la figura che ti somiglia e scegli un numero per il dolore (anche 0).";return;}
+  const f=FIG[figSel];
+  const o=calc({anamnesi:false,gonf:f.gonf,dol:dolSel,sym:[...symSel],sede:f.sede});
+  // precompila la parte estetista
+  $("gonf").value=f.gonf; $("dolore").value=dolSel;
+  document.querySelectorAll('input[name=sede]').forEach(x=>x.checked=f.sede.includes(x.value));
+  let h=`<div class="card"><div class="lab">Il tuo mese · ${fd(o.oggi)}</div>`;
+  if(o.stimata){
+    h+=`<div class="fase-big">Oggi sei nel giorno ${o.giorno}</div><p style="margin:0">${FASI[o.key][0].replace(" (stimata)","")}</p>${striscia(o.giorno,o.L,true)}`;
+  } else {
+    h+=`<div class="fase-big">${o.key==="nodata"?"Partiamo da te":FASI[o.key][0]}</div><p style="margin:0">Il calendario oggi non ci dice abbastanza: partiamo da come ti senti.</p>`;
+  }
+  h+=`</div>`;
+  // confronto sensazione / fase
+  if(o.tipica){
+    const ok=o.tipica===figSel;
+    h+=`<div class="card"><div class="lab">Come ti senti e la tua fase</div><div class="conf"><div>${svgFig(figSel,true)}<small>Come ti senti</small></div><div class="vs">${ok?"=":"≠"}</div><div>${svgFig(o.tipica,true)}<small>Tipico di questi giorni</small></div></div>
+      <p style="margin:10px 0 0;text-align:center">${ok?"<b style='font-weight:500'>Quello che senti è in linea con la tua fase.</b> Il tuo corpo sta facendo esattamente il suo lavoro.":"<b style='font-weight:500'>Oggi ti senti diversa da quello che è tipico di questi giorni.</b> Va benissimo: ogni donna è diversa, e partiamo da come ti senti tu."}</p></div>`;
+  }
+  // oggi
+  h+=`<div class="card oggi"><div class="lab">Oggi per te</div><div class="fase-big" style="font-size:19px">${o.esito}</div>
+     ${o.azioni.length?`<p style="margin:6px 0 0">${o.azioni.map(a=>AZCLI[a]).join(", ").replace(/^./,m=>m.toUpperCase())}.</p>`:""}
+     <div class="hint">La tua estetista conferma tutto dopo qualche domanda sulla tua salute.</div></div>`;
+  // mese
+  if(o.piano.length){
+    h+=`<div class="card"><div class="lab">Il tuo percorso nel mese</div>`+o.piano.map(p=>`<div class="pm${p.w[3]?" on":""}"><div class="pg">Giorni ${p.g}</div><div><b>${p.cli}</b><small>${p.az.replace(/^./,m=>m.toUpperCase())} · ${p.w[2]}</small></div></div>`).join("")+`</div>`;
+  }
+  // bilancia
+  h+=`<div class="card"><div class="lab">La bilancia</div><p style="margin:4px 0 8px">${FRASE_BIL}</p>${o.pesata?`<div class="fase-big" style="font-size:17px">Pesati tra il ${fd(o.pesata[0])} e il ${fd(o.pesata[1])}</div>`:""}</div>`;
+  h+=`<button class="btn" id="toEst">Continua · parte dell'estetista</button><button class="btn w" id="backCli">Modifica le risposte</button>`;
+  $("vMese").innerHTML=h; show("vMese");
+  $("toEst").onclick=()=>show("vEst"); $("backCli").onclick=()=>show("vCli");
+});
+$("backMese").addEventListener("click",()=>show("vMese"));
+
+// ---------- VISTA ESTETISTA ----------
+$("go").addEventListener("click",()=>{
+  const err=$("err"); err.textContent="";
+  const gonfIn=num($("gonf").value), dolIn=num($("dolore").value);
+  if(!$("anam").checked||gonfIn===null||dolIn===null){err.textContent="R1 · Senza anamnesi niente risultato: controlla gonfiore e dolore e conferma l'anamnesi.";return;}
+  const sede=[...document.querySelectorAll('input[name=sede]:checked')].map(x=>x.value);
+  const o=calc({anamnesi:true,gonf:gonfIn,dol:dolIn,sym:[...symSel],sede});
+  const c=id=>$(id).checked, hs=k=>o.sym.includes(k), eta=num($("eta").value), prima=$("prima").value==="si";
+  let cls=(c("acuto")||o.situ==="gravidanza"||c("incinta")||c("tumori")||o.dol>=8)?"no":"ok";
+
+  // temperatura
+  const temps=($("temp").value||"").split(/[,;\s]+/).map(num).filter(v=>v&&v>34&&v<40);
+  let notaTemp=null,rialzo=null;
+  if(temps.length>=6){const m=a=>a.reduce((x,y)=>x+y,0)/a.length;const diff=m(temps.slice(-3))-m(temps.slice(0,3));rialzo=diff>=0.2;
+    notaTemp=rialzo?`rialzo di circa ${diff.toFixed(1).replace(".",",")} °C, compatibile con ovulazione già avvenuta.`:"nessun rialzo sostenuto: probabilmente l'ovulazione non è ancora avvenuta.";}
+  else if(temps.length) notaTemp="servono almeno 6 giorni di misure: una temperatura sola non dice la fase.";
+  let inc=null;
+  if(o.stimata){inc="media — stima solo da calendario";if(o.L!==28||(o.giorno>=o.L-17&&o.giorno<=o.L-9))inc="alta — vicino all'ovulazione o ciclo non di 28 giorni";
+    if(rialzo!==null){const ok=(rialzo&&o.key==="luteale")||(!rialzo&&["mestruale","follicolare"].includes(o.key));inc=ok?"più bassa — calendario e temperatura vanno d'accordo":"alta — calendario e temperatura non tornano: ricontrolla";}}
+
+  const ES=[["col","Colesterolo totale","mg/dl",null,200],["trig","Trigliceridi","mg/dl",null,150],["gli","Glicemia","mg/dl",70,100],["tsh","TSH","µUI/ml",0.4,4.0]];
+  const esami=ES.map(([k,n,u,mi,ma])=>{const v=num($(k).value);if(v===null||isNaN(v))return null;const st=(mi!==null&&v<mi)?"sotto":(ma!==null&&v>ma)?"sopra":"nella norma";return{k,n,u,v,st};}).filter(Boolean);
+
+  const att=[];
+  if(o.situ==="allattamento")att.push("Allattamento: solo con l'ok del medico, mai sul seno.");
+  if(o.situ==="pillola"&&o.viso)att.push("Pillola: pelle più sensibile alla luce, protezione solare.");
+  if(c("cuore"))att.push("Cuore o dispositivi impiantati: niente stimolazioni senza l'ok del medico.");
+  if(c("vene"))att.push("Varici o problemi circolatori: drenaggio delicato, niente calore forte sulle gambe, mai sulle vene visibili.");
+  if(c("pelle"))att.push("Lesioni o infezioni: non lavorare su quella zona.");
+  if(c("farmaci"))att.push("Anticoagulanti o farmaci fotosensibilizzanti: niente stimoli forti sulla pelle, rischio lividi.");
+  if(c("tiroide")||esami.some(e=>e.k==="tsh"&&e.st!=="nella norma"))att.push("Tiroide: non lavorare sul collo.");
+  if(c("metalli"))att.push("Protesi o placche metalliche: non lavorare su quella zona.");
+  if(hs("seno"))att.push("Tensione al seno: evita la zona.");
+  if(hs("vampate"))att.push("Vampate: poco calore.");
+  if(hs("sensibile"))att.push("Sensibile al tatto: intensità bassa.");
+
+  const med=[];
+  if(c("acuto"))med.push("Sintomi acuti: subito dal medico, o il 112 se peggiorano.");
+  if(esami.some(e=>e.st!=="nella norma"))med.push("Esami fuori dai riferimenti ("+esami.filter(e=>e.st!=="nella norma").map(e=>e.n).join(", ")+"): controlla l'intervallo sul referto e invitala a parlarne con il medico, senza commentare i valori.");
+  if(o.situ==="irregolare")med.push("Ciclo irregolare: se non l'ha già fatto, una visita dal ginecologo.");
+  if(o.gonf>=7&&o.sede.includes("gambe"))med.push("Gonfiore forte alle gambe: se è nuovo, non passa o è da una gamba sola, va visto dal medico.");
+  if(c("tumori"))med.push("Tumori: niente tecnologie senza autorizzazione scritta dell'oncologo.");
+  if(eta&&eta>=43&&o.situ==="ciclo")med.push(`Ha ${eta} anni: chiedile se il ciclo è cambiato negli ultimi mesi.`);
+
+  const mis=[["peso","Peso","kg"],["vita","Vita","cm"],["fianchi","Fianchi","cm"],["coscia","Coscia","cm"]].map(([k,n,u])=>{const v=num($(k).value);return v?`${n}: ${String(v).replace(".",",")} ${u}`:null;}).filter(Boolean);
+  const F=FASI[o.key]||FASI[o.situ], cod=$("codice").value.trim().replace(/[<>&"]/g,"");
+  const rif=[`gonfiore ${o.gonf}/10${o.sede.length?" ("+o.sede.map(x=>x==="altro"?"altre zone":x).join(", ")+")":""}`,`dolore ${o.dol}/10`];o.sym.forEach(s=>rif.push(SYMN[s]));
+  if(figSel) rif.push(`figura scelta: ${FIG[figSel].n}${o.tipica?(o.tipica===figSel?" (in linea con la fase)":" (diversa dalla fase: tipica "+FIG[o.tipica].n+")"):""}`);
+
+  let h=`<div class="card"><div class="lab">Fase ${o.stimata?"stimata":""} · ${cod?cod+" · ":""}${eta?eta+" anni · ":""}${o.stimata?"giorno "+o.giorno+" · ":""}${fd(o.oggi)}</div>
     <div class="fase-big">${F[0]}</div>
     <p style="margin:0 0 6px"><b style="font-weight:500">Fisiologia:</b> ${F[1]}</p>
     <p style="margin:0"><b style="font-weight:500">Cosa può notare:</b> ${F[2]}</p>
-    ${stimata?striscia(giorno,L):""}
+    ${o.stimata?striscia(o.giorno,o.L,false):""}
     ${inc?`<div class="hint"><b style="font-weight:500">Incertezza:</b> ${inc}. È una stima, non una misura degli ormoni.</div>`:""}
     ${notaTemp?`<div class="hint"><b style="font-weight:500">Temperatura basale:</b> ${notaTemp}</div>`:""}
-    <div class="hint"><b style="font-weight:500">Oggi riferisce:</b> ${riferisce.join(", ")}.</div></div>`;
-  h+=`<div class="card oggi"><div class="lab">Seduta di oggi</div><div class="fase-big" style="margin:4px 0 10px">${esito}</div>
-    ${azioni.map((a,i)=>`<div class="az"><span class="n">${i+1}</span><div><b>${AZ[a][0]}</b><small>${AZ[a][1]}</small></div></div>`).join("")}
-    ${aspetta.length?`<div class="asp">${aspetta.map(([t,r])=>`<div>Aspetta: <b style="font-weight:500">${t}</b> ${rr(r)}</div>`).join("")}</div>`:""}
-    <div class="lab" style="margin-top:14px">Perché</div>${li(perche.map(([t,r])=>`${t} ${rr(r)}`))}
-    ${azioni.length>1&&!viso?`<div class="hint">Ordine: prima circolo, poi drenaggio, poi adipe, poi tono ${rr("R15")}.</div>`:""}
+    <div class="hint"><b style="font-weight:500">Riferisce:</b> ${rif.join(", ")}.</div></div>`;
+  h+=`<div class="card oggi"><div class="lab">Seduta di oggi</div><div class="fase-big" style="margin:4px 0 10px;color:${cls==="no"?"var(--no)":"inherit"}">${o.esito}</div>
+    ${o.azioni.map((a,i)=>`<div class="az"><span class="n">${i+1}</span><div><b>${AZ[a][0]}</b><small>${AZ[a][1]}</small></div></div>`).join("")}
+    ${o.aspetta.length?`<div class="asp">${o.aspetta.map(([t,r])=>`<div>Aspetta: <b style="font-weight:500">${t}</b> ${rr(r)}</div>`).join("")}</div>`:""}
+    <div class="lab" style="margin-top:14px">Perché</div>${li(o.perche.map(([t,r])=>`${t} ${rr(r)}`))}
+    ${o.azioni.length>1&&!o.viso?`<div class="hint">Ordine: prima circolo, poi drenaggio, poi adipe, poi tono ${rr("R15")}.</div>`:""}
     ${att.length?`<div class="lab" style="margin-top:14px">Attenzioni dall'anamnesi</div>${li(att)}`:""}</div>`;
-  if(piano.length) h+=`<div class="card"><div class="lab">Piano del mese</div><h2 style="margin-bottom:8px">Quando fare cosa</h2>${li(piano)}<div class="hint">Il piano per fase è il punto di partenza: a ogni seduta comanda come si sente lei ${rr("R7–R9")}.</div></div>`;
-  h+=`<div class="card"><div class="lab">Bilancia e misure</div><div class="fase-big" style="font-size:17px;margin:4px 0 8px;color:${bilOk?"var(--si)":"var(--no)"}">${bilOk?"Oggi puoi pesarla":"Oggi non pesarla"}</div>${li(bil.map(([t,r])=>`${t} ${rr(r)}`))}${mis.length?`<div class="hint">Misure di oggi: ${mis.join(" · ")}${bilOk?"":" — non valgono come confronto"}.</div>`:""}</div>`;
-  h+=`<div class="card"><div class="lab">Come parlarle</div><h2>Le parole</h2><div class="say">${PAROLE[key]||PAROLE.def}</div>
-    ${prima?`<div class="lab" style="margin-top:12px">Prima seduta ${rr("R24")}</div><div class="say">«Ti avviso da subito: in certi giorni del mese la bilancia ti dirà una bugia, perché gli ormoni ti fanno trattenere acqua. Per questo ti misuro con il centimetro e sempre nello stesso periodo del ciclo: così vediamo il risultato vero.»</div>`:""}
+  if(o.piano.length)h+=`<div class="card"><div class="lab">Piano del mese</div>${li(o.piano.map(p=>`<b>Giorni ${p.g}</b> · ${p.az} ${rr(p.r)}: ${p.w[2]}.`))}<div class="hint">Il piano per fase è il punto di partenza: a ogni seduta comanda come si sente lei ${rr("R7–R9")}.</div></div>`;
+  h+=`<div class="card"><div class="lab">Bilancia e misure</div><div class="fase-big" style="font-size:17px;margin:4px 0 8px;color:${o.bilOk?"var(--si)":"var(--no)"}">${o.bilOk?"Oggi puoi pesarla":"Oggi non pesarla"}</div>${li(o.bil.map(([t,r])=>`${t} ${rr(r)}`))}${mis.length?`<div class="hint">Misure di oggi: ${mis.join(" · ")}${o.bilOk?"":" — non valgono come confronto"}.</div>`:""}</div>`;
+  h+=`<div class="card"><div class="lab">Come parlarle</div><div class="say">${PAROLE[o.key]||PAROLE.def}</div>
+    ${prima?`<div class="lab" style="margin-top:12px">Prima seduta ${rr("R24")}</div><div class="say">«Ti avviso da subito: ${FRASE_BIL.charAt(0).toLowerCase()+FRASE_BIL.slice(1)}»</div>`:""}
     <div class="hint">Chiedi il permesso, ascolta, parla di fasi e non di problemi. Non fare diagnosi e non commentare gli esami.</div></div>`;
-  if(esami.length) h+=`<div class="card"><div class="lab">Esami portati</div>${li(esami.map(e=>`${e.n}: ${String(e.v).replace(".",",")} ${e.u} — ${e.st}`))}<div class="hint">Gli esami non decidono le azioni: servono solo a capire se mandarla dal medico.</div></div>`;
-  if(med.length) h+=`<div class="card"><div class="lab">Medico ${rr("R19")}</div><h2 style="margin-bottom:8px">Quando mandarla dal medico</h2>${li(med)}</div>`;
-  h+=`<div class="noprint"><button class="btn" id="stampa">Stampa / salva PDF</button><button class="btn w" id="mod">Modifica i dati</button><button class="btn w" id="nuova">Nuova valutazione</button></div>`;
-
-  const out=$("out"); out.innerHTML=h; out.classList.remove("hide"); $("form").classList.add("hide");
-  window.scrollTo({top:0,behavior:"smooth"});
+  if(esami.length)h+=`<div class="card"><div class="lab">Esami portati</div>${li(esami.map(e=>`${e.n}: ${String(e.v).replace(".",",")} ${e.u} — ${e.st}`))}</div>`;
+  if(med.length)h+=`<div class="card"><div class="lab">Medico ${rr("R19")}</div>${li(med)}</div>`;
+  h+=`<div class="noprint"><button class="btn" id="stampa">Stampa / salva PDF</button><button class="btn w" id="mod">Modifica i dati</button><button class="btn w" id="nuova">Nuova cliente</button></div>`;
+  $("out").innerHTML=h; show("out");
   $("stampa").onclick=()=>{try{window.print();}catch(e){}};
-  $("mod").onclick=()=>{out.classList.add("hide");$("form").classList.remove("hide");window.scrollTo({top:0});};
-  $("nuova").onclick=()=>{document.querySelectorAll("#form input").forEach(i=>{if(i.type==="checkbox")i.checked=false;else if(i.id!=="len")i.value="";});
-    $("len").value=28;["situ","obi","prima"].forEach(id=>$(id).selectedIndex=0);aggiornaCiclo();out.classList.add("hide");$("form").classList.remove("hide");window.scrollTo({top:0});};
+  $("mod").onclick=()=>show("vEst");
+  $("nuova").onclick=()=>location.reload();
 });
 aggiornaCiclo();
 </script>
+
 </body>
 </html>
