@@ -51,6 +51,11 @@
   ul.l{margin:0;padding-left:18px}ul.l li{margin:6px 0}
   .say{background:var(--perla);border-radius:20px;padding:14px 16px;margin:10px 0;font-style:italic}
   .hide{display:none}
+  .strip{display:flex;gap:4px;margin:16px 0 6px}
+  .sg{background:var(--perla);border-radius:12px;padding:8px 4px;text-align:center;min-width:0}
+  .sg span{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sg small{font-size:11px;color:var(--muto)}
+  .sg.on{background:var(--fumetto);outline:1.5px solid var(--celeste)}
   .foot{font-size:12px;color:var(--muto);text-align:center;margin-top:18px;padding:0 10px}
   .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.res-grid .card{margin:0}
   @media(max-width:680px){.grid,.checks,.res-grid{grid-template-columns:1fr}}
@@ -175,9 +180,8 @@ $("situ").addEventListener("change",aggiornaCiclo);
 const FASI={
   mestruale:["Mestruazioni","Pelle più reattiva, dolore più sentito, energia bassa. Lavoro dolce: benessere e calore, niente addome."],
   follicolare:["Fase follicolare","Gli estrogeni salgono: la pelle ripara meglio e il fastidio si sente meno. Finestra migliore per i trattamenti intensi."],
-  ovulatoria:["Periodo ovulatorio","Pelle luminosa e tonica: ancora un buon momento per il viso."],
-  luteale:["Fase luteale","Sale il progesterone: più ritenzione e pelle più grassa. Spazio a drenaggio, rimodellamento e benessere."],
-  premestruale:["Fase premestruale","Ritenzione al massimo e pelle incline a brufoli. Drenaggio e relax; rimanda i trattamenti aggressivi sul viso."],
+  ovulatoria:["Ovulazione (stimata)","Finestra calcolata solo sul calendario: l'ovulazione reale può cadere in altri giorni. Pelle in genere luminosa: ancora un buon momento per il viso."],
+  luteale:["Fase luteale","Sale il progesterone: più ritenzione e pelle più grassa, soprattutto verso la fine. Spazio a drenaggio, rimodellamento e benessere."],
   ritardo:["Ciclo in ritardo","Il ciclo è oltre la durata abituale. Prima di qualsiasi tecnologia chiedile se può essere incinta."],
   pillola:["Ormoni stabilizzati","Con la contraccezione ormonale il corpo è costante tutto il mese. Attenzione alle macchie: la pelle è più sensibile alla luce."],
   irregolare:["Ciclo irregolare","Senza un ritmo non si programma sulla fase: si adatta la seduta a come sta oggi."],
@@ -191,7 +195,6 @@ const PAROLE={
   follicolare:"«Questi sono i giorni in cui la tua pelle lavora meglio. Mettiamo qui la seduta più importante.»",
   ovulatoria:"«Ti vedo luminosa: è un buon momento per spingere un po' di più.»",
   luteale:"«Ti senti più gonfia? È normale, è il tuo corpo che trattiene. Oggi lavoriamo per alleggerirti.»",
-  premestruale:"«Giorni un po' pesanti, vero? Non è colpa tua, è una fase. Oggi pensiamo a farti stare bene.»",
   ritardo:"«Prima di iniziare ti faccio una domanda che faccio a tutte: c'è la possibilità che tu sia incinta?»",
   pillola:"«Con la pillola la pelle prende le macchie più facilmente: ti seguo io con protezione e tempi giusti.»",
   irregolare:"«Visto che il ciclo è imprevedibile, a ogni seduta mi dici come stai e adatto io il lavoro.»",
@@ -201,6 +204,11 @@ const PAROLE={
   gravidanza:"«Adesso la priorità siete voi due. Ti coccolo con mani e prodotti sicuri, poi ripartiamo insieme.»"
 };
 
+function striscia(g,L){
+  const seg=[["Mestruale",1,5],["Follicolare",6,L-15],["Ovulazione*",L-14,L-12],["Luteale",L-11,L]];
+  return `<div class="strip">`+seg.map(([n,a,b])=>`<div class="sg${g>=a&&g<=b?" on":""}" style="flex:${b-a+1}"><span>${n}</span><small>${a}–${b}</small></div>`).join("")+
+   `</div><div class="hint" style="font-size:12px">* Finestra solo illustrativa: l'ovulazione reale può cadere in giorni diversi e le fasi non sono intervalli separati. Calcolo su ciclo di ${L} giorni.</div>`;
+}
 $("go").addEventListener("click",()=>{
   const situ=$("situ").value, obi=$("obi").value, eta=num($("eta").value);
   const sym=[...document.querySelectorAll('input[name=sym]:checked')].map(x=>x.value);
@@ -214,7 +222,7 @@ $("go").addEventListener("click",()=>{
     giorno=Math.floor((oggi-lastD)/86400000)+1;
   }
   if(situ==="ciclo" && giorno>0){
-    key = giorno>L+5 ? "ritardo" : giorno<=5 ? "mestruale" : giorno<=L-15 ? "follicolare" : giorno<=L-12 ? "ovulatoria" : giorno<=L-6 ? "luteale" : "premestruale";
+    key = giorno>L+5 ? "ritardo" : giorno<=5 ? "mestruale" : giorno<=L-15 ? "follicolare" : giorno<=L-12 ? "ovulatoria" : "luteale";
   }
 
   // temperatura basale
@@ -243,7 +251,7 @@ $("go").addEventListener("click",()=>{
   if(key==="ritardo") R(ALL,1,"Ciclo in ritardo: escludi prima una gravidanza.");
   if(situ==="allattamento"){R(ALL,1,"Solo con l'ok del medico, mai sul seno.");R(["laser","polar"],2,"Rimandare a fine allattamento.");}
   if(key==="mestruale"||hs("crampi")){R(["micro","laser"],1,"Pelle più reattiva e più dolore: meglio spostare di qualche giorno.");R(["vacuum","polar","lipo"],1,"Evita l'addome oggi.");}
-  if(key==="premestruale"){R(["micro"],1,"Pelle incline a brufoli: meglio in fase follicolare.");R(["laser"],1,"Più sensibilità: valuta se spostare.");}
+  if(key==="luteale" && giorno>L-5){R(["micro"],1,"Pelle incline a brufoli: meglio in fase follicolare.");R(["laser"],1,"Più sensibilità: valuta se spostare.");}
   if(hs("sensibile")) R(["micro","laser","vacuum"],1,"È sensibile al tatto: intensità bassa.");
   if(situ==="pillola") R(["laser","micro"],1,"Rischio macchie: test spot e SPF 50.");
   if(hs("vampate")) R(["fir","polar"],1,"Ha le vampate: poco calore, meglio il freddo.");
@@ -278,10 +286,10 @@ $("go").addEventListener("click",()=>{
   // quando
   const cal=[];
   if(situ==="ciclo"&&lastD&&key!=="ritardo"){
-    let start=addD(lastD,5); while(addD(start,L-15-5)<oggi) start=addD(start,L);
-    const fine=addD(start,L-15-5); const da = start<oggi?oggi:start;
+    let start=addD(lastD,5); while(addD(start,L-21)<oggi) start=addD(start,L);
+    const fine=addD(start,L-21); const da = start<oggi?oggi:start;
     cal.push(`<b>Sedute intense</b> (viso, laser, radiofrequenza): ${da.getTime()===oggi.getTime()?"da oggi":"dal "+fd(da)} al ${fd(fine)}.`);
-    let lut=addD(lastD,L-14); while(addD(lut,13)<oggi) lut=addD(lut,L);
+    let lut=addD(lastD,L-12); while(addD(lut,11)<oggi) lut=addD(lut,L);
     cal.push(`<b>Drenaggio e rimodellamento</b> (vacuum, FIR, Polar Shape): seconda metà del ciclo, dal ${fd(lut<oggi?oggi:lut)}.`);
     cal.push(`<b>Prossimo ciclo previsto</b> intorno al ${fd(addD(lastD,Math.ceil((giorno)/L)*L))}: in quei giorni solo benessere.`);
   } else if(["peri","meno"].includes(situ)){
@@ -310,6 +318,7 @@ $("go").addEventListener("click",()=>{
   let h=`<div class="card"><div class="lab">${cod?cod+" · ":""}${eta?eta+" anni · ":""}${giorno&&situ==="ciclo"?"giorno "+giorno+" del ciclo · ":""}${fd(oggi)}</div>
     <div class="fase-big">${F[0]}</div><p style="margin:0">${F[1]}</p>
     <div class="stato ${cls}" style="margin-top:14px">${stato}</div>
+    ${(situ==="ciclo"&&giorno&&key!=="ritardo")?striscia(giorno,L):""}
     ${notaTemp?`<div class="hint">Temperatura basale: ${notaTemp}</div>`:""}</div>`;
   h+=`<div class="card"><div class="lab">Tecnologie</div><h2 style="margin-bottom:8px">Cosa usare</h2>`+
     lista.map(t=>`<div class="tech"><span class="dot ${lv[st[t].lv]}"></span><div><b>${TECH[t].n}</b>${top.includes(t)?'<span class="star">consigliata</span>':""} · <span style="color:var(--muto)">${lt[st[t].lv]}</span><small>${st[t].why.length?st[t].why.join(" "):TECH[t].d}</small></div></div>`).join("")+`</div>`;
