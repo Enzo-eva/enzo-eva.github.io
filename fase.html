@@ -131,26 +131,45 @@
     </div>
 
     <div class="card">
-      <div class="lab"><span class="num">02</span>Dati facoltativi</div>
-      <div class="hint">Solo se la cliente li porta. Vale sempre l'intervallo scritto sul suo referto; l'app non li interpreta, segnala solo se sono fuori.</div>
+      <div class="lab"><span class="num">02</span>Come sta oggi</div>
+      <div class="hint">Segna solo quello che riferisce lei: sono sensazioni, non diagnosi.</div>
+      <div class="grid">
+        <div><label class="f">Gonfiore percepito (0–10)</label><input type="number" id="gonf" min="0" max="10" placeholder="0"></div>
+        <div><label class="f">Dolore o fastidio (0–10)</label><input type="number" id="dolore" min="0" max="10" placeholder="0"></div>
+      </div>
+      <label class="f">Dove sente il gonfiore</label>
+      <div class="checks" style="margin-top:0">
+        <label class="ck"><input type="checkbox" name="sede" value="addome">Addome</label>
+        <label class="ck"><input type="checkbox" name="sede" value="gambe">Gambe</label>
+        <label class="ck full"><input type="checkbox" name="sede" value="altro">Altre zone</label>
+      </div>
+      <label class="f">Altro che riferisce</label>
+      <div class="checks" style="margin-top:0">
+        <label class="ck"><input type="checkbox" name="sym" value="crampi">Crampi / dolore al basso ventre</label>
+        <label class="ck"><input type="checkbox" name="sym" value="sensibile">Pelle o corpo sensibili al tatto</label>
+        <label class="ck"><input type="checkbox" name="sym" value="acne">Brufoli / acne</label>
+        <label class="ck"><input type="checkbox" name="sym" value="seno">Tensione al seno</label>
+        <label class="ck"><input type="checkbox" name="sym" value="stanca">Stanchezza / stress</label>
+        <label class="ck"><input type="checkbox" name="sym" value="vampate">Vampate di calore</label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="lab"><span class="num">03</span>Misure e dati facoltativi</div>
+      <div class="hint">Le misure si confrontano solo in condizioni simili, meglio nella stessa fase del ciclo: l'app ti dice quando ripeterle.</div>
+      <div class="grid">
+        <div><label class="f">Peso (kg)</label><input type="text" inputmode="decimal" id="peso" placeholder="Facoltativo"></div>
+        <div><label class="f">Vita (cm)</label><input type="text" inputmode="decimal" id="vita" placeholder="Facoltativo"></div>
+        <div><label class="f">Fianchi (cm)</label><input type="text" inputmode="decimal" id="fianchi" placeholder="Facoltativo"></div>
+        <div><label class="f">Coscia (cm)</label><input type="text" inputmode="decimal" id="coscia" placeholder="Facoltativo"></div>
+        <div style="grid-column:1/-1"><label class="f">Temperature basali degli ultimi giorni (°C, al risveglio, separate da virgola)</label><input type="text" inputmode="decimal" id="temp" placeholder="Es. 36.3, 36.35, 36.3, 36.6, 36.65, 36.7"></div>
+      </div>
+      <div class="hint" style="margin-top:14px">Esami del sangue, solo se li porta. Non misurano il grasso localizzato e non scelgono il macchinario: servono solo a capire se mandarla dal medico.</div>
       <div class="grid">
         <div><label class="f">Colesterolo totale (mg/dl)</label><input type="number" id="col" placeholder="Facoltativo"></div>
         <div><label class="f">Trigliceridi (mg/dl)</label><input type="number" id="trig" placeholder="Facoltativo"></div>
         <div><label class="f">Glicemia a digiuno (mg/dl)</label><input type="number" id="gli" placeholder="Facoltativo"></div>
         <div><label class="f">TSH (µUI/ml)</label><input type="text" inputmode="decimal" id="tsh" placeholder="Facoltativo"></div>
-        <div style="grid-column:1/-1"><label class="f">Temperature basali degli ultimi giorni (°C, al risveglio, separate da virgola)</label><input type="text" inputmode="decimal" id="temp" placeholder="Es. 36.3, 36.35, 36.3, 36.6, 36.65, 36.7"></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="lab"><span class="num">03</span>Come sta oggi</div>
-      <div class="checks">
-        <label class="ck"><input type="checkbox" name="sym" value="gonfiore">Gonfiore</label>
-        <label class="ck"><input type="checkbox" name="sym" value="gambe">Gambe pesanti</label>
-        <label class="ck"><input type="checkbox" name="sym" value="crampi">Crampi / dolore al basso ventre</label>
-        <label class="ck"><input type="checkbox" name="sym" value="stanca">Stanchezza / stress</label>
-        <label class="ck"><input type="checkbox" name="sym" value="sensibile">Sensibilità al tatto</label>
-        <label class="ck"><input type="checkbox" name="sym" value="vampate">Vampate di calore</label>
       </div>
     </div>
 
@@ -176,7 +195,7 @@
 
   <div id="out" class="hide"></div>
 
-  <div class="foot">Strumento di supporto per l'estetista: non fa diagnosi e non sostituisce il medico.</div>
+  <div class="foot">Strumento di supporto per l'estetista: non fa diagnosi, non è un protocollo clinico e non sostituisce il medico né il manuale del macchinario. I dati sul ciclo e sulla salute sono dati particolarmente protetti (GDPR): chiedi solo quelli che servono. Questa pagina non li salva.</div>
 </div>
 
 <script>
@@ -197,6 +216,7 @@ const MESI=["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","d
 const fd=d=>d.getDate()+" "+MESI[d.getMonth()];
 const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
 const num=v=>{v=(v||"").toString().replace(",",".").trim();return v===""?null:parseFloat(v);};
+const li=a=>`<ul class="l">${a.map(x=>`<li>${x}</li>`).join("")}</ul>`;
 
 function aggiornaCiclo(){
   const s=$("situ").value;
@@ -205,24 +225,25 @@ function aggiornaCiclo(){
 }
 $("situ").addEventListener("change",aggiornaCiclo);
 
+// [nome, fisiologia prevalente, possibili manifestazioni]
 const FASI={
-  mestruale:["Mestruazioni","Pelle più reattiva, dolore più sentito, energia bassa. Lavoro dolce: benessere e calore, niente addome."],
-  follicolare:["Fase follicolare","Gli estrogeni salgono: la pelle ripara meglio e il fastidio si sente meno. Finestra migliore per i trattamenti intensi."],
-  ovulatoria:["Ovulazione (stimata)","Finestra calcolata solo sul calendario: l'ovulazione reale può cadere in altri giorni. Pelle in genere luminosa: ancora un buon momento per il viso."],
-  luteale:["Fase luteale","Sale il progesterone: più ritenzione e pelle più grassa, soprattutto verso la fine. Spazio a drenaggio, rimodellamento e benessere."],
-  ritardo:["Ciclo in ritardo","Il ciclo è oltre la durata abituale. Prima di qualsiasi tecnologia chiedile se può essere incinta."],
-  pillola:["Ormoni stabilizzati","Con la contraccezione ormonale il corpo è costante tutto il mese. Attenzione alle macchie: la pelle è più sensibile alla luce."],
-  irregolare:["Ciclo irregolare","Senza un ritmo non si programma sulla fase: si adatta la seduta a come sta oggi."],
-  peri:["Perimenopausa","Gli estrogeni oscillano e calano: meno collagene, adipe che si sposta sull'addome, sonno altalenante. È il momento di prevenire."],
-  meno:["Menopausa","Estrogeni bassi: pelle più sottile e secca, meno tono, adipe addominale. Percorsi lunghi e costanti."],
-  allattamento:["Allattamento","Ormoni ancora in assestamento. Si lavora solo con l'ok del medico, mai sul seno."],
-  gravidanza:["Gravidanza","Niente tecnologie: solo manualità dolci e cosmetici compatibili."]
+  mestruale:["Fase mestruale","Estrogeni e progesterone bassi, inizio del flusso.","Possibili crampi e stanchezza; il gonfiore dei giorni prima può durare ancora un po' e poi ridursi."],
+  follicolare:["Fase follicolare","Estrogeni in genere in aumento, temperatura basale relativamente bassa.","In alcune donne meno gonfiore e meno fastidi rispetto ai giorni prima del ciclo."],
+  ovulatoria:["Fase periovulatoria (stimata)","Picco di estrogeni e di LH. Il giorno reale dell'ovulazione varia da donna a donna e da ciclo a ciclo.","A volte un leggero dolore al basso ventre o un gonfiore passeggero."],
+  luteale:["Fase luteale","Progesterone alto dopo l'ovulazione, temperatura basale più alta.","Possibili tensione al seno, gonfiore, brufoli e piccole variazioni di peso, soprattutto negli ultimi giorni."],
+  ritardo:["Ciclo in ritardo","Il ciclo è oltre la durata abituale.","Prima di qualsiasi tecnologia chiedile se può essere incinta."],
+  pillola:["Contraccezione ormonale","Il ciclo naturale è sospeso: l'app non stima nessuna fase dal calendario.","La pelle può essere più sensibile alla luce: attenzione alle macchie."],
+  irregolare:["Ciclo irregolare","Senza un ritmo regolare il calendario non è affidabile: l'app non stima la fase.","Si adatta la seduta a come sta oggi."],
+  peri:["Perimenopausa","Estrogeni che oscillano e calano: il calendario non è affidabile e l'app non stima la fase.","Possibili ciclo che cambia, vampate, sonno altalenante, pelle più secca."],
+  meno:["Menopausa","Estrogeni bassi e stabili: nessuna fase del ciclo.","Possibili pelle più sottile e secca, meno tono, vampate."],
+  allattamento:["Allattamento","Ormoni in assestamento: l'app non stima la fase.","Si lavora solo con l'ok del medico, mai sul seno."],
+  gravidanza:["Gravidanza","Nessuna fase del ciclo.","Niente tecnologie: solo manualità dolci e cosmetici compatibili."]
 };
 const PAROLE={
-  mestruale:"«Come ti senti in questi giorni? Oggi facciamo una seduta che ti rimette in pace; quella intensa la spostiamo di qualche giorno.»",
-  follicolare:"«Questi sono i giorni in cui la tua pelle lavora meglio. Mettiamo qui la seduta più importante.»",
-  ovulatoria:"«Ti vedo luminosa: è un buon momento per spingere un po' di più.»",
-  luteale:"«Ti senti più gonfia? È normale, è il tuo corpo che trattiene. Oggi lavoriamo per alleggerirti.»",
+  mestruale:"«Come ti senti in questi giorni? Dimmi tu cosa ti fa stare meglio oggi, e adattiamo la seduta.»",
+  follicolare:"«Come ti senti in questo periodo del mese? Se ti senti bene, possiamo lavorare con più intensità.»",
+  ovulatoria:"«Senti qualche fastidio in questi giorni? Se sì, me lo dici e regolo io.»",
+  luteale:"«Ti senti più gonfia in questi giorni? Può capitare, non è colpa tua. Oggi lavoriamo per farti stare più leggera.»",
   ritardo:"«Prima di iniziare ti faccio una domanda che faccio a tutte: c'è la possibilità che tu sia incinta?»",
   pillola:"«Con la pillola la pelle prende le macchie più facilmente: ti seguo io con protezione e tempi giusti.»",
   irregolare:"«Visto che il ciclo è imprevedibile, a ogni seduta mi dici come stai e adatto io il lavoro.»",
@@ -231,19 +252,23 @@ const PAROLE={
   allattamento:"«Il tuo corpo sta ancora tornando a sé. Chiediamo un ok al medico e poi costruiamo il percorso.»",
   gravidanza:"«Adesso la priorità siete voi due. Ti coccolo con mani e prodotti sicuri, poi ripartiamo insieme.»"
 };
+const SYMN={crampi:"crampi",sensibile:"sensibilità al tatto",acne:"brufoli",seno:"tensione al seno",stanca:"stanchezza",vampate:"vampate"};
 
 function striscia(g,L){
   const seg=[["Mestruale",1,5],["Follicolare",6,L-15],["Ovulazione*",L-14,L-12],["Luteale",L-11,L]];
   return `<div class="strip">`+seg.map(([n,a,b])=>`<div class="sg${g>=a&&g<=b?" on":""}" style="flex:${b-a+1}"><span>${n}</span><small>${a}–${b}</small></div>`).join("")+
-   `</div><div class="hint" style="font-size:12px">* Finestra solo illustrativa: l'ovulazione reale può cadere in giorni diversi e le fasi non sono intervalli separati. Calcolo su ciclo di ${L} giorni.</div>`;
+   `</div><div class="hint" style="font-size:12px">* Finestra solo illustrativa: l'ovulazione reale può cadere in giorni diversi e le fasi non sono intervalli separati. Ciclo di ${L} giorni.</div>`;
 }
+
 $("go").addEventListener("click",()=>{
   const situ=$("situ").value, obi=$("obi").value, eta=num($("eta").value);
   const sym=[...document.querySelectorAll('input[name=sym]:checked')].map(x=>x.value);
+  const sede=[...document.querySelectorAll('input[name=sede]:checked')].map(x=>x.value);
+  const gonf=Math.min(10,Math.max(0,num($("gonf").value)||0)), dol=Math.min(10,Math.max(0,num($("dolore").value)||0));
   const c=id=>$(id).checked, hs=k=>sym.includes(k);
   const oggi=new Date(); oggi.setHours(12,0,0,0);
 
-  // fase
+  // ---- A. fase stimata
   let key=situ, giorno=null, L=num($("len").value)||28, lastD=null;
   if($("last").value && ["ciclo","irregolare","peri"].includes(situ)){
     lastD=new Date($("last").value+"T12:00:00");
@@ -252,39 +277,51 @@ $("go").addEventListener("click",()=>{
   if(situ==="ciclo" && giorno>0){
     key = giorno>L+5 ? "ritardo" : giorno<=5 ? "mestruale" : giorno<=L-15 ? "follicolare" : giorno<=L-12 ? "ovulatoria" : "luteale";
   }
+  const stimata = situ==="ciclo" && giorno>0 && key!=="ritardo";
 
-  // temperatura basale
-  let notaTemp=null;
+  // temperatura basale come serie
   const temps=($("temp").value||"").split(/[,;\s]+/).map(num).filter(v=>v && v>34 && v<40);
+  let notaTemp=null, rialzo=null;
   if(temps.length>=6){
     const m=a=>a.reduce((x,y)=>x+y,0)/a.length;
-    const diff=m(temps.slice(-3))-m(temps.slice(0,3));
-    notaTemp = diff>=0.2 ? `Le temperature si sono alzate di circa ${diff.toFixed(1)} °C: l'ovulazione è probabilmente già avvenuta (seconda metà del ciclo).`
-                         : "Nessun rialzo termico evidente: probabilmente l'ovulazione non è ancora avvenuta.";
-  } else if(temps.length){ notaTemp="Servono almeno 6 giorni di temperature per vedere l'andamento: una sola misura non dice la fase."; }
+    const diff=m(temps.slice(-3))-m(temps.slice(0,3)); rialzo=diff>=0.2;
+    notaTemp = rialzo ? `rialzo di circa ${diff.toFixed(1).replace(".",",")} °C, compatibile con ovulazione già avvenuta (di solito il rialzo è tra 0,2 e 0,5 °C).`
+                      : "nessun rialzo sostenuto: probabilmente l'ovulazione non è ancora avvenuta.";
+  } else if(temps.length){ notaTemp="servono almeno 6 giorni di misure: una temperatura sola non dice la fase."; }
 
-  if(notaTemp && notaTemp.startsWith("Le temperature") && ["mestruale","follicolare"].includes(key)) notaTemp+=" Non torna con la data del ciclo: ricontrolla la data o le temperature.";
-  // esami (riferimenti indicativi standard)
+  // incertezza
+  let inc=null;
+  if(stimata){
+    inc="media — stima solo da calendario";
+    if(L!==28 || (giorno>=L-17 && giorno<=L-9)) inc="alta — vicino all'ovulazione o ciclo non di 28 giorni, il calendario sbaglia facilmente";
+    if(rialzo!==null){
+      const coerente = (rialzo && key==="luteale") || (!rialzo && ["mestruale","follicolare"].includes(key));
+      inc = coerente ? "più bassa — calendario e temperatura vanno d'accordo" : "alta — calendario e temperatura non tornano: ricontrolla data e misure";
+    }
+  }
+
+  // esami (riferimenti indicativi)
   const ES=[["col","Colesterolo totale","mg/dl",null,200],["trig","Trigliceridi","mg/dl",null,150],["gli","Glicemia","mg/dl",70,100],["tsh","TSH","µUI/ml",0.4,4.0]];
   const esami=ES.map(([k,n,u,mi,ma])=>{const v=num($(k).value);if(v===null||isNaN(v))return null;
     const st=(mi!==null&&v<mi)?"sotto":(ma!==null&&v>ma)?"sopra":"nella norma";return{k,n,u,v,st};}).filter(Boolean);
   const fuori=k=>esami.some(e=>e.k===k&&e.st!=="nella norma");
-  const tir=c("tiroide")||fuori("tsh"), zuc=fuori("gli");
 
-  // semaforo
+  // ---- D. sicurezza: semaforo guidato da sintomi riferiti e controindicazioni, mai dal solo giorno del ciclo
   const st={};ALL.forEach(t=>st[t]={lv:0,why:[]});
   const R=(list,lv,why)=>list.forEach(t=>{if(lv>st[t].lv)st[t].lv=lv;if(!st[t].why.includes(why))st[t].why.push(why);});
-  const zonaObi = ["viso","pelle"].includes(obi)?"viso":["peli"].includes(obi)?"entrambi":"corpo";
   if(situ==="gravidanza"||c("incinta")) R(ALL,2,"Gravidanza: niente tecnologie.");
   if(key==="ritardo") R(ALL,1,"Ciclo in ritardo: escludi prima una gravidanza.");
   if(situ==="allattamento"){R(ALL,1,"Solo con l'ok del medico, mai sul seno.");R(["laser","polar"],2,"Rimandare a fine allattamento.");}
-  if(key==="mestruale"||hs("crampi")){R(["micro","laser"],1,"Pelle più reattiva e più dolore: meglio spostare di qualche giorno.");R(["vacuum","polar","lipo"],1,"Evita l'addome oggi.");}
-  if(key==="luteale" && giorno>L-5){R(["micro"],1,"Pelle incline a brufoli: meglio in fase follicolare.");R(["laser"],1,"Più sensibilità: valuta se spostare.");}
-  if(hs("sensibile")) R(["micro","laser","vacuum"],1,"È sensibile al tatto: intensità bassa.");
-  if(situ==="pillola") R(["laser","micro"],1,"Rischio macchie: test spot e SPF 50.");
-  if(hs("vampate")) R(["fir","polar"],1,"Ha le vampate: poco calore, meglio il freddo.");
-  if(tir) R(["rf","hd","polar"],1,"Tiroide: non lavorare sul collo.");
-  if(zuc) R(["polar","fir"],1,"Glicemia fuori: temperature moderate, controlla la pelle.");
+  if(dol>=8) R(ALL,2,`Dolore ${dol}/10: oggi si rimanda.`);
+  else if(dol>=5) R(["micro","laser","vacuum","polar"],1,`Dolore ${dol}/10: intensità bassa o rimanda.`);
+  if(hs("crampi")) R(["vacuum","polar","lipo"],1,"Crampi: niente addome oggi.");
+  if(hs("sensibile")) R(["micro","laser","vacuum"],1,"Riferisce sensibilità: intensità bassa.");
+  if(hs("acne")) R(["micro","microdermo"],1,"Non lavorare sui brufoli infiammati.");
+  if(hs("seno")) R(["polar","vacuum"],0,"Tensione al seno: evita la zona.");
+  if(hs("vampate")) R(["fir","polar"],1,"Vampate: poco calore, meglio il freddo.");
+  if(situ==="pillola") R(["laser","micro"],1,"Pillola: rischio macchie, test spot e SPF 50.");
+  if(c("tiroide")||fuori("tsh")) R(["rf","hd","polar"],1,"Tiroide: non lavorare sul collo.");
+  if(fuori("gli")) R(["polar","fir"],1,"Glicemia fuori: temperature moderate, controlla la pelle.");
   if(c("cuore")){R(["rf","polar"],2,"Controindicato con dispositivi impiantati o problemi cardiaci.");R(["hd","lipo","fir","laser","vacuum"],1,"Verifica la scheda tecnica e chiedi l'ok del medico.");}
   if(c("metalli")) R(["rf","polar","hd"],1,"Mai sulla zona con protesi o placche metalliche.");
   if(c("vene")){R(["vacuum"],1,"Mai sulle vene visibili, aspirazione bassa.");R(["fir","polar"],1,"Calore moderato sulle gambe.");}
@@ -293,67 +330,69 @@ $("go").addEventListener("click",()=>{
   if(c("tumori")) R(ALL,2,"Solo con autorizzazione scritta dell'oncologo.");
   if(c("acuto")) R(ALL,2,"Sintomi acuti: nessun trattamento.");
 
-  // priorità per obiettivo e fase
+  // priorità: obiettivo + cosa riferisce oggi (non il giorno del ciclo)
   const sc={};ALL.forEach(t=>{let s=TECH[t].obi.includes(obi)?5:0;
-    if(["peri","meno"].includes(situ)&&["rf","micro","hd","polar"].includes(t))s+=1;
-    if(["luteale","premestruale"].includes(key)&&["vacuum","fir"].includes(t))s+=1;
-    if(["follicolare","ovulatoria"].includes(key)&&["micro","rf","hd","laser"].includes(t))s+=1;
-    if(hs("gonfiore")&&["vacuum","fir"].includes(t))s+=1;
+    if(gonf>=5&&sede.includes("gambe")&&["vacuum","fir"].includes(t))s+=1;
     if(hs("stanca")&&t==="fir")s+=1;
     sc[t]=s-st[t].lv*3;});
+  const zonaObi=["viso","pelle"].includes(obi)?"viso":obi==="peli"?"entrambi":"corpo";
   const top=ALL.filter(t=>st[t].lv<2&&TECH[t].obi.includes(obi)).sort((a,b)=>sc[b]-sc[a]).slice(0,2);
   const lista=ALL.filter(t=>TECH[t].area===zonaObi||TECH[t].area==="entrambi"||zonaObi==="entrambi").sort((a,b)=>(st[a].lv-st[b].lv)||(sc[b]-sc[a]));
 
-  // stato generale
   let stato,cls;
   if(c("acuto")){stato="NON TRATTARE — sintomi che richiedono il medico, anche con urgenza.";cls="no";}
   else if(situ==="gravidanza"||c("incinta")||c("tumori")){stato="NIENTE TECNOLOGIE — solo manualità e benessere.";cls="no";}
-  else if(ALL.some(t=>st[t].lv>0)||!c("scheda")||key==="ritardo"){stato="SI PUÒ LAVORARE CON ATTENZIONE — leggi i punti gialli"+(!c("scheda")?" e controlla la scheda del macchinario.":".");cls="cau";}
-  else {stato="SI PUÒ PROCEDERE — percorso qui sotto.";cls="ok";}
+  else if(dol>=8){stato="RIMANDA — oggi il dolore è troppo alto.";cls="no";}
+  else if(!c("scheda")){stato="PRIMA CONTROLLA LA SCHEDA DEL MACCHINARIO — la proposta vale solo dopo.";cls="cau";}
+  else if(ALL.some(t=>st[t].lv>0)||key==="ritardo"){stato="SI PUÒ LAVORARE CON ATTENZIONE — leggi i punti gialli.";cls="cau";}
+  else {stato="SI PUÒ PROCEDERE — proposta qui sotto.";cls="ok";}
 
-  // quando
-  const cal=[];
-  if(situ==="ciclo"&&lastD&&key!=="ritardo"){
-    let start=addD(lastD,5); while(addD(start,L-21)<oggi) start=addD(start,L);
-    const fine=addD(start,L-21); const da = start<oggi?oggi:start;
-    cal.push(`<b>Sedute intense</b> (viso, laser, radiofrequenza): ${da.getTime()===oggi.getTime()?"da oggi":"dal "+fd(da)} al ${fd(fine)}.`);
-    let lut=addD(lastD,L-12); while(addD(lut,11)<oggi) lut=addD(lut,L);
-    cal.push(`<b>Drenaggio e rimodellamento</b> (vacuum, FIR, Polar Shape): seconda metà del ciclo, dal ${fd(lut<oggi?oggi:lut)}.`);
-    cal.push(`<b>Prossimo ciclo previsto</b> intorno al ${fd(addD(lastD,Math.ceil((giorno)/L)*L))}: in quei giorni solo benessere.`);
-  } else if(["peri","meno"].includes(situ)){
-    cal.push("Viso: 6–8 sedute ogni 2–3 settimane, poi una al mese.");
-    cal.push("Corpo: 2 a settimana per 8–10 settimane, poi ogni 15 giorni.");
-  } else if(["gravidanza","allattamento"].includes(situ)||c("incinta")){
-    cal.push("Sedute di manualità e benessere quando se la sente. Il percorso con le tecnologie riparte dopo.");
+  // ---- C. misure e quando ripeterle
+  const mis=[["peso","Peso","kg"],["vita","Vita","cm"],["fianchi","Fianchi","cm"],["coscia","Coscia","cm"]].map(([k,n,u])=>{const v=num($(k).value);return v?`${n}: <b style="font-weight:500">${String(v).replace(".",",")} ${u}</b>`:null;}).filter(Boolean);
+  const quando=[];
+  if(stimata){
+    const stessa=addD(lastD,Math.ceil(giorno/L)*L+giorno-1);
+    quando.push(`Ripeti le misure intorno al <b>${fd(stessa)}</b>: stesso giorno del prossimo ciclo, così il confronto è pulito.`);
+    quando.push(`Prossimo ciclo previsto intorno al ${fd(addD(lastD,Math.ceil(giorno/L)*L))}.`);
   } else {
-    cal.push("Viso: una seduta intensa ogni 3–4 settimane. Corpo: 2 a settimana per 6–8 settimane.");
-    if(situ==="irregolare") cal.push("A ogni seduta chiedi come sta e adatta: con gonfiore e crampi solo drenaggio e benessere.");
+    quando.push("Ripeti le misure ogni 4 settimane, alla stessa ora e nelle stesse condizioni.");
   }
+  quando.push("Misura sempre allo stesso modo: stessa ora, stessi punti, stesso metro.");
+  if(gonf>=5) quando.push(`Oggi riferisce gonfiore ${gonf}/10: le misure di oggi possono risultare più alte del solito. Gonfiore percepito non vuol dire per forza più acqua misurata.`);
 
   // medico
   const med=[];
-  if(c("acuto")) med.push("Sintomi acuti: invitala a sentire subito il medico o il 112 se peggiorano.");
-  if(esami.some(e=>e.st!=="nella norma")) med.push("Valori fuori dai riferimenti indicativi ("+esami.filter(e=>e.st!=="nella norma").map(e=>e.n).join(", ")+"): controlla l'intervallo sul referto e, se è fuori, invitala a parlarne con il medico.");
+  if(c("acuto")) med.push("Sintomi acuti: invitala a sentire subito il medico, o il 112 se peggiorano.");
+  if(esami.some(e=>e.st!=="nella norma")) med.push("Esami fuori dai riferimenti indicativi ("+esami.filter(e=>e.st!=="nella norma").map(e=>e.n).join(", ")+"): controlla l'intervallo sul referto e invitala a parlarne con il medico. Tu non commentare i valori.");
   if(situ==="irregolare") med.push("Ciclo irregolare: se non l'ha già fatto, una visita dal ginecologo.");
   if(key==="ritardo") med.push("Ciclo in ritardo: prima di trattare, chiarire una possibile gravidanza.");
-  if(eta&&eta>=43&&situ==="ciclo") med.push(`Ha ${eta} anni: chiedile se il ciclo è cambiato negli ultimi mesi. Potrebbe essere in perimenopausa.`);
+  if(eta&&eta>=43&&situ==="ciclo") med.push(`Ha ${eta} anni: chiedile se il ciclo è cambiato negli ultimi mesi.`);
+  if(gonf>=7 && sede.includes("gambe")) med.push("Gonfiore forte alle gambe: se è nuovo, non passa o è da una gamba sola, va visto dal medico.");
   if(c("tumori")) med.push("Tumori: nessuna tecnologia senza autorizzazione scritta dell'oncologo.");
   if(c("cuore")) med.push("Cuore o dispositivi impiantati: serve l'ok del medico.");
 
-  // render
+  // ---- render
   const F=FASI[key]||FASI[situ], cod=$("codice").value.trim().replace(/[<>&"]/g,"");
   const lv=["s","c","n"], lt=["Sì","Con attenzione","No"];
-  let h=`<div class="card"><div class="lab">${cod?cod+" · ":""}${eta?eta+" anni · ":""}${giorno&&situ==="ciclo"?"giorno "+giorno+" del ciclo · ":""}${fd(oggi)}</div>
-    <div class="fase-big">${F[0]}</div><p style="margin:0">${F[1]}</p>
-    <div class="stato ${cls}" style="margin-top:14px">${stato}</div>
-    ${(situ==="ciclo"&&giorno&&key!=="ritardo")?striscia(giorno,L):""}
-    ${notaTemp?`<div class="hint">Temperatura basale: ${notaTemp}</div>`:""}</div>`;
-  h+=`<div class="card"><div class="lab">Tecnologie</div><h2 style="margin-bottom:8px">Cosa usare</h2>`+
-    lista.map(t=>`<div class="tech"><span class="dot ${lv[st[t].lv]}"></span><div><b>${TECH[t].n}</b>${top.includes(t)?'<span class="star">consigliata</span>':""} · <span style="color:var(--muto)">${lt[st[t].lv]}</span><small>${st[t].why.length?st[t].why.join(" "):TECH[t].d}</small></div></div>`).join("")+`</div>`;
-  h+=`<div class="res-grid"><div class="card"><div class="lab">Calendario</div><h2 style="margin-bottom:8px">Quando</h2><ul class="l">${cal.map(x=>`<li>${x}</li>`).join("")}</ul></div>
-     <div class="card"><div class="lab">Come parlarle</div><h2>Le parole</h2><div class="say">${PAROLE[key]||PAROLE[situ]}</div><div class="hint">Chiedi il permesso, ascolta, parla di fasi e non di problemi. Non commentare mai gli esami.</div></div></div>`;
-  if(esami.length) h+=`<div class="card" style="margin-top:14px"><div class="lab">Dati portati</div><ul class="l">${esami.map(e=>`<li>${e.n}: <b style="font-weight:500">${e.v} ${e.u}</b> — ${e.st}${e.st!=="nella norma"?" (riferimento indicativo)":""}</li>`).join("")}</ul></div>`;
-  if(med.length) h+=`<div class="card" style="margin-top:14px"><div class="lab">Attenzione</div><h2 style="margin-bottom:8px">Quando mandarla dal medico</h2><ul class="l">${med.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+  const riferisce=[]; if(gonf) riferisce.push(`gonfiore ${gonf}/10${sede.length?" ("+sede.map(x=>x==="altro"?"altre zone":x).join(", ")+")":""}`);
+  if(dol) riferisce.push(`dolore ${dol}/10`); sym.forEach(s=>riferisce.push(SYMN[s]));
+
+  let h=`<div class="card"><div class="lab">A · Fase ${stimata?"stimata":""} · ${cod?cod+" · ":""}${eta?eta+" anni · ":""}${stimata?"giorno "+giorno+" · ":""}${fd(oggi)}</div>
+    <div class="fase-big">${F[0]}</div>
+    <p style="margin:0 0 6px"><b style="font-weight:500">Fisiologia:</b> ${F[1]}</p>
+    <p style="margin:0"><b style="font-weight:500">Cosa può notare:</b> ${F[2]} Ogni donna è diversa.</p>
+    ${stimata?striscia(giorno,L):""}
+    ${inc?`<div class="hint"><b style="font-weight:500">Incertezza della stima:</b> ${inc}. È una stima, non una misura degli ormoni.</div>`:""}
+    ${notaTemp?`<div class="hint"><b style="font-weight:500">Temperatura basale:</b> ${notaTemp}</div>`:""}
+    <div class="stato ${cls}" style="margin-top:14px">${stato}</div></div>`;
+  h+=`<div class="res-grid"><div class="card"><div class="lab">B · Oggi riferisce</div><h2 style="margin-bottom:8px">Come sta</h2>${riferisce.length?li(riferisce):'<p style="margin:0">Nessun fastidio dichiarato.</p>'}</div>
+     <div class="card"><div class="lab">C · Misure</div><h2 style="margin-bottom:8px">Da confrontare</h2>${mis.length?li(mis):""}${li(quando)}</div></div>`;
+  h+=`<div class="card" style="margin-top:14px"><div class="lab">D · Sicurezza e proposta</div><h2 style="margin-bottom:8px">Tecnologie</h2>`+
+    lista.map(t=>`<div class="tech"><span class="dot ${lv[st[t].lv]}"></span><div><b>${TECH[t].n}</b>${top.includes(t)?'<span class="star">per l\'obiettivo</span>':""} · <span style="color:var(--muto)">${lt[st[t].lv]}</span><small>${st[t].why.length?st[t].why.join(" "):TECH[t].d}</small></div></div>`).join("")+
+    `<div class="hint">La proposta nasce dall'obiettivo e da come sta oggi, non dal giorno del ciclo né dagli esami. Vale solo dopo aver controllato la scheda del macchinario.</div></div>`;
+  h+=`<div class="card"><div class="lab">Come parlarle</div><h2>Le parole</h2><div class="say">${PAROLE[key]||PAROLE[situ]}</div><div class="hint">Chiedi il permesso, ascolta, parla di fasi e non di problemi. Non fare diagnosi e non commentare gli esami.</div></div>`;
+  if(esami.length) h+=`<div class="card"><div class="lab">Esami portati</div>${li(esami.map(e=>`${e.n}: <b style="font-weight:500">${String(e.v).replace(".",",")} ${e.u}</b> — ${e.st}${e.st!=="nella norma"?" (riferimento indicativo)":""}`))}</div>`;
+  if(med.length) h+=`<div class="card"><div class="lab">Attenzione</div><h2 style="margin-bottom:8px">Quando mandarla dal medico</h2>${li(med)}</div>`;
   h+=`<div class="noprint"><button class="btn" id="stampa">Stampa / salva PDF</button><button class="btn w" id="mod">Modifica i dati</button><button class="btn w" id="nuova">Nuova valutazione</button></div>`;
 
   const out=$("out"); out.innerHTML=h; out.classList.remove("hide"); $("form").classList.add("hide");
