@@ -204,6 +204,17 @@
         <label class="ck"><input type="checkbox" name="sede" value="gambe">Gambe</label>
         <label class="ck full"><input type="checkbox" name="sede" value="altro">Altre zone</label>
       </div>
+      <div class="grid">
+        <div><label class="f">Da quanti giorni sente il gonfiore</label><input type="number" id="gdur" min="0" max="60" placeholder="Facoltativo"></div>
+        <div><label class="f">Le capita anche negli altri cicli?</label><select id="gric"><option value="">Non so</option><option value="si">Sì, ogni ciclo</option><option value="no">No, è nuovo</option></select></div>
+      </div>
+      <div class="lab" style="margin-top:18px">Pelle · si registra ogni voce a parte</div>
+      <div class="grid">
+        <div><label class="f">Sensibilità</label><select id="pSens"><option value="">Non valutata</option><option>Normale</option><option>Aumentata</option></select></div>
+        <div><label class="f">Idratazione</label><select id="pIdr"><option value="">Non valutata</option><option>Bassa</option><option>Normale</option><option>Alta</option></select></div>
+        <div><label class="f">Sebo</label><select id="pSebo"><option value="">Non valutato</option><option>Basso</option><option>Normale</option><option>Alto</option></select></div>
+        <div><label class="f">Temperatura della pelle</label><select id="pTemp"><option value="">Non valutata</option><option>Fredda</option><option>Normale</option><option>Calda</option></select></div>
+      </div>
     </div>
 
     <div class="card">
@@ -299,7 +310,7 @@ const AZ={
   rinnovareDolce:["Rinnovare con delicatezza","la pelle del viso, senza stimoli forti."]
 };
 const ORDINE=["calmare","arterioso","drenare","drenareBreve","adipe","tonificare","rassodare","rinnovare","rinnovareDolce"];
-const AZCLI={calmare:"ti aiutiamo a rilassarti",arterioso:"riattiviamo la circolazione",drenare:"liberiamo i liquidi",drenareBreve:"prepariamo i tessuti",adipe:"lavoriamo sugli accumuli",tonificare:"tonifichiamo",rassodare:"rassodiamo la pelle",rinnovare:"rinnoviamo la pelle",rinnovareDolce:"rinnoviamo la pelle con dolcezza"};
+const AZCLI={calmare:"ti aiutiamo a rilassarti",arterioso:"riattiviamo la circolazione",drenare:"alleggeriamo la sensazione di gonfiore",drenareBreve:"prepariamo i tessuti",adipe:"lavoriamo sugli accumuli",tonificare:"tonifichiamo",rassodare:"rassodiamo la pelle",rinnovare:"rinnoviamo la pelle",rinnovareDolce:"rinnoviamo la pelle con dolcezza"};
 const FASI={
   mestruale:["Fase mestruale","Estrogeni e progesterone bassi, inizio del flusso.","Possibili crampi e stanchezza; il gonfiore dei giorni prima può durare ancora un po'."],
   follicolare:["Fase follicolare","Estrogeni in genere in aumento, temperatura basale relativamente bassa.","In alcune donne meno gonfiore e meno fastidi."],
@@ -324,7 +335,15 @@ const PAROLE={
   gravidanza:"«Adesso la priorità siete voi due. Ti coccolo con le mani, poi ripartiamo insieme.»"
 };
 const SYMN={crampi:"crampi",sensibile:"sensibilità al tatto",acne:"brufoli",seno:"tensione al seno",stanca:"stanchezza",vampate:"vampate"};
-const FRASE_BIL="In certi giorni del mese la bilancia ti dice una bugia, perché gli ormoni ti fanno trattenere acqua. Per questo ti misuriamo con il centimetro e sempre nello stesso periodo del ciclo: così vediamo il risultato vero.";
+const FRASE_BIL="In certi giorni del mese peso e gonfiore cambiano anche quando il percorso sta funzionando, e non dicono nulla sul grasso. Per questo ti misuriamo sempre nelle stesse condizioni e nello stesso periodo del ciclo: così vediamo il risultato vero.";
+// Atlante scientifico dei tessuti: [parametro, affidabilità, testo]
+const ATL={
+  mestruale:[["Acqua extracellulare","Moderata","Alcuni studi vedono valori medi un po' più alti durante le mestruazioni. Non è prevedibile per la singola cliente."],["Gonfiore addominale","Moderata","Il gonfiore percepito può essere massimo all'inizio del flusso e calare nei giorni dopo. Non equivale per forza a ritenzione."],["Cute","Limitata","Possibili variazioni di sensibilità e reattività, senza un andamento universale."],["Temperatura","Alta","La temperatura basale torna ai valori più bassi."],["Tessuto adiposo","Moderata","Nessuna variazione rapida e prevedibile del grasso o degli adipociti."]],
+  follicolare:[["Acqua extracellulare","Moderata","In alcune osservazioni più bassa che nei giorni del ciclo; non si deduce per la singola cliente."],["Gonfiore addominale","Moderata","A metà fase il gonfiore riferito tende a essere minore."],["Cute","Limitata","Non è dimostrato un aumento sistematico dell'idratazione della pelle."],["Temperatura","Alta","Temperatura basale più bassa che in fase luteale."],["Tessuto adiposo","Moderata","Non è dimostrato che il grasso localizzato si riduca più facilmente."]],
+  ovulatoria:[["Acqua extracellulare","Limitata","Nessun picco universale documentato."],["Gonfiore addominale","Moderata","Alcune donne riferiscono gonfiore o fastidio passeggero."],["Cute","Limitata","Differenze di elasticità in alcuni studi, non sufficienti per regole individuali."],["Temperatura","Alta","Il rialzo si vede di solito dopo l'ovulazione; una misura sola non la conferma."],["Tessuto adiposo","Moderata","Nessun cambiamento rapido degli adipociti dimostrato."]],
+  luteale:[["Acqua extracellulare","Moderata","Possibili oscillazioni dei liquidi; il massimo non cade sempre in questa fase."],["Gonfiore addominale","Moderata","Possibile gonfiore prima del ciclo, anche intestinale: non dimostra acqua nei tessuti."],["Cute","Moderata","Possibili cambi di temperatura cutanea, perfusione, sudorazione e brufoli; sebo e idratazione senza regola unica."],["Temperatura","Alta","Temperatura a riposo di circa 0,3–0,7 °C più alta che in fase follicolare."],["Tessuto adiposo","Moderata","Nessun ingrossamento ciclico prevedibile degli adipociti."]]
+};
+const FONTI=[["Changes in body weight and body composition during the menstrual cycle (2023)","https://pubmed.ncbi.nlm.nih.gov/37395124/"],["Fluid Retention over the Menstrual Cycle (2011)","https://pubmed.ncbi.nlm.nih.gov/21845193/"],["Physiological Changes in Women's Skin During the Menstrual Cycle (2025)","https://pubmed.ncbi.nlm.nih.gov/39776723/"],["Temperature regulation in women: Effects of the menstrual cycle (2020)","https://pubmed.ncbi.nlm.nih.gov/33123618/"],["Impact of Follicular Menstrual Phase on Body Composition Measures and Resting Metabolism (2021)","https://pubmed.ncbi.nlm.nih.gov/34280938/"]];
 
 function striscia(g,L,cli){
   const seg=[["Mestruale",1,5],["Follicolare",6,L-15],["Ovulazione*",L-14,L-12],["Luteale",L-11,L]];
@@ -346,7 +365,7 @@ function calc(opts){
   const stimata=situ==="ciclo"&&giorno>0&&key!=="ritardo", lutFine=key==="luteale"&&giorno>=L-6;
   // figura tipica della fase
   let tipica=null;
-  if(stimata) tipica = key==="mestruale"?"pancia":(key==="follicolare"||key==="ovulatoria")?"leggera":lutFine?"gonfia":"pesante";
+  if(stimata) tipica = key==="mestruale"?"pancia":lutFine?"pancia":"leggera";
 
   let esito,azioni=[],aspetta=[],perche=[];
   const stop=c("acuto")?"R3":(situ==="gravidanza"||c("incinta")||c("tumori"))?"R4":key==="ritardo"?"R5":dol>=8?"R6":null;
@@ -370,10 +389,11 @@ function calc(opts){
         else {esito="Seduta adipe";azioni=["drenareBreve","adipe","tonificare","rassodare"];}
         if(stimata) perche.push([FASI[key][0]+": si lavora sull'obiettivo"+(key==="ovulatoria"?", ascoltando un eventuale fastidio al basso ventre":"")+".","R11"]);
       } else {
-        if(viso){esito="Seduta viso";azioni=["rassodare","rinnovareDolce"];}
-        else if(obi==="gambe"){esito="Seduta gambe";azioni=["arterioso","drenare"];}
-        else {esito=obi==="tono"?"Seduta tono":"Seduta adipe";azioni=obi==="tono"?["drenare","tonificare","rassodare"]:["drenare","adipe","tonificare"];}
-        perche.push([lutFine?"Ultimi giorni della luteale ma è sgonfia: drenaggio pieno, poi obiettivo.":"Prima parte della luteale: più drenaggio, poi obiettivo.","R12"]);
+        if(viso){esito="Seduta viso";azioni=["rassodare","rinnovare"];}
+        else if(obi==="gambe"){esito="Seduta gambe";azioni=["arterioso","drenare","tonificare"];}
+        else if(obi==="tono"){esito="Seduta tono";azioni=["drenareBreve","tonificare","rassodare"];}
+        else {esito="Seduta adipe";azioni=["drenareBreve","adipe","tonificare","rassodare"];}
+        perche.push(["Fase luteale e si sente bene: si lavora sull'obiettivo. La fase da sola non indica ritenzione (Atlante R01).","R12"]);
       }
       if(viso&&hs("acne")){azioni=azioni.map(a=>a==="rinnovare"?"rinnovareDolce":a);perche.push(["Brufoli: rinnovare solo con delicatezza, mai sui brufoli infiammati.","R7"]);}
     }
@@ -396,7 +416,7 @@ function calc(opts){
     bil.push([gonf>=5?"Oggi si sente gonfia: peso e misure di oggi non valgono come confronto.":"Puoi pesarla: a digiuno, stessa ora, stesse condizioni delle altre volte.",gonf>=5?"R18":"R21"]);
     bil.push(["Ripeti peso e misure ogni 4 settimane, nelle stesse condizioni.","R17"]);
   }
-  bil.push(["Se il peso sale ma i centimetri scendono, conta il centimetro: è acqua, non grasso.","R22"]);
+  bil.push(["Peso, gonfiore e centimetri non misurano il grasso: si guarda l'andamento, sempre in condizioni uguali (Atlante R02).","R22"]);
   bil.push(["Il risultato si legge prima con centimetro e foto, poi con la bilancia.","R23"]);
 
   // piano del mese
@@ -407,8 +427,8 @@ function calc(opts){
     const ob=viso?"rassodare e rinnovare la pelle":obi==="gambe"?"circolazione, drenaggio e tono":obi==="tono"?"tonificare e rassodare":"lavorare sugli accumuli e tonificare";
     piano.push({g:"1–5",cli:"Ti ascoltiamo",az:"calmare e riattivare la circolazione con dolcezza",r:"R10",w:w(1,5)});
     piano.push({g:`6–${L-12}`,cli:"Il momento di lavorare",az:ob,r:"R11",w:w(6,L-12)});
-    piano.push({g:`${L-11}–${L-7}`,cli:"Liberiamo e lavoriamo",az:"più drenaggio, poi l'obiettivo",r:"R12",w:w(L-11,L-7)});
-    piano.push({g:`${L-6}–${L}`,cli:"Leggerezza",az:viso?"rinnovare la pelle con dolcezza":"circolazione e drenaggio",r:"R13",w:w(L-6,L)});
+    piano.push({g:`${L-11}–${L-7}`,cli:"Continuiamo",az:"obiettivo, se si sente bene",r:"R12",w:w(L-11,L-7)});
+    piano.push({g:`${L-6}–${L}`,cli:"Ci regoliamo su di te",az:viso?"se ci sono brufoli, rinnovare con dolcezza":"se si sente gonfia, circolazione e drenaggio; altrimenti obiettivo",r:"R13",w:w(L-6,L)});
     piano.sort((p,q)=>p.w[0]-q.w[0]);
   }
   return {situ,obi,viso,gonf,dol,sym,sede,key,giorno,L,lastD,stimata,lutFine,tipica,esito,azioni,aspetta,perche,bil,bilOk,pesata,piano,oggi};
@@ -499,6 +519,9 @@ $("go").addEventListener("click",()=>{
   const mis=[["peso","Peso","kg"],["vita","Vita","cm"],["fianchi","Fianchi","cm"],["coscia","Coscia","cm"]].map(([k,n,u])=>{const v=num($(k).value);return v?`${n}: ${String(v).replace(".",",")} ${u}`:null;}).filter(Boolean);
   const F=FASI[o.key]||FASI[o.situ], cod=$("codice").value.trim().replace(/[<>&"]/g,"");
   const rif=[`gonfiore ${o.gonf}/10${o.sede.length?" ("+o.sede.map(x=>x==="altro"?"altre zone":x).join(", ")+")":""}`,`dolore ${o.dol}/10`];o.sym.forEach(s=>rif.push(SYMN[s]));
+  const gdur=num($("gdur").value), gric=$("gric").value;
+  if(gdur) rif.push(`gonfiore da ${gdur} giorni`); if(gric) rif.push(gric==="si"?"gonfiore che si ripete ogni ciclo":"gonfiore nuovo, non dei cicli precedenti");
+  const pelle=[["Sensibilità","pSens"],["Idratazione","pIdr"],["Sebo","pSebo"],["Temperatura pelle","pTemp"]].filter(([n,id])=>$(id).value).map(([n,id])=>n+": "+$(id).value.toLowerCase());
   if(figSel) rif.push(`figura scelta: ${FIG[figSel].n}${o.tipica?(o.tipica===figSel?" (in linea con la fase)":" (diversa dalla fase: tipica "+FIG[o.tipica].n+")"):""}`);
 
   let h=`<div class="card"><div class="lab">Fase ${o.stimata?"stimata":""} · ${cod?cod+" · ":""}${eta?eta+" anni · ":""}${o.stimata?"giorno "+o.giorno+" · ":""}${fd(o.oggi)}</div>
@@ -522,6 +545,9 @@ $("go").addEventListener("click",()=>{
     <div class="hint">Chiedi il permesso, ascolta, parla di fasi e non di problemi. Non fare diagnosi e non commentare gli esami.</div></div>`;
   if(esami.length)h+=`<div class="card"><div class="lab">Esami portati</div>${li(esami.map(e=>`${e.n}: ${String(e.v).replace(".",",")} ${e.u} — ${e.st}`))}</div>`;
   if(med.length)h+=`<div class="card"><div class="lab">Medico ${rr("R19")}</div>${li(med)}</div>`;
+  if(pelle.length) h+=`<div class="card"><div class="lab">Pelle oggi · voci separate</div><p style="margin:4px 0 0">${pelle.join(" · ")}</p><div class="hint">Sensibilità, idratazione, sebo e temperatura si registrano separati: una non dice nulla sulle altre (Atlante R03).</div></div>`;
+  h+=`<div class="card"><div class="lab">Atlante dei tessuti</div>`+(o.stimata&&ATL[o.key]?`<h2 style="margin-bottom:8px">Cosa dice la ricerca su questa fase</h2>`+ATL[o.key].map(([p,a,t])=>`<div class="tech"><span class="dot ${a==="Alta"?"s":a==="Moderata"?"c":"n"}"></span><div><b>${p}</b> · <span style="color:var(--muto)">affidabilità ${a.toLowerCase()}</span><small>${t}</small></div></div>`).join("")+`<div class="hint">Sono andamenti medi, non misure della cliente. Gonfiore percepito non vuol dire acqua trattenuta; circonferenza e peso non vogliono dire grasso (Atlante R01–R02).</div>`:`<p style="margin:6px 0 0">Il modello a quattro fasi non si applica a ${FASI[o.key]?FASI[o.key][0].toLowerCase():"questa situazione"} (Atlante R06): si lavora su come si sente.</p>`)+`</div>`;
+  h+=`<div class="card"><div class="lab">Fonti</div>${li(FONTI.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener" style="color:var(--antracite)">${t}</a>`))}<div class="hint">Contenuto preliminare, da sottoporre a revisione scientifica e normativa prima della vendita.</div></div>`;
   h+=`<div class="noprint"><button class="btn" id="stampa">Stampa / salva PDF</button><button class="btn w" id="mod">Modifica i dati</button><button class="btn w" id="nuova">Nuova cliente</button></div>`;
   $("out").innerHTML=h; show("out");
   $("stampa").onclick=()=>{try{window.print();}catch(e){}};
