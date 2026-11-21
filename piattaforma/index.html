@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"><meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fase — piattaforma</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:"Larke";src:url(../font/larke-100.woff2) format("woff2");font-weight:100 300}
+  @font-face{font-family:"Larke";src:url(../font/larke-400.woff2) format("woff2");font-weight:400}
+  @font-face{font-family:"Larke";src:url(../font/larke-600.woff2) format("woff2");font-weight:500 600}
+  :root{--perla:#F3F0F9;--antracite:#5A4D86;--scuro:#3D3360;--celeste:#8E7CC6;--fumetto:#E6DEF6;--testo:#3a3450;--muto:#8C84A3;--r:28px;--si:#2e9e6b;--cau:#d9962b;--no:#c9483f}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--perla);color:var(--testo);font-family:"Larke","Jost",system-ui,sans-serif;font-weight:300;font-size:16px;line-height:1.5}
+  .wrap{max-width:900px;margin:0 auto;padding:16px 14px 50px}
+  .lab{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muto);font-weight:400}
+  h1,h2{font-weight:300;letter-spacing:.14em;text-transform:uppercase;margin:0}
+  .hero{display:flex;flex-direction:column-reverse;background:linear-gradient(135deg,#C9BCEB,#A694D9 55%,#8E7CC6)!important;position:relative;border-radius:var(--r);overflow:hidden;margin-bottom:18px;box-shadow:0 26px 40px -28px rgba(61,51,96,.55);background:#A897D8}
+  .hero svg{display:block;width:100%;height:auto;margin-top:-10px}
+  .hero .txt{position:relative;padding:24px 24px 0;color:#fff}
+  .hero .lab{color:#F1ECFB}
+  .hero h1{font-size:30px;letter-spacing:.32em;margin:6px 0 4px;font-weight:300}
+  .hero p{margin:0;font-size:13px;color:#F4F0FC;max-width:330px}
+  .card{background:#fff;border-radius:var(--r);padding:22px 20px;margin-bottom:14px}
+  .card h2{font-size:15px;margin:6px 0 4px}
+  .num{color:var(--celeste);font-weight:400;margin-right:6px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+  label.f{display:block;font-size:13px;color:var(--muto);margin:12px 0 6px}
+  input[type=text],input[type=number],input[type=date],select{width:100%;border:1px solid #E3DCF0;background:#FBFAFE;border-radius:16px;padding:12px 14px;font:inherit;font-weight:400;color:var(--testo);-webkit-appearance:none;appearance:none;min-height:48px}
+  select{background-image:linear-gradient(45deg,transparent 50%,#8C84A3 50%),linear-gradient(135deg,#8C84A3 50%,transparent 50%);background-position:calc(100% - 20px) 21px,calc(100% - 15px) 21px;background-size:5px 5px;background-repeat:no-repeat;padding-right:34px}
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .ck{display:flex;gap:10px;align-items:flex-start;background:#FBFAFE;border:1px solid #ECE6F6;border-radius:16px;padding:11px 13px;font-size:14px;line-height:1.35;cursor:pointer}
+  .ck input{width:18px;height:18px;margin:1px 0 0;accent-color:#8E7CC6;flex:0 0 18px}
+  .ck.full{grid-column:1/-1}
+  .hint{font-size:13px;color:var(--muto);margin-top:8px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:999px;background:var(--fumetto);color:var(--scuro);font:inherit;font-weight:400;letter-spacing:.16em;text-transform:uppercase;font-size:14px;padding:16px 18px;cursor:pointer;margin-top:10px}
+  .btn::before{content:"";width:18px;height:1.5px;background:var(--scuro)}
+  .btn.w{background:#fff;border:1px solid #E3DCF0}
+  .stato{border-radius:20px;padding:14px 16px;font-weight:400;margin:4px 0 14px}
+  .stato.ok{background:#e9f6ef;color:#20714c}.stato.cau{background:#fff3df;color:#8a5a10}.stato.no{background:#fde9e6;color:#9b3129}
+  .fase-big{font-size:21px;letter-spacing:.16em;text-transform:uppercase;margin:6px 0}
+  .tech{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-top:1px solid #EFEAF7}
+  .tech:first-of-type{border-top:0}
+  .dot{flex:0 0 12px;height:12px;border-radius:50%;margin-top:6px}
+  .dot.s{background:var(--si)}.dot.c{background:var(--cau)}.dot.n{background:var(--no)}
+  .tech b{font-weight:500}.tech small{display:block;color:var(--muto);font-size:13px;line-height:1.4}
+  .star{color:var(--celeste);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-left:6px}
+  ul.l{margin:0;padding-left:18px}ul.l li{margin:6px 0}
+  .say{background:var(--perla);border-radius:20px;padding:14px 16px;margin:10px 0;font-style:italic}
+  .hide{display:none}
+  .oggi{border:1.5px solid var(--celeste)}
+  .rule{display:inline-block;font-size:10px;letter-spacing:.08em;background:var(--fumetto);color:var(--scuro);border-radius:999px;padding:1px 7px;margin-left:4px;vertical-align:1px;font-weight:400;font-style:normal}
+  .az{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid #EFEAF7}
+  .az:first-of-type{border-top:0}
+  .az .n{flex:0 0 28px;height:28px;border-radius:50%;background:var(--celeste);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:400}
+  .az b{font-weight:500}.az small{display:block;color:var(--muto);font-size:13px}
+  .asp{background:#fff3df;color:#8a5a10;border-radius:16px;padding:10px 14px;margin-top:10px;font-size:14px}
+  .strip{display:flex;gap:4px;margin:16px 0 6px}
+  .sg{background:var(--perla);border-radius:12px;padding:8px 4px;text-align:center;min-width:0}
+  .sg span{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sg small{font-size:11px;color:var(--muto)}
+  .sg.on{background:var(--fumetto);outline:1.5px solid var(--celeste)}
+  .foot{font-size:12px;color:var(--muto);text-align:center;margin-top:18px;padding:0 10px}
+  .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.res-grid .card{margin:0}
+  @media(max-width:680px){.grid,.checks,.res-grid{grid-template-columns:1fr}}
+  @media print{.noprint,.btn{display:none!important}body{background:#fff}.card{border:1px solid #ddd}.hero{box-shadow:none}}
+  .cli{font-size:18px}
+  .cli label.f{font-size:15px;color:var(--testo)}
+  .cli select,.cli input{font-size:18px;min-height:54px}
+  .cli .hint{font-size:15px}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+  .fig{border:1.5px solid #ECE6F6;border-radius:20px;padding:10px 4px 10px;text-align:center;background:#FBFAFE;font:inherit;color:inherit;cursor:pointer}
+  .fig.on{border-color:var(--celeste);background:var(--fumetto)}
+  .fig svg{width:100%;height:auto;max-height:200px}
+  .fig b{display:block;font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+  .fig small{display:block;font-size:12px;color:var(--muto);line-height:1.3;margin-top:2px}
+  .scala{display:grid;grid-template-columns:repeat(11,1fr);gap:4px}
+  .scala button{border:1px solid #E3DCF0;background:#FBFAFE;border-radius:12px;padding:12px 0;font:inherit;font-size:16px;color:var(--testo);cursor:pointer}
+  .scala button.on{background:var(--celeste);color:#fff;border-color:var(--celeste)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid #E3DCF0;background:#FBFAFE;border-radius:999px;padding:10px 16px;font:inherit;font-size:16px;color:var(--testo);cursor:pointer}
+  .chip.on{background:var(--fumetto);border-color:var(--celeste)}
+  .conf{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:8px;text-align:center}
+  .conf small{display:block;font-size:12px;color:var(--muto)}
+  .conf .vs{font-size:34px;color:var(--celeste);font-weight:300}
+  .pm{display:flex;gap:14px;align-items:flex-start;padding:12px 10px;border-radius:16px}
+  .pm+.pm{margin-top:4px}
+  .pm.on{background:var(--fumetto)}
+  .pm .pg{flex:0 0 88px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--celeste);padding-top:3px}
+  .pm b{font-weight:500}.pm small{display:block;color:var(--muto);font-size:14px}
+  @media(max-width:520px){.figs{grid-template-columns:repeat(2,1fr)}.scala button{padding:10px 0;font-size:14px}}
+
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+  .fig{border:1.5px solid #ECE6F6;border-radius:20px;padding:10px 4px;text-align:center;background:#FBFAFE;font:inherit;color:inherit;cursor:pointer}
+  .fig.on{border-color:var(--celeste);background:var(--fumetto)}
+  .fig svg{width:100%;height:auto;max-height:190px}
+  .fig b{display:block;font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+  .fig small{display:block;font-size:12px;color:var(--muto);line-height:1.3;margin-top:2px}
+  .scala{display:grid;grid-template-columns:repeat(11,1fr);gap:4px}
+  .scala button{border:1px solid #E3DCF0;background:#FBFAFE;border-radius:12px;padding:11px 0;font:inherit;color:var(--testo);cursor:pointer}
+  .scala button.on{background:var(--celeste);color:#fff;border-color:var(--celeste)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid #E3DCF0;background:#FBFAFE;border-radius:999px;padding:9px 15px;font:inherit;font-size:15px;color:var(--testo);cursor:pointer}
+  .chip.on{background:var(--fumetto);border-color:var(--celeste)}
+  .conf{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:8px;text-align:center}
+  .conf small{display:block;font-size:12px;color:var(--muto)}.conf .vs{font-size:34px;color:var(--celeste)}
+  .pm{display:flex;gap:14px;align-items:flex-start;padding:12px 10px;border-radius:16px}.pm+.pm{margin-top:4px}.pm.on{background:var(--fumetto)}
+  .pm .pg{flex:0 0 90px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--celeste);padding-top:3px}
+  .pm b{font-weight:500}.pm small{display:block;color:var(--muto);font-size:14px}
+  .steps{display:flex;gap:6px;margin-top:10px}.steps span{flex:1;height:5px;border-radius:5px;background:#ECE6F6}.steps span.on{background:var(--celeste)}
+  .mini{border:1px solid #E3DCF0;background:#fff;border-radius:999px;padding:7px 14px;font:inherit;font-size:13px;color:var(--scuro);cursor:pointer;white-space:nowrap;margin-left:6px}
+  .err{color:var(--no);text-align:center;font-size:14px;margin-top:8px;min-height:18px}
+  textarea{width:100%;border:1px solid #E3DCF0;background:#FBFAFE;border-radius:16px;padding:12px 14px;font:inherit;color:var(--testo)}
+  .top{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:10px}
+  .brand{font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--scuro);font-weight:400;margin-right:auto}
+  #roles{display:flex;gap:4px;background:#fff;border-radius:999px;padding:4px}
+  #roles button{border:0;background:none;border-radius:999px;padding:7px 12px;font:inherit;font-size:12px;color:var(--muto);cursor:pointer}
+  #roles button.on{background:var(--celeste);color:#fff}
+  #nav{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px;padding-bottom:2px}
+  #nav a{white-space:nowrap;text-decoration:none;color:var(--scuro);background:#fff;border-radius:999px;padding:8px 14px;font-size:13px}
+  #nav a.on{background:var(--fumetto);outline:1.5px solid var(--celeste)}
+  .head{padding:16px 20px}.head .t{font-size:19px;margin-top:4px}
+  .tb{width:100%;border-collapse:collapse}.tb td{padding:8px 0;border-top:1px solid #EFEAF7}.tb td+td{text-align:right;font-weight:500}
+  a{color:var(--antracite)}
+  @media(max-width:560px){.figs{grid-template-columns:repeat(2,1fr)}.scala button{padding:9px 0;font-size:13px}#roles button{padding:6px 9px}}
+</style></head>
+<body><div class="wrap">
+<div class="top noprint"><div class="brand">Fase · Skinem</div>
+<div id="roles"><button data-r="donna">Donna</button><button data-r="pro">Professionista</button><button data-r="centro">Cabina</button><button data-r="admin">Admin</button></div></div>
+<nav id="nav" class="noprint"></nav>
+<main id="app"></main>
+<p class="foot">Versione 1 · i dati restano su questo dispositivo finché non colleghiamo il database online.</p>
+</div>
+<script>const HERO='<svg viewBox="0 100 600 230" role="img" aria-label="Curve degli ormoni che cambiano durante il ciclo">\n      <defs>\n        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C9BCEB"/><stop offset=".55" stop-color="#A694D9"/><stop offset="1" stop-color="#7D6BB8"/></linearGradient>\n        <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="38"/></filter>\n        <linearGradient id="est" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>\n        <linearGradient id="pro" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EBDDFB" stop-opacity=".5"/><stop offset="1" stop-color="#EBDDFB" stop-opacity="0"/></linearGradient>\n      </defs>\n      \n      <circle cx="510" cy="-60" r="140" fill="#E9E1FA" opacity=".55" filter="url(#blur)"/>\n      <circle cx="90" cy="300" r="120" fill="#6B58A8" opacity=".5" filter="url(#blur)"/>\n      <circle cx="330" cy="180" r="90" fill="#F5D9F0" opacity=".35" filter="url(#blur)"/>\n      <!-- progesterone -->\n      <path d="M0 292 C150 292 230 290 300 282 C360 274 380 205 445 200 C505 196 535 262 600 288 L600 330 L0 330Z" fill="url(#pro)"/>\n      <path d="M0 292 C150 292 230 290 300 282 C360 274 380 205 445 200 C505 196 535 262 600 288" fill="none" stroke="#F3EAFE" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/>\n      <!-- estrogeni -->\n      <path d="M0 286 C80 284 140 270 200 230 C240 202 262 160 285 162 C310 164 320 250 350 252 C390 254 420 222 450 222 C500 222 540 270 600 282 L600 330 L0 330Z" fill="url(#est)"/>\n      <path d="M0 286 C80 284 140 270 200 230 C240 202 262 160 285 162 C310 164 320 250 350 252 C390 254 420 222 450 222 C500 222 540 270 600 282" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>\n      <!-- fasi -->\n      <g stroke="#fff" stroke-opacity=".35" stroke-width="1"><line x1="107" y1="150" x2="107" y2="312"/><line x1="278" y1="150" x2="278" y2="312"/><line x1="343" y1="150" x2="343" y2="312"/></g>\n      <g fill="#fff" fill-opacity=".85" font-family="Larke,Jost,sans-serif" font-size="10" letter-spacing="2.4">\n        <text x="18" y="318">MESTRUALE</text><text x="120" y="318">FOLLICOLARE</text><text x="286" y="318">OVUL.</text><text x="430" y="318">LUTEALE</text>\n      </g>\n      <circle cx="285" cy="162" r="5" fill="#fff"/><circle cx="285" cy="162" r="11" fill="none" stroke="#fff" stroke-opacity=".5"/>\n      <g font-family="Larke,Jost,sans-serif" font-size="9" letter-spacing="1.8" fill="#fff" fill-opacity=".8">\n        <text x="210" y="150">ESTROGENI</text><text x="452" y="190">PROGESTERONE</text>\n      </g>\n    </svg>';
+"use strict";
+/* ============================================================
+   FASE – piattaforma (versione 1, dati sul dispositivo)
+   Tutto l'accesso ai dati passa da DB: per collegare il database
+   online basta riscrivere questo oggetto, il resto resta uguale.
+   ============================================================ */
+const KEY="fase-piattaforma-v1";
+const COMUNI=["Altidona","Amandola","Belmonte Piceno","Campofilone","Falerone","Fermo","Francavilla d'Ete","Grottazzolina","Lapedona","Magliano di Tenna","Massa Fermana","Monsampietro Morico","Montappone","Monte Giberto","Monte Rinaldo","Monte San Pietrangeli","Monte Urano","Monte Vidon Combatte","Monte Vidon Corrado","Montefalcone Appennino","Montefortino","Montegiorgio","Montegranaro","Monteleone di Fermo","Montelparo","Monterubbiano","Montottone","Moresco","Ortezzano","Pedaso","Petritoli","Ponzano di Fermo","Porto San Giorgio","Porto Sant'Elpidio","Rapagnano","Santa Vittoria in Matenano","Sant'Elpidio a Mare","Servigliano","Smerillo","Torre San Patrizio"];
+const TIPI={nutrizionista:"Nutrizionista",estetista:"Estetista",ginecologo:"Ginecologo",trainer:"Personal trainer"};
+const GRUPPI=["nutrizionista","estetista","ginecologo","trainer"];
+
+const SEED={
+  v:1,
+  regole:{versione:1,data:"2026-11-21",gonf:5,dolMid:5,dolStop:8},
+  donne:[], test:[], schede:[], richieste:[], valutazioni:[],
+  pro:[
+    {id:"p1",nome:"Skinem Casabianca",tipo:"estetista",comune:"Fermo",indirizzo:"Lido di Fermo",descr:"Centro Skinem: percorsi corpo con il metodo Fase.",orari:"Lun–Sab 9–19",tel:"",email:"",tratt:["P","RC","SL","SC","RM","TM","TP"],stato:"attivo",quota:true,demo:false},
+    {id:"p2",nome:"Studio nutrizione (esempio)",tipo:"nutrizionista",comune:"Porto San Giorgio",indirizzo:"",descr:"Profilo di esempio per la prova.",orari:"",tel:"",email:"",tratt:[],stato:"attivo",quota:true,demo:true},
+    {id:"p3",nome:"Ginecologia (esempio)",tipo:"ginecologo",comune:"Fermo",indirizzo:"",descr:"Profilo di esempio per la prova.",orari:"",tel:"",email:"",tratt:[],stato:"attivo",quota:true,demo:true},
+    {id:"p4",nome:"Personal trainer (esempio)",tipo:"trainer",comune:"Porto Sant'Elpidio",indirizzo:"",descr:"Profilo di esempio per la prova.",orari:"",tel:"",email:"",tratt:[],stato:"attivo",quota:true,demo:true},
+    {id:"p5",nome:"Centro estetico (esempio)",tipo:"estetista",comune:"Sant'Elpidio a Mare",indirizzo:"",descr:"Profilo di esempio per la prova.",orari:"",tel:"",email:"",tratt:["P","RC","SL","TM"],stato:"attivo",quota:false,demo:true}
+  ],
+  centri:[{id:"c1",nome:"Skinem Casabianca",proId:"p1",operatrici:["Operatrice 1","Operatrice 2"]}],
+  sessione:{donna:null,pro:"p1",centro:null,operatrice:null}
+};
+let mem=null;
+const DB={
+  load(){ if(mem) return mem; try{ const t=localStorage.getItem(KEY); mem=t?JSON.parse(t):null; }catch(e){} if(!mem) mem=JSON.parse(JSON.stringify(SEED)); return mem; },
+  save(){ try{ localStorage.setItem(KEY,JSON.stringify(mem)); }catch(e){} },
+  reset(){ mem=JSON.parse(JSON.stringify(SEED)); DB.save(); }
+};
+const S=()=>DB.load();
+const uid=p=>p+Math.random().toString(36).slice(2,9);
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const MESI=["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
+const fd=d=>d.getDate()+" "+MESI[d.getMonth()];
+const fdd=iso=>{const d=new Date(iso);return fd(d)+" "+d.getFullYear();};
+const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+const num=v=>{v=(v==null?"":String(v)).replace(",",".").trim();return v===""?null:parseFloat(v);};
+const today=()=>{const d=new Date();d.setHours(12,0,0,0);return d;};
+const li=a=>`<ul class="l">${a.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+const rr=r=>`<span class="rule">${r}</span>`;
+
+/* ============================ MOTORE ============================ */
+const TR={
+  P:{n:"Pausa",d:"Benessere e rilassamento: si ascolta il corpo."},
+  RC:{n:"Risveglio Circolo",d:"Caldo e freddo per rimettere in circolo il sangue."},
+  SL:{n:"Sblocco Linfatico",d:"Apertura dei gangli linfatici e drenaggio."},
+  SC:{n:"Scollamento",d:"Vacuum sui distretti con cellulite."},
+  RM:{n:"Rimodella",d:"Lavoro sugli accumuli di adipe."},
+  TM:{n:"Tono Muscolo",d:"Tonificazione del muscolo."},
+  TP:{n:"Tono Pelle",d:"Tonificazione superficiale: collagene e microcorrenti."}
+};
+const ORD=["P","RC","SL","SC","RM","TM","TP"];
+const OBI={
+  adipe:{n:"Adipe localizzato",t:["SL","SC","RM","TM","TP"],breve:true},
+  gambe:{n:"Gambe pesanti e ritenzione",t:["RC","SL","SC","TM"],breve:false},
+  tono:{n:"Tono e rilassamento del corpo",t:["SL","TM","TP"],breve:true}
+};
+const SITU={ciclo:"Naturale e regolare",irregolare:"Irregolare / non lo so",pillola:"Pillola o simili",peri:"Perimenopausa",meno:"Menopausa",allattamento:"Allatto",gravidanza:"Sono incinta"};
+const ZONE={addome:"Tonificare l'addome",fianchi:"Modellare i fianchi",glutei:"Tonificare i glutei",interno:"Rassodare l'interno coscia",esterno:"Tonificare l'esterno coscia",braccia:"Rassodare le braccia"};
+const ZONEN={addome:"Addome",fianchi:"Fianchi",glutei:"Glutei",interno:"Interno coscia",esterno:"Esterno coscia",braccia:"Braccia"};
+const SYMN={crampi:"Crampi",sensibile:"Pelle sensibile",acne:"Brufoli",seno:"Seno teso",stanca:"Stanchezza",vampate:"Vampate"};
+const SALUTE={acuto:"Sintomi improvvisi: una gamba gonfia, dolore al petto, fiato corto",incinta:"Gravidanza possibile",tumori:"Tumori in corso o recenti",cuore:"Cuore o pacemaker",vene:"Varici o trombosi",pelle:"Lesioni o infezioni nella zona",farmaci:"Anticoagulanti o farmaci che sensibilizzano al sole",tiroide:"Problemi di tiroide",metalli:"Protesi metalliche"};
+const FIG={leggera:{n:"Leggera",d:"Mi sento sgonfia, piena di energia",gonf:1,sede:[]},pancia:{n:"Pancia",d:"Basso ventre gonfio o con crampi",gonf:5,sede:["addome"]},pesante:{n:"Pesante",d:"Gambe pesanti e gonfie",gonf:6,sede:["gambe"]},gonfia:{n:"Tutta gonfia",d:"Pancia, gambe e seno tesi",gonf:8,sede:["addome","gambe","altro"]}};
+const FASI={
+  mestruale:["Fase mestruale","Estrogeni e progesterone bassi, inizio del flusso.","Possibili crampi e stanchezza."],
+  follicolare:["Fase follicolare","Estrogeni in genere in aumento, temperatura basale relativamente bassa.","In alcune donne meno gonfiore e meno fastidi."],
+  ovulatoria:["Ovulazione (stimata)","Picco di estrogeni e LH. Il giorno reale varia da donna a donna.","A volte un leggero fastidio al basso ventre."],
+  luteale:["Fase luteale","Progesterone alto, temperatura basale più alta.","Possibili tensione al seno, gonfiore e brufoli, soprattutto negli ultimi giorni."],
+  ritardo:["Ciclo in ritardo","Il ciclo è oltre la durata abituale.","Prima di tutto va chiarita una possibile gravidanza."]
+};
+const PAROLE={mestruale:"«Come ti senti in questi giorni? Oggi pensiamo a farti stare bene: il lavoro più intenso lo facciamo tra qualche giorno.»",follicolare:"«Questi sono giorni buoni per lavorare sul tuo obiettivo. Dimmi se senti qualcosa che non va e regolo io.»",ovulatoria:"«Senti qualche fastidio al basso ventre in questi giorni? Se sì, me lo dici e regolo io.»",luteale:"«Ti senti più gonfia in questi giorni? Può capitare, non è colpa tua. Oggi lavoriamo per farti stare più leggera.»",ritardo:"«Prima di iniziare ti faccio una domanda che faccio a tutte: c'è la possibilità che tu sia incinta?»",def:"«Raccontami come ti senti oggi: è da lì che parto per decidere cosa fare.»"};
+const FRASE_BIL="In certi giorni del mese peso e gonfiore cambiano anche quando il percorso sta funzionando, e non dicono nulla sul grasso. Per questo il risultato si misura sempre nelle stesse condizioni e nello stesso periodo del ciclo.";
+
+function trList(keys,breve){return [...new Set(keys)].sort((a,b)=>ORD.indexOf(a)-ORD.indexOf(b)).map(k=>({k,n:TR[k].n+(k==="SL"&&breve?" (breve)":""),d:TR[k].d}));}
+
+/* i = {situ,last,len,obi,zone[],fig,gonf,dol,sym[],sede[],sal{}, eta, cabina:{temps[],esami{},anam}}  rif = data di riferimento */
+function motore(i,rif){
+  const R=S().regole, oggi=rif?new Date(rif):today(); oggi.setHours(12,0,0,0);
+  const L=num(i.len)||28, situ=i.situ, sal=i.sal||{}, sym=i.sym||[], hs=k=>sym.includes(k);
+  const gonf=i.gonf!=null?i.gonf:(i.fig?FIG[i.fig].gonf:0), dol=i.dol||0;
+  let key=null, giorno=null, lastD=null;
+  if(i.last && ["ciclo","irregolare","peri"].includes(situ)){ lastD=new Date(i.last+"T12:00:00"); giorno=Math.floor((oggi-lastD)/86400000)+1; }
+  if(situ==="ciclo" && giorno>0) key = giorno>L+5?"ritardo":giorno<=5?"mestruale":giorno<=L-15?"follicolare":giorno<=L-12?"ovulatoria":"luteale";
+  const stimata = !!key && key!=="ritardo";
+  const tipica = stimata ? ((giorno<=5||giorno>=L-6)?"pancia":"leggera") : null;
+  const ob=OBI[i.obi]||OBI.adipe;
+  let esito, tr=[], aspetta=[], perche=[], allarme=false, stop=false;
+  if(sal.acuto){ esito="Nessun trattamento"; allarme=true; stop=true; perche.push(["Sintomi improvvisi: va sentito subito il medico.","R3"]); }
+  else if(situ==="gravidanza"||sal.incinta||sal.tumori){ esito="Solo Pausa, senza tecnologie"; tr=trList(["P"]); stop=true; perche.push(["Gravidanza, possibile gravidanza o tumore.","R4"]); }
+  else if(key==="ritardo"){ esito="Solo Pausa"; tr=trList(["P"]); stop=true; perche.push(["Ciclo in ritardo: prima si chiarisce una possibile gravidanza.","R5"]); }
+  else if(dol>=R.dolStop){ esito="Si rimanda"; stop=true; perche.push([`Dolore ${dol}/10.`,"R6"]); }
+  else if(hs("crampi")||dol>=R.dolMid){ esito="Seduta calmante"; tr=trList(["P","RC"]); aspetta.push(["Rimodella e lavoro sull'addome","R7"]); perche.push([hs("crampi")?"Oggi ha crampi.":`Oggi riferisce dolore ${dol}/10.`,"R7"]); }
+  else if(gonf>=R.gonf){ esito="Seduta circolo"; tr=trList(["RC","SL"]); aspetta.push(["Rimodella: su un tessuto gonfio non si lavora l'adipe","R16"]); perche.push([`Si sente gonfia (${gonf}/10): prima circolo, poi drenaggio.`,"R8"]); }
+  else if(key==="mestruale"){ esito="Seduta calmante"; tr=trList(["P","RC"]); perche.push(["Fase mestruale: benessere e circolo con dolcezza.","R10"]); }
+  else { esito="Seduta "+ob.n.toLowerCase(); tr=trList(ob.t,ob.breve);
+    if(stimata) perche.push([FASI[key][0]+(key==="luteale"?", si sente bene":"")+": si lavora sull'obiettivo.",key==="luteale"?"R12":"R11"]);
+    else perche.push(["Nessuna fase dal calendario: decide come si sente.",situ==="ciclo"?"R2":"R14"]); }
+  // piano
+  const piano=[];
+  if(stimata){
+    const k=Math.floor((giorno-1)/L), d0=addD(lastD,k*L);
+    const w=(a,b)=>{let A=addD(d0,a-1),B=addD(d0,b-1);if(B<oggi){A=addD(A,L);B=addD(B,L);}return {A,B,txt:(A<=oggi?"da oggi":"dal "+fd(A))+" al "+fd(B),on:giorno>=a&&giorno<=b};};
+    const tob=trList(ob.t,ob.breve).map(t=>t.n).join(" → ");
+    piano.push({g:"1–5",nome:"Ti ascoltiamo",tr:"Pausa → Risveglio Circolo",r:"R10",w:w(1,5)});
+    piano.push({g:`6–${L-12}`,nome:"Il momento di lavorare",tr:tob,r:"R11",w:w(6,L-12)});
+    piano.push({g:`${L-11}–${L-7}`,nome:"Continuiamo",tr:tob+" (se si sente bene)",r:"R12",w:w(L-11,L-7)});
+    piano.push({g:`${L-6}–${L}`,nome:"Ci regoliamo su di te",tr:"Se gonfia: Risveglio Circolo → Sblocco Linfatico; altrimenti obiettivo",r:"R13",w:w(L-6,L)});
+    piano.sort((a,b)=>a.w.A-b.w.A);
+  }
+  // fase/incertezza
+  let inc=null, notaTemp=null;
+  if(stimata){ inc="media — solo calendario"; if(L!==28||(giorno>=L-17&&giorno<=L-9)) inc="alta — vicino all'ovulazione o ciclo non di 28 giorni";
+    const temps=(i.cabina&&i.cabina.temps)||[];
+    if(temps.length>=6){const m=a=>a.reduce((x,y)=>x+y,0)/a.length;const diff=m(temps.slice(-3))-m(temps.slice(0,3));const rial=diff>=0.2;
+      notaTemp=rial?`rialzo di circa ${diff.toFixed(1).replace(".",",")} °C: ovulazione probabilmente avvenuta.`:"nessun rialzo sostenuto.";
+      const ok=(rial&&key==="luteale")||(!rial&&["mestruale","follicolare"].includes(key)); inc=ok?"più bassa — calendario e temperatura d'accordo":"alta — calendario e temperatura non tornano"; } }
+  // bilancia (cabina)
+  const bil=[]; let bilOk;
+  if(stimata){ const fuori=key==="mestruale"||giorno>=L-6; bilOk=!fuori&&gonf<R.gonf;
+    const k=Math.floor((giorno-1)/L); let w0=addD(lastD,k*L+5),w1=addD(lastD,k*L+12); const from=bilOk?oggi:addD(oggi,1); if(w1<from){w0=addD(w0,L);w1=addD(w1,L);} if(w0<from)w0=from;
+    bil.push([fuori?"Oggi non pesarla (giorni del ciclo o ultimi 7 giorni): se insiste, scrivi il peso ma non confrontarlo.":gonf>=R.gonf?"Oggi si sente gonfia: peso e misure non valgono come confronto.":"Oggi puoi pesarla: a digiuno, stessa ora.",fuori?"R20":gonf>=R.gonf?"R18":"R21"]);
+    bil.push([`Prossima pesata utile: tra il ${fd(w0)} e il ${fd(w1)}.`,"R21"]);
+    bil.push([`Misure con il metro: intorno al ${fd(addD(lastD,(Math.floor((giorno-1)/L)+1)*L+((giorno-1)%L)))}, stesso giorno del prossimo ciclo.`,"R17"]);
+  } else { bilOk=gonf<R.gonf; bil.push([bilOk?"Puoi pesarla: stesse condizioni delle altre volte.":"Oggi si sente gonfia: peso e misure non valgono come confronto.",bilOk?"R21":"R18"]); bil.push(["Peso e misure ogni 4 settimane.","R17"]); }
+  bil.push(["Peso, gonfiore e centimetri non misurano il grasso: si guarda l'andamento.","R22"]);
+  // medico
+  const med=[]; const es=(i.cabina&&i.cabina.esami)||{};
+  const fuoriEs=[]; if(es.col>200)fuoriEs.push("colesterolo"); if(es.trig>150)fuoriEs.push("trigliceridi"); if(es.gli!=null&&(es.gli<70||es.gli>100))fuoriEs.push("glicemia"); if(es.tsh!=null&&(es.tsh<0.4||es.tsh>4))fuoriEs.push("TSH");
+  if(sal.acuto) med.push("Sintomi improvvisi: subito dal medico, o il 112 se peggiorano.");
+  if(fuoriEs.length) med.push("Esami fuori dai riferimenti ("+fuoriEs.join(", ")+"): ne parli con il medico.");
+  if(situ==="irregolare") med.push("Ciclo irregolare: una visita dal ginecologo, se non l'ha già fatta.");
+  if(gonf>=7&&(i.sede||[]).includes("gambe")) med.push("Gonfiore forte alle gambe: se è nuovo, non passa o è da una gamba sola, va visto dal medico.");
+  if(sal.tumori) med.push("Tumori: niente tecnologie senza autorizzazione scritta dell'oncologo.");
+  if(sal.cuore) med.push("Cuore o pacemaker: serve l'ok del medico.");
+  if(i.eta>=43&&situ==="ciclo") med.push("Ha 43 anni o più: chiedile se il ciclo è cambiato negli ultimi mesi.");
+  // attenzioni
+  const att=[]; if(situ==="allattamento")att.push("Allattamento: solo con l'ok del medico, mai sul seno.");
+  if(sal.vene)att.push("Varici o trombosi: drenaggio delicato, niente calore forte sulle gambe."); if(sal.pelle)att.push("Lesioni o infezioni: non lavorare su quella zona."); if(sal.farmaci)att.push("Anticoagulanti o farmaci fotosensibilizzanti: niente stimoli forti, rischio lividi."); if(sal.tiroide)att.push("Tiroide: non lavorare sul collo."); if(sal.metalli)att.push("Protesi metalliche: non lavorare su quella zona."); if(hs("seno"))att.push("Seno teso: evita la zona."); if(hs("vampate"))att.push("Vampate: poco calore."); if(hs("sensibile"))att.push("Pelle sensibile: intensità bassa.");
+  const zone=(i.zone||[]).map(z=>({z:ZONEN[z],o:ZONE[z]}));
+  return {key,giorno,L,stimata,tipica,esito,tr,aspetta,perche,allarme,stop,piano,inc,notaTemp,bil,bilOk,med,att,zone,gonf,dol,fuoriEs,versione:R.versione};
+}
+
+/* ============================ GRAFICA ============================ */
+const BODY=`<circle cx="60" cy="27" r="15"/><path d="M54,43 C54,50 50,54 38,57 C32,59 31,66 33,80 C35,95 40,105 42,120 C43,132 36,145 33,160 C31,178 36,200 40,225 C43,250 45,270 46,288 L54,288 C54,265 55,240 56,220 C57,200 58,185 60,178 C62,185 63,200 64,220 C65,240 66,265 66,288 L74,288 C75,270 77,250 80,225 C84,200 89,178 87,160 C84,145 77,132 78,120 C80,105 85,95 87,80 C89,66 88,59 82,57 C70,54 66,50 66,43"/><path d="M37,59 C29,64 27,82 26,102 C25,122 27,142 29,158"/><path d="M83,59 C91,64 93,82 94,102 C95,122 93,142 91,158"/>`;
+let gid=0;
+function svgFig(k,w){const id="hg"+(++gid);const h=(x,y,rx,ry,o)=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="url(#${id})" opacity="${o||1}"/>`;
+  const X={leggera:"",pancia:h(60,140,26,22)+`<path d="M50,150 l4,-4 l4,4 l4,-4 l4,4 l4,-4" fill="none" stroke="#8E7CC6" stroke-width="1.4"/>`,pesante:h(44,245,13,34)+h(76,245,13,34),gonfia:h(60,138,28,24)+h(44,245,13,34)+h(76,245,13,34)+h(50,84,10,8,.9)+h(70,84,10,8,.9)}[k];
+  return `<svg viewBox="0 0 120 300" ${w?`style="width:${w}px"`:""}><defs><radialGradient id="${id}"><stop offset="0" stop-color="#A694D9" stop-opacity=".75"/><stop offset="1" stop-color="#A694D9" stop-opacity="0"/></radialGradient></defs>${X}<g fill="none" stroke="#5A4D86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${BODY}</g></svg>`;}
+function striscia(g,L){const seg=[["Mestruale",1,5],["Follicolare",6,L-15],["Ovulazione*",L-14,L-12],["Luteale",L-11,L]];
+  return `<div class="strip">`+seg.map(([n,a,b])=>`<div class="sg${g>=a&&g<=b?" on":""}" style="flex:${b-a+1}"><span>${n}</span><small>${a}–${b}</small></div>`).join("")+`</div><div class="hint" style="font-size:12px">* Il giorno dell'ovulazione è indicativo: in ogni donna può cambiare.</div>`;}
+
+/* ============================ FORM CONDIVISI ============================ */
+function formCiclo(v){v=v||{};return `
+  <div class="grid">
+    <div><label class="f">Com'è il tuo ciclo?</label><select id="situ">${Object.entries(SITU).map(([k,n])=>`<option value="${k}"${v.situ===k?" selected":""}>${n}</option>`).join("")}</select></div>
+    <div id="bLast"><label class="f">Primo giorno dell'ultimo ciclo</label><input type="date" id="last" value="${v.last||""}"></div>
+    <div id="bLen"><label class="f">Di solito quanti giorni dura?</label><input type="number" id="len" min="21" max="40" value="${v.len||28}"></div>
+  </div>`;}
+function bindCiclo(){const f=()=>{const s=$("#situ").value;$("#bLast").classList.toggle("hide",!["ciclo","irregolare","peri"].includes(s));$("#bLen").classList.toggle("hide",s!=="ciclo");};$("#situ").onchange=f;f();}
+function readCiclo(){return {situ:$("#situ").value,last:$("#last").value,len:num($("#len").value)||28};}
+function formObi(v){v=v||{};return `
+  <label class="f">Il tuo obiettivo</label><select id="obi">${Object.entries(OBI).map(([k,o])=>`<option value="${k}"${v.obi===k?" selected":""}>${o.n}</option>`).join("")}</select>
+  <label class="f">Le zone, anche più di una</label><div class="chips" id="zone">${Object.entries(ZONEN).map(([k,n])=>`<button type="button" class="chip${(v.zone||[]).includes(k)?" on":""}" data-v="${k}">${n}</button>`).join("")}</div>`;}
+function formSente(v){v=v||{};return `
+  <h2>Quale ti somiglia di più?</h2><div class="hint">Tocca la figura: conta come ti senti oggi.</div>
+  <div class="figs" id="figs">${Object.keys(FIG).map(k=>`<button type="button" class="fig${v.fig===k?" on":""}" data-v="${k}">${svgFig(k)}<b>${FIG[k].n}</b><small>${FIG[k].d}</small></button>`).join("")}</div>
+  <label class="f" style="margin-top:18px">Dolore o fastidio, da 0 a 10</label>
+  <div class="scala" id="dol">${[...Array(11).keys()].map(n=>`<button type="button" data-v="${n}" class="${v.dol===n?"on":""}">${n}</button>`).join("")}</div>
+  <label class="f" style="margin-top:18px">Altro che senti</label>
+  <div class="chips" id="sym">${Object.entries(SYMN).map(([k,n])=>`<button type="button" class="chip${(v.sym||[]).includes(k)?" on":""}" data-v="${k}">${n}</button>`).join("")}</div>`;}
+function formSalute(v){v=v||{};return `<div class="checks">${Object.entries(SALUTE).map(([k,n])=>`<label class="ck${k==="acuto"?" full":""}"><input type="checkbox" data-s="${k}"${v[k]?" checked":""}>${n}</label>`).join("")}</div>`;}
+function bindPick(){
+  document.querySelectorAll("#zone .chip,#sym .chip").forEach(b=>b.onclick=()=>b.classList.toggle("on"));
+  document.querySelectorAll("#figs .fig").forEach(b=>b.onclick=()=>{document.querySelectorAll("#figs .fig").forEach(x=>x.classList.toggle("on",x===b));});
+  document.querySelectorAll("#dol button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#dol button").forEach(x=>x.classList.toggle("on",x===b));});
+}
+const picked=sel=>[...document.querySelectorAll(sel+" .on")].map(b=>b.dataset.v);
+const readSalute=()=>{const o={};document.querySelectorAll("input[data-s]").forEach(c=>o[c.dataset.s]=c.checked);return o;};
+
+/* ============================ RENDER SCHEDA ============================ */
+function htmlFase(r){ if(!r.key) return `<div class="fase-big">Partiamo da come ti senti</div><p style="margin:0">Il calendario non ci dice abbastanza: decide come ti senti oggi.</p>`;
+  if(r.key==="ritardo") return `<div class="fase-big">Ciclo in ritardo</div><p style="margin:0">Prima di tutto va chiarita una possibile gravidanza.</p>`;
+  return `<div class="fase-big">Giorno ${r.giorno} · ${FASI[r.key][0]}</div><p style="margin:0">${FASI[r.key][2]}</p>${striscia(r.giorno,r.L)}`;}
+function htmlConfronto(r,fig){ if(!r.tipica||!fig) return ""; const ok=r.tipica===fig;
+  return `<div class="card"><div class="lab">Come ti senti e la tua fase</div><div class="conf"><div>${svgFig(fig,70)}<small>Come ti senti</small></div><div class="vs">${ok?"=":"≠"}</div><div>${svgFig(r.tipica,70)}<small>Tipico di questi giorni</small></div></div><p style="text-align:center;margin:10px 0 0">${ok?"<b>Quello che senti è in linea con la tua fase.</b>":"<b>Oggi ti senti diversa da ciò che è tipico.</b> Va benissimo: partiamo da come ti senti tu."}</p></div>`;}
+function htmlTr(r,regole){ return r.tr.map((t,i)=>`<div class="az"><span class="n">${i+1}</span><div><b>${t.n}</b><small>${t.d}</small></div></div>`).join("")+(r.aspetta.length?`<div class="asp">${r.aspetta.map(([t,x])=>`Aspetta: <b>${t}</b>${regole?" "+rr(x):""}`).join("<br>")}</div>`:""); }
+function htmlPiano(r,regole){ if(!r.piano.length) return ""; return `<div class="card"><div class="lab">Il tuo mese</div>${r.piano.map(p=>`<div class="pm${p.w.on?" on":""}"><div class="pg">Giorni ${p.g}</div><div><b>${p.nome}</b>${regole?" "+rr(p.r):""}<small>${p.tr} · ${p.w.txt}</small></div></div>`).join("")}</div>`; }
+
+function schedaDonna(sc){ const r=sc.r, t=sc.input;
+  let h=`<div class="card"><div class="lab">La tua scheda · ${fdd(sc.data)}</div>${htmlFase(r)}</div>`;
+  if(r.allarme) return h+`<div class="card" style="background:#fde9e6"><div class="lab" style="color:#9b3129">Senti il medico</div><p style="margin:6px 0 0"><b>Hai indicato sintomi che vanno visti subito da un medico.</b> Oggi non ti proponiamo trattamenti. Se peggiorano, chiama il 112.</p></div>`;
+  h+=htmlConfronto(r,t.fig);
+  h+=`<div class="card oggi"><div class="lab">I trattamenti adatti a te oggi</div><div class="fase-big" style="font-size:18px">${r.esito}</div>${htmlTr(r,false)}</div>`;
+  h+=htmlPiano(r,false);
+  if(r.zone.length) h+=`<div class="card"><div class="lab">Per il tono</div>${li(r.zone.map(z=>`<b>${z.z}:</b> ${z.o.toLowerCase()}`))}<p class="hint">Rivolgiti a un <b>personal trainer</b> per il tono e a un <b>nutrizionista</b> per l'alimentazione: il come lo decidono loro.</p></div>`;
+  else h+=`<div class="card"><div class="lab">Gli altri professionisti</div><p class="hint" style="margin:0">Per un risultato completo: un <b>nutrizionista</b> per l'alimentazione e un <b>personal trainer</b> per il tono.</p></div>`;
+  h+=`<div class="card"><div class="lab">La bilancia</div><p style="margin:4px 0 0">${FRASE_BIL}</p></div>`;
+  const si=Object.keys(t.sal||{}).filter(k=>t.sal[k]);
+  if(si.length) h+=`<div class="card"><div class="lab">Da dire al professionista</div>${li(si.map(k=>SALUTE[k]))}</div>`;
+  if(r.med.length) h+=`<div class="card"><div class="lab">Ne parli con il medico</div>${li(r.med)}</div>`;
+  return h;}
+
+/* ============================ PAGINE ============================ */
+const V={}; let tmp={};
+function page(title,lab,body){return `<div class="card head"><div class="lab">${lab}</div><h1 class="t">${title}</h1></div>${body}`;}
+const me=()=>{const s=S();return s.donne.find(d=>d.id===s.sessione.donna);};
+const needDonna=()=>{if(!me()){location.hash="#d2";return true;}return false;};
+
+V.d1=()=>`<div class="hero">${HERO}<div class="txt"><div class="lab">Fase</div><h1>Fase</h1><p>Capisci il tuo corpo e trova il trattamento giusto per te, nel momento giusto.</p></div></div>
+ <div class="card"><div class="lab">Come funziona</div>
+  <div class="az"><span class="n">1</span><div><b>Fai il test</b><small>Cinque domande su ciclo, obiettivo e come ti senti.</small></div></div>
+  <div class="az"><span class="n">2</span><div><b>Ricevi la tua scheda</b><small>La tua fase, i trattamenti adatti e il tuo mese.</small></div></div>
+  <div class="az"><span class="n">3</span><div><b>Scegli il professionista</b><small>Tra quelli affiliati della provincia di Fermo.</small></div></div></div>
+ <button class="btn" onclick="location.hash=me()?'#d3':'#d2'">Fai il test</button>
+ <button class="btn w" onclick="location.hash=me()?'#d8':'#d2'">${me()?"La mia area":"Accedi"}</button>
+ <p class="foot">Fase non fa diagnosi e non sostituisce una valutazione professionale.</p>`;
+
+V.d2=()=>{ if(me()) return `<div class="card"><p>Sei già registrata come <b>${esc(me().nome)}</b>.</p></div><button class="btn" onclick="location.hash='#d3'">Fai il test</button><button class="btn w" onclick="esci()">Esci</button>`;
+ return page("Registrati","Gratis",`<div class="card"><div class="grid">
+  <div><label class="f">Nome</label><input type="text" id="rn"></div><div><label class="f">Email</label><input type="text" id="re"></div>
+  <div><label class="f">Password</label><input type="text" id="rp"></div><div><label class="f">Comune</label><select id="rc">${COMUNI.map(c=>`<option>${c}</option>`).join("")}<option>Altro</option></select></div></div>
+  <div class="checks">
+   <label class="ck full"><input type="checkbox" id="k1">Accetto privacy e termini *</label>
+   <label class="ck full"><input type="checkbox" id="k2">Acconsento al trattamento dei miei dati sulla salute e sul ciclo, per ricevere la scheda *</label>
+   <label class="ck full"><input type="checkbox" id="k3">Voglio ricevere comunicazioni promozionali (facoltativo)</label></div></div>
+  <button class="btn" onclick="registra()">Registrati</button><div class="err" id="err"></div>`);};
+window.registra=()=>{const n=$("#rn").value.trim(),e=$("#re").value.trim();
+ if(!n||!e.includes("@")||!$("#rp").value||!$("#k1").checked||!$("#k2").checked){$("#err").textContent="Compila nome, email e password e accetta i due consensi obbligatori.";return;}
+ const s=S(); let d=s.donne.find(x=>x.email===e);
+ if(!d){d={id:uid("d"),nome:n,email:e,comune:$("#rc").value,creata:new Date().toISOString(),consensi:{privacy:true,salute:true,marketing:$("#k3").checked,data:new Date().toISOString()}};s.donne.push(d);}
+ s.sessione.donna=d.id; DB.save(); location.hash="#d3";};
+window.esci=()=>{S().sessione.donna=null;DB.save();location.hash="#d1";};
+
+V.d3=()=>{ if(needDonna())return ""; const st=tmp.step||1, v=tmp.test||{};
+ const bar=`<div class="steps">${[1,2,3,4,5].map(n=>`<span class="${n<=st?"on":""}"></span>`).join("")}</div>`;
+ const tit=["Il tuo ciclo","Il tuo obiettivo","Come ti senti oggi","La tua salute","Riepilogo"][st-1];
+ let b="";
+ if(st===1) b=formCiclo(v);
+ if(st===2) b=formObi(v);
+ if(st===3) b=formSente(v);
+ if(st===4) b=`<div class="hint">Rispondi sì solo se ti riguarda. Serve per la tua sicurezza.</div>`+formSalute(v.sal);
+ if(st===5) b=riepilogo(v);
+ return `<div class="card"><div class="lab">Test · passo ${st} di 5</div>${bar}<h2 style="margin:10px 0">${tit}</h2>${b}</div>
+  <button class="btn" onclick="avanti()">${st<5?"Avanti":"Vedi la mia scheda"}</button>${st>1?`<button class="btn w" onclick="indietro()">Indietro</button>`:""}<div class="err" id="err"></div>`;};
+function riepilogo(v){const sal=Object.keys(v.sal||{}).filter(k=>v.sal[k]);
+ const row=(n,t,s)=>`<div class="tech"><div style="flex:1"><b>${n}</b><small>${t}</small></div><button class="mini" onclick="tmp.step=${s};render()">Modifica</button></div>`;
+ return row("Ciclo",SITU[v.situ]+(v.last?" · ultimo ciclo "+v.last:""),1)+row("Obiettivo",OBI[v.obi].n+(v.zone.length?" · "+v.zone.map(z=>ZONEN[z]).join(", "):""),2)+row("Come ti senti",FIG[v.fig].n+" · dolore "+v.dol+"/10"+(v.sym.length?" · "+v.sym.map(s=>SYMN[s]).join(", "):""),3)+row("Salute",sal.length?sal.map(k=>SALUTE[k]).join("; "):"Nessuna voce",4);}
+window.avanti=()=>{const st=tmp.step||1, v=tmp.test=tmp.test||{}; const err=$("#err");
+ if(st===1){Object.assign(v,readCiclo()); if(v.situ==="ciclo"&&!v.last){err.textContent="Inserisci il primo giorno dell'ultimo ciclo.";return;}}
+ if(st===2){v.obi=$("#obi").value;v.zone=picked("#zone");}
+ if(st===3){const f=picked("#figs")[0],d=picked("#dol")[0]; if(!f||d==null){err.textContent="Scegli la figura e un numero per il dolore.";return;} v.fig=f;v.dol=+d;v.sym=picked("#sym");v.gonf=FIG[f].gonf;v.sede=FIG[f].sede;}
+ if(st===4){v.sal=readSalute();}
+ if(st===5){ const s=S(); const t={id:uid("t"),donna:s.sessione.donna,data:new Date().toISOString(),input:JSON.parse(JSON.stringify(v))};
+   s.test.push(t); const r=motore(v); const sc={id:uid("s"),donna:t.donna,test:t.id,data:t.data,input:t.input,r,versione:r.versione}; s.schede.push(sc); DB.save(); tmp={}; location.hash="#d4/"+sc.id; return;}
+ tmp.step=st+1; render();};
+window.indietro=()=>{tmp.step=(tmp.step||1)-1;render();};
+
+V.d4=(id)=>{ if(needDonna())return ""; const s=S(); const sc=id?s.schede.find(x=>x.id===id):s.schede.filter(x=>x.donna===s.sessione.donna).slice(-1)[0];
+ if(!sc) return `<div class="card"><p>Non hai ancora una scheda.</p></div><button class="btn" onclick="location.hash='#d3'">Fai il test</button>`;
+ return schedaDonna(sc)+`<button class="btn" onclick="location.hash='#d5/${sc.id}'">Trova un professionista vicino a te</button><button class="btn w" onclick="location.hash='#d8'">La mia area</button><p class="foot">Fase non fa diagnosi e non sostituisce una valutazione professionale.</p>`;};
+
+V.d5=(scId)=>{ const s=S(); const sc=scId?s.schede.find(x=>x.id===scId):null; const f=tmp.f||{comune:"",tr:sc?sc.r.tr.map(t=>t.k):[]};
+ const att=s.pro.filter(p=>p.stato==="attivo"&&(!f.comune||p.comune===f.comune));
+ const gr=GRUPPI.map(g=>{let L=att.filter(p=>p.tipo===g); if(g==="estetista"&&f.tr.length) L=L.filter(p=>f.tr.some(t=>p.tratt.includes(t)));
+   return `<div class="card"><div class="lab">${TIPI[g]==="Estetista"?"Estetiste":TIPI[g]==="Personal trainer"?"Personal trainer":TIPI[g]==="Ginecologo"?"Ginecologi":"Nutrizionisti"}</div>${L.length?L.map(p=>`<div class="tech"><div style="flex:1"><b>${esc(p.nome)}</b><small>${esc(p.comune)}${p.tipo==="estetista"?" · "+p.tratt.map(t=>TR[t].n).join(", "):""}</small></div><button class="mini" onclick="location.hash='#d6/${p.id}${sc?"/"+sc.id:""}'">Vedi</button></div>`).join(""):`<p class="hint">Nessuno con questi filtri.</p>`}</div>`;}).join("");
+ return page("Professionisti","Provincia di Fermo",`<div class="card"><div class="grid"><div><label class="f">Comune</label><select id="fc" onchange="tmp.f={comune:this.value,tr:(tmp.f||{}).tr||[]};render()"><option value="">Tutta la provincia</option>${COMUNI.map(c=>`<option${f.comune===c?" selected":""}>${c}</option>`).join("")}</select></div></div>
+  <label class="f">Trattamenti (estetiste)</label><div class="chips">${ORD.map(k=>`<button type="button" class="chip${f.tr.includes(k)?" on":""}" onclick="togTr('${k}')">${TR[k].n}</button>`).join("")}</div></div>`+gr);};
+window.togTr=k=>{tmp.f=tmp.f||{comune:"",tr:[]};const a=tmp.f.tr||[];tmp.f.tr=a.includes(k)?a.filter(x=>x!==k):[...a,k];render();};
+
+V.d6=(id,scId)=>{const p=S().pro.find(x=>x.id===id); if(!p) return "";
+ return `<div class="card"><div class="lab">${TIPI[p.tipo]}${p.demo?" · profilo di esempio":""}</div><div class="fase-big">${esc(p.nome)}</div><p style="margin:0">${esc(p.descr)}</p>
+  ${li([`<b>Dove:</b> ${esc([p.indirizzo,p.comune].filter(Boolean).join(", "))}`].concat(p.orari?[`<b>Orari:</b> ${esc(p.orari)}`]:[]).concat(p.tratt.length?[`<b>Trattamenti Fase:</b> ${p.tratt.map(t=>TR[t].n).join(", ")}`]:[]))}</div>
+  <button class="btn" onclick="location.hash='#d7/${p.id}${scId?"/"+scId:""}'">Contatta</button><button class="btn w" onclick="history.back()">Indietro</button>`;};
+
+V.d7=(id,scId)=>{ if(needDonna())return ""; const p=S().pro.find(x=>x.id===id);
+ return page("Contatta "+esc(p.nome),"Richiesta",`<div class="card"><label class="f">Messaggio (facoltativo)</label><textarea id="msg" rows="4"></textarea>
+  <label class="f">Come preferisci essere contattata?</label><select id="cp"><option>Telefono</option><option>WhatsApp</option><option>Email</option></select>
+  <label class="f">Il tuo recapito</label><input type="text" id="rec" placeholder="Numero o email">
+  <div class="checks"><label class="ck full"><input type="checkbox" id="share"${scId?"":" disabled"}>Condivido la mia scheda con ${esc(p.nome)}${scId?"":" (fai prima il test)"}</label></div></div>
+  <button class="btn" onclick="invia('${id}','${scId||""}')">Invia la richiesta</button>`);};
+window.invia=(id,scId)=>{const s=S(); s.richieste.push({id:uid("r"),donna:s.sessione.donna,pro:id,data:new Date().toISOString(),msg:$("#msg").value,contatto:$("#cp").value,recapito:$("#rec").value,scheda:$("#share").checked&&scId?scId:null,stato:"nuova"}); DB.save();
+ $("#app").innerHTML=`<div class="card"><div class="fase-big">Richiesta inviata</div><p>Il professionista riceverà una email e ti contatterà.</p></div><button class="btn" onclick="location.hash='#d8'">La mia area</button>`;};
+
+V.d8=()=>{ if(needDonna())return ""; const s=S(), d=me(); const sch=s.schede.filter(x=>x.donna===d.id).reverse(); const rq=s.richieste.filter(x=>x.donna===d.id).reverse(); const pn=id=>(s.pro.find(p=>p.id===id)||{}).nome||"";
+ return page("Ciao "+esc(d.nome),"La mia area",`
+  <div class="card"><div class="lab">Le mie schede</div>${sch.length?sch.map(x=>`<div class="tech"><div style="flex:1"><b>${fdd(x.data)}</b><small>${esc(x.r.esito)}</small></div><button class="mini" onclick="location.hash='#d4/${x.id}'">Apri</button></div>`).join(""):`<p class="hint">Ancora nessuna scheda.</p>`}</div>
+  <button class="btn" onclick="cicloOggi()">È arrivato il ciclo oggi</button>
+  <button class="btn w" onclick="tmp={};location.hash='#d3'">Rifai il test</button>
+  <div class="card" style="margin-top:14px"><div class="lab">Le mie richieste</div>${rq.length?rq.map(x=>`<div class="tech"><div style="flex:1"><b>${esc(pn(x.pro))}</b><small>${fdd(x.data)} · ${x.stato}${x.scheda?" · scheda condivisa":""}</small></div></div>`).join(""):`<p class="hint">Nessuna richiesta.</p>`}</div>
+  <div class="card"><div class="lab">Privacy</div>
+   <label class="ck full"><input type="checkbox" ${d.consensi.marketing?"checked":""} onchange="me().consensi.marketing=this.checked;DB.save()">Comunicazioni promozionali</label>
+   <button class="btn w" onclick="scarica()">Scarica i miei dati</button><button class="btn w" onclick="ritiraSalute()">Ritira il consenso sui dati di salute</button><button class="btn w" style="color:var(--no)" onclick="cancella()">Cancella il mio account</button></div>
+  <button class="btn w" onclick="esci()">Esci</button>`);};
+window.cicloOggi=()=>{const s=S(); const last=s.test.filter(t=>t.donna===s.sessione.donna).slice(-1)[0]; tmp={step:3,test:last?JSON.parse(JSON.stringify(last.input)):{}}; const d=new Date(); tmp.test.last=d.toISOString().slice(0,10); if(!tmp.test.situ)tmp.step=1; location.hash="#d3"; render();};
+window.scarica=()=>{const s=S(),id=s.sessione.donna; const dati={profilo:me(),test:s.test.filter(x=>x.donna===id),schede:s.schede.filter(x=>x.donna===id),richieste:s.richieste.filter(x=>x.donna===id)};
+ const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([JSON.stringify(dati,null,2)],{type:"application/json"})); a.download="miei-dati-fase.json"; a.click();};
+window.ritiraSalute=()=>{const s=S(),id=s.sessione.donna; s.test=s.test.filter(x=>x.donna!==id); s.schede=s.schede.filter(x=>x.donna!==id); s.richieste.forEach(r=>{if(r.donna===id)r.scheda=null;}); me().consensi.salute=false; DB.save(); render();};
+window.cancella=()=>{if(!confirmBox())return;const s=S(),id=s.sessione.donna; s.donne=s.donne.filter(x=>x.id!==id); s.test=s.test.filter(x=>x.donna!==id); s.schede=s.schede.filter(x=>x.donna!==id); s.richieste=s.richieste.filter(x=>x.donna!==id); s.sessione.donna=null; DB.save(); location.hash="#d1";};
+function confirmBox(){ if(tmp.conf){tmp.conf=false;return true;} tmp.conf=true; const e=document.createElement("div"); e.className="stato no"; e.textContent="Tocca di nuovo \"Cancella il mio account\" per confermare."; $("#app").prepend(e); return false; }
+
+/* ---------- PROFESSIONISTA ---------- */
+const mePro=()=>S().pro.find(p=>p.id===S().sessione.pro);
+V.p1=()=>page("Aderisci a Fase","Professionisti",`<div class="card"><div class="grid">
+  <div><label class="f">Nome dell'attività</label><input type="text" id="an"></div><div><label class="f">Tipo</label><select id="at">${GRUPPI.map(g=>`<option value="${g}">${TIPI[g]}</option>`).join("")}</select></div>
+  <div><label class="f">Referente</label><input type="text" id="ar"></div><div><label class="f">Email</label><input type="text" id="ae"></div>
+  <div><label class="f">Telefono</label><input type="text" id="aph"></div><div><label class="f">Partita IVA</label><input type="text" id="aiva"></div>
+  <div><label class="f">Indirizzo</label><input type="text" id="ai"></div><div><label class="f">Comune</label><select id="ac">${COMUNI.map(c=>`<option>${c}</option>`).join("")}</select></div></div>
+  <div class="checks"><label class="ck full"><input type="checkbox" id="ak1">Accetto privacy e termini per i professionisti *</label><label class="ck full"><input type="checkbox" id="ak2">Uso i dati delle donne solo per rispondere alle loro richieste *</label></div>
+  <p class="hint">La quota di adesione è una tantum e si versa fuori dalla piattaforma.</p></div>
+  <button class="btn" onclick="aderisci()">Invia la richiesta</button><div class="err" id="err"></div>`);
+window.aderisci=()=>{const n=$("#an").value.trim(); if(!n||!$("#ae").value.includes("@")||!$("#ak1").checked||!$("#ak2").checked){$("#err").textContent="Compila nome ed email e accetta le due spunte.";return;}
+ const s=S(); s.pro.push({id:uid("p"),nome:n,tipo:$("#at").value,referente:$("#ar").value,email:$("#ae").value,tel:$("#aph").value,iva:$("#aiva").value,indirizzo:$("#ai").value,comune:$("#ac").value,descr:"",orari:"",tratt:[],stato:"in attesa",quota:false,demo:false,data:new Date().toISOString()}); DB.save();
+ $("#app").innerHTML=`<div class="card"><div class="fase-big">Richiesta in valutazione</div><p>Ti scriveremo appena approvata.</p></div>`;};
+V.p2=()=>{const s=S(); const p=mePro(); const att=s.pro.filter(x=>x.stato==="attivo");
+ return page("Il mio profilo","Professionista",`<div class="card"><label class="f">Sto lavorando come</label><select onchange="S().sessione.pro=this.value;DB.save();render()">${att.map(x=>`<option value="${x.id}"${x.id===p.id?" selected":""}>${esc(x.nome)}</option>`).join("")}</select></div>
+  <div class="card"><div class="grid"><div><label class="f">Descrizione breve</label><input type="text" id="pd" value="${esc(p.descr)}"></div><div><label class="f">Indirizzo</label><input type="text" id="pi" value="${esc(p.indirizzo)}"></div>
+  <div><label class="f">Orari</label><input type="text" id="po" value="${esc(p.orari)}"></div><div><label class="f">Telefono</label><input type="text" id="pt" value="${esc(p.tel)}"></div></div>
+  ${p.tipo==="estetista"?`<label class="f">Trattamenti Fase che offro</label><div class="chips" id="ptr">${ORD.map(k=>`<button type="button" class="chip${p.tratt.includes(k)?" on":""}" data-v="${k}" onclick="this.classList.toggle('on')">${TR[k].n}</button>`).join("")}</div>`:""}</div>
+  <button class="btn" onclick="salvaPro()">Salva</button><button class="btn w" onclick="location.hash='#d6/${p.id}'">Anteprima</button>`);};
+window.salvaPro=()=>{const p=mePro(); p.descr=$("#pd").value;p.indirizzo=$("#pi").value;p.orari=$("#po").value;p.tel=$("#pt").value; if($("#ptr"))p.tratt=picked("#ptr"); DB.save(); render();};
+V.p3=(rid)=>{const s=S(),p=mePro(); const rq=s.richieste.filter(r=>r.pro===p.id).reverse(); const dn=id=>(s.donne.find(d=>d.id===id)||{nome:"(account cancellato)"}).nome;
+ if(rid){const r=s.richieste.find(x=>x.id===rid); const sc=r.scheda?s.schede.find(x=>x.id===r.scheda):null;
+  return page(esc(dn(r.donna)),"Richiesta del "+fdd(r.data),`<div class="card">${li([`<b>Contatto preferito:</b> ${esc(r.contatto)} · ${esc(r.recapito)}`,`<b>Messaggio:</b> ${esc(r.msg)||"—"}`])}
+   <label class="f">Stato</label><select onchange="statoRq('${r.id}',this.value)">${["nuova","contattata","chiusa"].map(x=>`<option${r.stato===x?" selected":""}>${x}</option>`).join("")}</select></div>
+   ${sc?`<div class="lab" style="margin:10px 4px">Scheda condivisa (sola lettura)</div>`+schedaDonna(sc):`<div class="card"><p class="hint" style="margin:0">La donna non ha condiviso la scheda.</p></div>`}<button class="btn w" onclick="location.hash='#p3'">Tutte le richieste</button>`);}
+ return page("Richieste ricevute",esc(p.nome),`<div class="card">${rq.length?rq.map(r=>`<div class="tech"><div style="flex:1"><b>${esc(dn(r.donna))}</b><small>${fdd(r.data)} · ${r.stato}${r.scheda?" · con scheda":""}</small></div><button class="mini" onclick="location.hash='#p3/${r.id}'">Apri</button></div>`).join(""):`<p class="hint">Nessuna richiesta.</p>`}</div>`);};
+window.statoRq=(id,v)=>{S().richieste.find(r=>r.id===id).stato=v;DB.save();};
+
+/* ---------- CENTRO IN CABINA ---------- */
+const centro=()=>S().centri.find(c=>c.id===S().sessione.centro);
+V.c1=()=>{const s=S(); if(!centro()) return page("Accesso del centro","Cabina",`<div class="card"><label class="f">Centro</label><select id="cc">${s.centri.map(c=>`<option value="${c.id}">${esc(c.nome)}</option>`).join("")}</select><label class="f">Password</label><input type="text" id="cpw" placeholder="(in questa versione non serve)"></div><button class="btn" onclick="S().sessione.centro=$('#cc').value;DB.save();render()">Entra</button>`);
+ const c=centro(); const q=(tmp.q||"").toUpperCase(); const vals=s.valutazioni.filter(v=>v.centro===c.id&&(!q||v.codice.toUpperCase().includes(q))).reverse();
+ return page(esc(c.nome),"Cabina",`<div class="card"><label class="f">Operatrice</label><select onchange="S().sessione.operatrice=this.value;DB.save()">${c.operatrici.map(o=>`<option${s.sessione.operatrice===o?" selected":""}>${o}</option>`).join("")}</select></div>
+  <button class="btn" onclick="tmp={};if(!S().sessione.operatrice){S().sessione.operatrice=centro().operatrici[0];DB.save();}location.hash='#c2'">Nuova valutazione</button>
+  <div class="card" style="margin-top:14px"><div class="lab">Valutazioni salvate</div><input type="text" placeholder="Cerca codice cliente" value="${esc(tmp.q||"")}" oninput="tmp.q=this.value;clearTimeout(window._t);window._t=setTimeout(()=>{render();const i=document.querySelector('#app input[placeholder]');if(i){i.focus();i.setSelectionRange(99,99);}},300)">
+  ${vals.length?vals.map(v=>`<div class="tech"><div style="flex:1"><b>${esc(v.codice)}</b><small>${fdd(v.data)} · ${esc(v.operatrice)} · ${esc(v.r.esito)}</small></div><button class="mini" onclick="location.hash='#c5/${v.id}'">Apri</button></div>`).join(""):`<p class="hint">Nessuna valutazione.</p>`}</div>
+  <button class="btn w" onclick="S().sessione.centro=null;DB.save();render()">Esci dal centro</button>`);};
+V.c2=()=>{ if(!centro()){location.hash="#c1";return "";} const v=tmp.cab||{};
+ return `<div class="cli"><div class="card"><div class="lab">01 · Il tuo ciclo</div>${formCiclo(v)}</div><div class="card"><div class="lab">02 · Il tuo obiettivo</div>${formObi(v)}</div><div class="card"><div class="lab">03 · Come ti senti oggi</div>${formSente(v)}</div>
+  <button class="btn" onclick="vediMese()">Vedi il tuo mese</button><div class="err" id="err"></div></div>`;};
+window.vediMese=()=>{const f=picked("#figs")[0],d=picked("#dol")[0]; if(!f||d==null){$("#err").textContent="Tocca la figura e scegli un numero per il dolore.";return;}
+ const v=Object.assign(tmp.cab||{},readCiclo(),{obi:$("#obi").value,zone:picked("#zone"),fig:f,dol:+d,sym:picked("#sym"),gonf:FIG[f].gonf,sede:FIG[f].sede}); tmp.cab=v; location.hash="#c3";};
+V.c3=()=>{const v=tmp.cab; if(!v){location.hash="#c2";return "";} const r=motore(v);
+ return `<div class="cli"><div class="card"><div class="lab">Il tuo mese · ${fd(today())}</div>${htmlFase(r)}</div>${htmlConfronto(r,v.fig)}
+  <div class="card oggi"><div class="lab">Oggi per te</div><div class="fase-big" style="font-size:18px">${r.esito}</div>${htmlTr(r,false)}<p class="hint">La tua estetista conferma tutto dopo qualche domanda sulla tua salute.</p></div>
+  ${htmlPiano(r,false)}<div class="card"><div class="lab">La bilancia</div><p style="margin:4px 0 0">${FRASE_BIL}</p></div>
+  <button class="btn" onclick="location.hash='#c4'">Continua · parte dell'estetista</button><button class="btn w" onclick="location.hash='#c2'">Modifica le risposte</button></div>`;};
+V.c4=()=>{const v=tmp.cab; if(!v){location.hash="#c2";return "";} const c=v.cabina||{};
+ return `<div class="card" style="background:var(--antracite);color:#fff"><div class="lab" style="color:#E6DEF6">Solo estetista</div><p style="margin:6px 0 0">Gonfiore e dolore arrivano dalla figura scelta: correggili se serve.</p></div>
+  <div class="card"><div class="lab">Dati e sensazioni</div><div class="grid">
+   <div><label class="f">Codice cliente (mai il nome) *</label><input type="text" id="cod" value="${esc(v.codice||"")}"></div><div><label class="f">Età</label><input type="number" id="eta" value="${v.eta||""}"></div>
+   <div><label class="f">Prima seduta?</label><select id="prima"><option value="no">No</option><option value="si"${v.prima?" selected":""}>Sì</option></select></div><div></div>
+   <div><label class="f">Gonfiore 0–10 *</label><input type="number" id="gonf" value="${v.gonf}"></div><div><label class="f">Dolore 0–10 *</label><input type="number" id="dolx" value="${v.dol}"></div></div>
+   <label class="f">Dove sente il gonfiore</label><div class="chips" id="sede">${[["addome","Addome"],["gambe","Gambe"],["altro","Altre zone"]].map(([k,n])=>`<button type="button" class="chip${(v.sede||[]).includes(k)?" on":""}" data-v="${k}" onclick="this.classList.toggle('on')">${n}</button>`).join("")}</div>
+   <div class="grid"><div><label class="f">Da quanti giorni</label><input type="number" id="gdur" value="${c.gdur||""}"></div><div><label class="f">Si ripete ogni ciclo?</label><select id="gric"><option value="">Non so</option><option value="si">Sì</option><option value="no">No, è nuovo</option></select></div></div></div>
+  <div class="card"><div class="lab">Pelle</div><div class="grid">${[["sens","Sensibilità",["Normale","Aumentata"]],["idr","Idratazione",["Bassa","Normale","Alta"]],["sebo","Sebo",["Basso","Normale","Alto"]],["tp","Temperatura",["Fredda","Normale","Calda"]]].map(([k,n,o])=>`<div><label class="f">${n}</label><select id="pe_${k}"><option value="">Non valutata</option>${o.map(x=>`<option>${x}</option>`).join("")}</select></div>`).join("")}</div></div>
+  <div class="card"><div class="lab">Misure ed esami</div><div class="grid">${[["peso","Peso (kg)"],["vita","Vita (cm)"],["fianchi","Fianchi (cm)"],["coscia","Coscia (cm)"],["col","Colesterolo totale (mg/dl)"],["trig","Trigliceridi (mg/dl)"],["gli","Glicemia (mg/dl)"],["tsh","TSH (µUI/ml)"]].map(([k,n])=>`<div><label class="f">${n}</label><input type="text" inputmode="decimal" id="m_${k}"></div>`).join("")}
+   <div style="grid-column:1/-1"><label class="f">Temperature basali (°C, separate da virgola)</label><input type="text" id="temps"></div></div></div>
+  <div class="card"><div class="lab">Anamnesi</div>${formSalute(v.sal)}<div class="checks"><label class="ck full" style="background:var(--fumetto)"><input type="checkbox" id="anam">Ho fatto l'anamnesi completa e ho la scheda firmata *</label></div></div>
+  <button class="btn" onclick="creaSeduta()">Crea la seduta</button><button class="btn w" onclick="location.hash='#c3'">Torna al mese</button><div class="err" id="err"></div>`;};
+window.creaSeduta=()=>{const v=tmp.cab, err=$("#err"); const g=num($("#gonf").value), d=num($("#dolx").value), cod=$("#cod").value.trim();
+ if(!$("#anam").checked||g==null||d==null){err.textContent="R1 · Senza anamnesi niente risultato: conferma l'anamnesi e compila gonfiore e dolore.";return;}
+ if(!cod){err.textContent="Inserisci il codice cliente.";return;}
+ Object.assign(v,{codice:cod,eta:num($("#eta").value),prima:$("#prima").value==="si",gonf:g,dol:d,sede:picked("#sede"),sal:readSalute()});
+ const M=k=>num($("#m_"+k).value);
+ v.cabina={gdur:num($("#gdur").value),gric:$("#gric").value,pelle:{sens:$("#pe_sens").value,idr:$("#pe_idr").value,sebo:$("#pe_sebo").value,tp:$("#pe_tp").value},misure:{peso:M("peso"),vita:M("vita"),fianchi:M("fianchi"),coscia:M("coscia")},esami:{col:M("col"),trig:M("trig"),gli:M("gli"),tsh:M("tsh")},temps:($("#temps").value||"").split(/[,;\s]+/).map(num).filter(x=>x&&x>34&&x<40)};
+ const s=S(); const r=motore(v); const val={id:uid("v"),centro:s.sessione.centro,operatrice:s.sessione.operatrice||"",codice:cod,data:new Date().toISOString(),input:JSON.parse(JSON.stringify(v)),r,versione:r.versione};
+ s.valutazioni.push(val); DB.save(); tmp={}; location.hash="#c5/"+val.id;};
+V.c5=(id)=>{const s=S(); const val=s.valutazioni.find(x=>x.id===id); if(!val) return "";
+ const r=val.r, v=val.input, c=v.cabina||{};
+ const rif=[`gonfiore ${r.gonf}/10${(v.sede||[]).length?" ("+v.sede.join(", ")+")":""}`,`dolore ${r.dol}/10`].concat((v.sym||[]).map(x=>SYMN[x].toLowerCase()));
+ if(c.gdur) rif.push(`gonfiore da ${c.gdur} giorni`); if(c.gric) rif.push(c.gric==="si"?"si ripete ogni ciclo":"gonfiore nuovo");
+ const pelle=Object.entries(c.pelle||{}).filter(([k,x])=>x).map(([k,x])=>({sens:"sensibilità",idr:"idratazione",sebo:"sebo",tp:"temperatura"}[k]+": "+x.toLowerCase()));
+ const mis=Object.entries(c.misure||{}).filter(([k,x])=>x).map(([k,x])=>k+" "+String(x).replace(".",",")+(k==="peso"?" kg":" cm"));
+ const F=r.key&&FASI[r.key];
+ let h=`<div class="card"><div class="lab">${esc(val.codice)} · ${fdd(val.data)} · ${esc(val.operatrice)} · regole v${val.versione}</div>
+  ${r.key&&r.key!=="ritardo"?`<div class="fase-big">${F[0]}</div><p style="margin:0 0 6px"><b>Fisiologia:</b> ${F[1]}</p><p style="margin:0"><b>Cosa può notare:</b> ${F[2]}</p>${striscia(r.giorno,r.L)}`:htmlFase(r)}
+  ${r.inc?`<div class="hint"><b>Incertezza:</b> ${r.inc}. È una stima, non una misura degli ormoni.</div>`:""}${r.notaTemp?`<div class="hint"><b>Temperatura basale:</b> ${r.notaTemp}</div>`:""}
+  <div class="hint"><b>Riferisce:</b> ${rif.join(", ")}.${pelle.length?" <b>Pelle:</b> "+pelle.join(", ")+".":""}</div></div>`;
+ h+=`<div class="card oggi"><div class="lab">Seduta di oggi</div><div class="fase-big" style="color:${r.stop?"var(--no)":"inherit"}">${r.esito}</div>${htmlTr(r,true)}
+  <div class="lab" style="margin-top:14px">Perché</div>${li(r.perche.map(([t,x])=>t+" "+rr(x)))}${r.tr.length>1?`<div class="hint">Ordine dei trattamenti ${rr("R15")}</div>`:""}
+  ${r.att.length?`<div class="lab" style="margin-top:14px">Attenzioni dall'anamnesi</div>${li(r.att)}`:""}</div>`;
+ h+=htmlPiano(r,true);
+ h+=`<div class="card"><div class="lab">Bilancia e misure</div><div class="fase-big" style="font-size:17px;color:${r.bilOk?"var(--si)":"var(--no)"}">${r.bilOk?"Oggi puoi pesarla":"Oggi non pesarla"}</div>${li(r.bil.map(([t,x])=>t+" "+rr(x)))}${mis.length?`<div class="hint">Misure di oggi: ${mis.join(" · ")}</div>`:""}</div>`;
+ h+=`<div class="card"><div class="lab">Le parole</div><div class="say">${PAROLE[r.key]||PAROLE.def}</div>${v.prima?`<div class="lab">Prima seduta ${rr("R24")}</div><div class="say">«Ti avviso da subito: ${FRASE_BIL.charAt(0).toLowerCase()+FRASE_BIL.slice(1)}»</div>`:""}</div>`;
+ if(r.med.length) h+=`<div class="card"><div class="lab">Medico ${rr("R19")}</div>${li(r.med)}</div>`;
+ h+=`<div class="card"><div class="lab">Fonti</div>${li(FONTI.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`))}</div>`;
+ return h+`<div class="noprint"><button class="btn" onclick="try{window.print()}catch(e){}">Stampa / salva PDF</button><button class="btn w" onclick="tmp={cab:JSON.parse(JSON.stringify(S().valutazioni.find(x=>x.id==='${id}').input))};location.hash='#c2'">Nuova valutazione da questa</button><button class="btn w" onclick="location.hash='#c1'">Torna al centro</button></div>`;};
+const FONTI=[["Changes in body weight and body composition during the menstrual cycle (2023)","https://pubmed.ncbi.nlm.nih.gov/37395124/"],["Fluid Retention over the Menstrual Cycle (2011)","https://pubmed.ncbi.nlm.nih.gov/21845193/"],["Physiological Changes in Women's Skin During the Menstrual Cycle (2025)","https://pubmed.ncbi.nlm.nih.gov/39776723/"],["Temperature regulation in women: Effects of the menstrual cycle (2020)","https://pubmed.ncbi.nlm.nih.gov/33123618/"],["Impact of Follicular Menstrual Phase on Body Composition Measures and Resting Metabolism (2021)","https://pubmed.ncbi.nlm.nih.gov/34280938/"]];
+
+/* ---------- AMMINISTRAZIONE ---------- */
+V.a1=()=>{const s=S(); const L=s.pro.filter(p=>p.stato==="in attesa");
+ return page("Da approvare","Amministrazione",`<div class="card">${L.length?L.map(p=>`<div class="tech"><div style="flex:1"><b>${esc(p.nome)}</b><small>${TIPI[p.tipo]} · ${esc(p.comune)} · ${esc(p.email)} · ${esc(p.tel)} · P.IVA ${esc(p.iva||"—")}</small></div><button class="mini" onclick="apr('${p.id}','attivo')">Approva</button><button class="mini" onclick="apr('${p.id}','rifiutato')">Rifiuta</button></div>`).join(""):`<p class="hint">Nessuna richiesta in attesa.</p>`}</div>`);};
+window.apr=(id,st)=>{S().pro.find(p=>p.id===id).stato=st;DB.save();render();};
+V.a2=()=>{const s=S(); return page("Professionisti e centri","Amministrazione",GRUPPI.map(g=>`<div class="card"><div class="lab">${TIPI[g]}</div>${s.pro.filter(p=>p.tipo===g&&p.stato!=="in attesa").map(p=>`<div class="tech"><div style="flex:1"><b>${esc(p.nome)}</b><small>${esc(p.comune)} · ${p.stato}${p.demo?" · esempio":""}</small></div>
+  <label class="ck" style="padding:6px 10px"><input type="checkbox" ${p.quota?"checked":""} onchange="S().pro.find(x=>x.id==='${p.id}').quota=this.checked;DB.save()">Quota versata</label>
+  <button class="mini" onclick="apr('${p.id}','${p.stato==="attivo"?"sospeso":"attivo"}')">${p.stato==="attivo"?"Sospendi":"Riattiva"}</button></div>`).join("")||`<p class="hint">Nessuno.</p>`}</div>`).join("")+
+  `<div class="card"><div class="lab">Centri in cabina</div>${s.centri.map(c=>`<div class="tech"><div style="flex:1"><b>${esc(c.nome)}</b><small>Operatrici: ${c.operatrici.map(esc).join(", ")}</small></div><button class="mini" onclick="addOp('${c.id}')">+ Operatrice</button></div>`).join("")}
+  <label class="f">Crea un account cabina per</label><select id="newc">${s.pro.filter(p=>p.tipo==="estetista"&&p.stato==="attivo"&&!s.centri.some(c=>c.proId===p.id)).map(p=>`<option value="${p.id}">${esc(p.nome)}</option>`).join("")}</select><button class="btn w" onclick="addCentro()">Crea account cabina</button></div>`);};
+window.addOp=id=>{const c=S().centri.find(x=>x.id===id);c.operatrici.push("Operatrice "+(c.operatrici.length+1));DB.save();render();};
+window.addCentro=()=>{const v=$("#newc").value;if(!v)return;const p=S().pro.find(x=>x.id===v);S().centri.push({id:uid("c"),nome:p.nome,proId:p.id,operatrici:["Operatrice 1"]});DB.save();render();};
+V.a3=()=>{const R=S().regole; return page("Testi e regole","Amministrazione",`<div class="card"><div class="lab">Soglie · versione ${R.versione} del ${R.data}</div><div class="grid">
+  <div><label class="f">Gonfiore che fa scattare la seduta circolo (R8)</label><input type="number" id="rg" value="${R.gonf}"></div>
+  <div><label class="f">Dolore per la seduta calmante (R7)</label><input type="number" id="rd1" value="${R.dolMid}"></div>
+  <div><label class="f">Dolore che fa rimandare (R6)</label><input type="number" id="rd2" value="${R.dolStop}"></div></div>
+  <p class="hint">Ogni modifica crea una nuova versione: le schede già fatte tengono la versione con cui sono state calcolate.</p></div>
+  <button class="btn" onclick="salvaRegole()">Salva nuova versione</button>
+  <div class="card" style="margin-top:14px"><div class="lab">Comuni attivi</div><p class="hint" style="margin:0">Provincia di Fermo: ${COMUNI.length} comuni.</p></div>
+  <div class="card"><div class="lab">Strumenti</div><button class="btn w" onclick="DB.reset();tmp={};location.hash='#d1'">Azzera tutti i dati di prova</button></div>`);};
+window.salvaRegole=()=>{const R=S().regole; Object.assign(R,{gonf:num($("#rg").value)||5,dolMid:num($("#rd1").value)||5,dolStop:num($("#rd2").value)||8,versione:R.versione+1,data:new Date().toISOString().slice(0,10)}); DB.save(); render();};
+V.a4=()=>{const s=S(); const cont=(a,f)=>a.filter(f).length;
+ const rows=[["Donne registrate",s.donne.length],["Test completati",s.test.length],["Schede",s.schede.length],["Richieste inviate",s.richieste.length],["Richieste con scheda condivisa",cont(s.richieste,r=>r.scheda)],["Professionisti attivi",cont(s.pro,p=>p.stato==="attivo")],["In attesa di approvazione",cont(s.pro,p=>p.stato==="in attesa")],["Valutazioni in cabina",s.valutazioni.length]];
+ const perPro=s.pro.filter(p=>p.stato==="attivo").map(p=>[p.nome,cont(s.richieste,r=>r.pro===p.id)]);
+ const perCom={}; s.richieste.forEach(r=>{const d=s.donne.find(x=>x.id===r.donna);const c=d?d.comune:"—";perCom[c]=(perCom[c]||0)+1;});
+ const tab=a=>`<table class="tb">${a.map(([n,v])=>`<tr><td>${esc(n)}</td><td>${v}</td></tr>`).join("")}</table>`;
+ return page("Numeri","Amministrazione",`<div class="card">${tab(rows)}</div><div class="card"><div class="lab">Richieste per professionista</div>${tab(perPro)}</div><div class="card"><div class="lab">Richieste per comune</div>${Object.keys(perCom).length?tab(Object.entries(perCom)):`<p class="hint">Nessuna.</p>`}</div>`);};
+
+/* ============================ ROUTER ============================ */
+const NAV={donna:[["d1","Home"],["d3","Test"],["d4","Scheda"],["d5","Professionisti"],["d8","La mia area"]],pro:[["p1","Aderisci"],["p2","Profilo"],["p3","Richieste"]],centro:[["c1","Centro"],["c2","Nuova valutazione"]],admin:[["a1","Da approvare"],["a2","Elenco"],["a3","Regole"],["a4","Numeri"]]};
+const ROLE=c=>({d:"donna",p:"pro",c:"centro",a:"admin"})[c];
+function render(){ const h=(location.hash||"#d1").slice(1).split("/"); const k=h[0]; const fn=V[k]||V.d1; const role=ROLE(k[0])||"donna";
+ document.querySelectorAll("#roles button").forEach(b=>b.classList.toggle("on",b.dataset.r===role));
+ $("#nav").innerHTML=NAV[role].map(([c,n])=>`<a href="#${c}" class="${c===k?"on":""}">${n}</a>`).join("");
+ $("#app").innerHTML=fn(h[1],h[2])||$("#app").innerHTML; bindAll(); }
+function bindAll(){ if($("#situ")) bindCiclo(); bindPick(); }
+window.addEventListener("hashchange",()=>{ if(!/^#d3/.test(location.hash)) {} render(); window.scrollTo(0,0); });
+document.querySelectorAll("#roles button").forEach(b=>b.onclick=()=>{location.hash="#"+NAV[b.dataset.r][0][0];});
+render();
+
+</script></body></html>
