@@ -144,7 +144,7 @@ const GRUPPI=["nutrizionista","estetista","ginecologo","trainer"];
 const SEED={
   v:1,
   regole:{versione:1,data:"2026-11-21",gonf:5,dolMid:5,dolStop:8},
-  donne:[], test:[], schede:[], richieste:[], valutazioni:[],
+  donne:[], test:[], schede:[], richieste:[], valutazioni:[], valori:[],
   pro:[
     {id:"p1",nome:"Skinem Casabianca",tipo:"estetista",comune:"Fermo",indirizzo:"Lido di Fermo",descr:"Centro Skinem: percorsi corpo con il metodo Fase.",orari:"Lun–Sab 9–19",tel:"",email:"",tratt:["P","RC","SL","SC","RM","TM","TP"],stato:"attivo",quota:true,demo:false},
     {id:"p2",nome:"Studio nutrizione (esempio)",tipo:"nutrizionista",comune:"Porto San Giorgio",indirizzo:"",descr:"Profilo di esempio per la prova.",orari:"",tel:"",email:"",tratt:[],stato:"attivo",quota:true,demo:true},
@@ -161,7 +161,7 @@ const DB={
   save(){ try{ localStorage.setItem(KEY,JSON.stringify(mem)); }catch(e){} },
   reset(){ mem=JSON.parse(JSON.stringify(SEED)); DB.save(); }
 };
-const S=()=>DB.load();
+const S=()=>{const d=DB.load(); if(!d.valori) d.valori=[]; return d;};
 const uid=p=>p+Math.random().toString(36).slice(2,9);
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -206,6 +206,23 @@ const FASI={
 const PAROLE={mestruale:"«Come ti senti in questi giorni? Oggi pensiamo a farti stare bene: il lavoro più intenso lo facciamo tra qualche giorno.»",follicolare:"«Questi sono giorni buoni per lavorare sul tuo obiettivo. Dimmi se senti qualcosa che non va e regolo io.»",ovulatoria:"«Senti qualche fastidio al basso ventre in questi giorni? Se sì, me lo dici e regolo io.»",luteale:"«Ti senti più gonfia in questi giorni? Può capitare, non è colpa tua. Oggi lavoriamo per farti stare più leggera.»",ritardo:"«Prima di iniziare ti faccio una domanda che faccio a tutte: c'è la possibilità che tu sia incinta?»",def:"«Raccontami come ti senti oggi: è da lì che parto per decidere cosa fare.»"};
 const FRASE_BIL="In certi giorni del mese peso e gonfiore cambiano anche quando il percorso sta funzionando, e non dicono nulla sul grasso. Per questo il risultato si misura sempre nelle stesse condizioni e nello stesso periodo del ciclo.";
 
+const VAL=[
+ {g:"Composizione corporea (bioimpedenza)",fonte:"Biologo o nutrizionista",v:[["peso","Peso","kg"],["mg_pct","Massa grassa","%"],["mm","Massa magra","kg"],["mmusc","Massa muscolare","kg"],["acqua_tot","Acqua totale","%"],["aic","Acqua intracellulare","L"],["aec","Acqua extracellulare","L"],["mb","Metabolismo basale","kcal"],["pa","Angolo di fase","°"]]},
+ {g:"Circonferenze",fonte:"Professionista o centro",v:[["vita","Vita","cm"],["fianchi","Fianchi","cm"],["coscia","Coscia","cm"],["braccio","Braccio","cm"]]},
+ {g:"Analisi del sangue",fonte:"Laboratorio",v:[["col","Colesterolo totale","mg/dl"],["hdl","Colesterolo HDL","mg/dl"],["ldl","Colesterolo LDL","mg/dl"],["trig","Trigliceridi","mg/dl"],["gli","Glicemia a digiuno","mg/dl"],["ins","Insulina","µU/ml"],["tsh","TSH","µUI/ml"],["ft4","FT4","ng/dl"],["ferr","Ferritina","ng/ml"],["vitd","Vitamina D","ng/ml"]]},
+ {g:"Ormoni",fonte:"Ginecologa",v:[["fsh","FSH","mUI/ml"],["lh","LH","mUI/ml"],["e2","Estradiolo","pg/ml"],["prog","Progesterone","ng/ml"],["prl","Prolattina","ng/ml"],["testo","Testosterone","ng/ml"],["amh","AMH","ng/ml"]]}
+];
+const VALK={}; VAL.forEach(g=>g.v.forEach(([k,n,u])=>VALK[k]={n,u,g:g.g}));
+const FONTIV=["Biologo / nutrizionista","Ginecologa","Medico","Laboratorio analisi","Centro estetico","Io stessa"];
+const fmtN=x=>String(Math.round(x*100)/100).replace(".",",");
+function storicoValori(donnaId){const L=S().valori.filter(x=>x.donna===donnaId).sort((a,b)=>a.data<b.data?-1:1); const out={};
+ L.forEach(r=>Object.entries(r.v).forEach(([k,val])=>{(out[k]=out[k]||[]).push({data:r.data,val,fonte:r.fonte});})); return out;}
+function htmlValori(donnaId,full){const st=storicoValori(donnaId); const keys=Object.keys(st); if(!keys.length) return `<p class="hint" style="margin:0">Nessun valore inserito.</p>`;
+ return VAL.map(g=>{const ks=g.v.filter(([k])=>st[k]); if(!ks.length) return ""; return `<div class="lab" style="margin-top:12px">${g.g}</div><table class="tb">${ks.map(([k,n,u])=>{const a=st[k], l=a[a.length-1], p=a.length>1?a[a.length-2]:null; const d=p?l.val-p.val:null;
+  return `<tr><td>${n}<br><small style="color:var(--muto)">${fdd(l.data)} · ${esc(l.fonte)}</small></td><td>${fmtN(l.val)} ${u}${d!=null&&d!==0?`<br><small style="color:var(--muto)">${d>0?"+":""}${fmtN(d)} dal ${fdd(p.data)}</small>`:""}</td></tr>`+(full&&a.length>2?`<tr><td colspan="2"><small style="color:var(--muto)">Storico: ${a.map(x=>fmtN(x.val)+" ("+fdd(x.data)+")").join(" · ")}</small></td></tr>`:"");}).join("")}</table>`;}).join("");}
+function avvisiValori(donnaId){const st=storicoValori(donnaId); const last=k=>st[k]?st[k][st[k].length-1].val:null; const f=[];
+ if(last("col")>200)f.push("colesterolo totale"); if(last("trig")>150)f.push("trigliceridi"); const g=last("gli"); if(g!=null&&(g<70||g>100))f.push("glicemia"); const t=last("tsh"); if(t!=null&&(t<0.4||t>4))f.push("TSH");
+ return f;}
 function trList(keys,breve){return [...new Set(keys)].sort((a,b)=>ORD.indexOf(a)-ORD.indexOf(b)).map(k=>({k,n:TR[k].n+(k==="SL"&&breve?" (breve)":""),d:TR[k].d}));}
 
 /* i = {situ,last,len,obi,zone[],fig,gonf,dol,sym[],sede[],sal{}, eta, cabina:{temps[],esami{},anam}}  rif = data di riferimento */
@@ -411,14 +428,18 @@ V.d7=(id,scId)=>{ if(needDonna())return ""; const p=S().pro.find(x=>x.id===id);
  return page("Contatta "+esc(p.nome),"Richiesta",`<div class="card"><label class="f">Messaggio (facoltativo)</label><textarea id="msg" rows="4"></textarea>
   <label class="f">Come preferisci essere contattata?</label><select id="cp"><option>Telefono</option><option>WhatsApp</option><option>Email</option></select>
   <label class="f">Il tuo recapito</label><input type="text" id="rec" placeholder="Numero o email">
-  <div class="checks"><label class="ck full"><input type="checkbox" id="share"${scId?"":" disabled"}>Condivido la mia scheda con ${esc(p.nome)}${scId?"":" (fai prima il test)"}</label></div></div>
+  <div class="checks"><label class="ck full"><input type="checkbox" id="share"${scId?"":" disabled"}>Condivido la mia scheda con ${esc(p.nome)}${scId?"":" (fai prima il test)"}</label>
+  ${S().valori.some(x=>x.donna===S().sessione.donna)?`<label class="ck full"><input type="checkbox" id="sharev">Condivido anche i miei valori (analisi e composizione corporea)</label>`:""}</div></div>
   <button class="btn" onclick="invia('${id}','${scId||""}')">Invia la richiesta</button>`);};
-window.invia=(id,scId)=>{const s=S(); s.richieste.push({id:uid("r"),donna:s.sessione.donna,pro:id,data:new Date().toISOString(),msg:$("#msg").value,contatto:$("#cp").value,recapito:$("#rec").value,scheda:$("#share").checked&&scId?scId:null,stato:"nuova"}); DB.save();
+window.invia=(id,scId)=>{const s=S(); s.richieste.push({id:uid("r"),donna:s.sessione.donna,pro:id,data:new Date().toISOString(),msg:$("#msg").value,contatto:$("#cp").value,recapito:$("#rec").value,scheda:$("#share").checked&&scId?scId:null,valori:!!($("#sharev")&&$("#sharev").checked),stato:"nuova"}); DB.save();
  $("#app").innerHTML=`<div class="card"><div class="fase-big">Richiesta inviata</div><p>Il professionista riceverà una email e ti contatterà.</p></div><button class="btn" onclick="location.hash='#d8'">La mia area</button>`;};
 
 V.d8=()=>{ if(needDonna())return ""; const s=S(), d=me(); const sch=s.schede.filter(x=>x.donna===d.id).reverse(); const rq=s.richieste.filter(x=>x.donna===d.id).reverse(); const pn=id=>(s.pro.find(p=>p.id===id)||{}).nome||"";
  return page("Ciao "+esc(d.nome),"La mia area",`
   <div class="card"><div class="lab">Le mie schede</div>${sch.length?sch.map(x=>`<div class="tech"><div style="flex:1"><b>${fdd(x.data)}</b><small>${esc(x.r.esito)}</small></div><button class="mini" onclick="location.hash='#d4/${x.id}'">Apri</button></div>`).join(""):`<p class="hint">Ancora nessuna scheda.</p>`}</div>
+  <div class="card"><div class="lab">I miei valori</div><p class="hint" style="margin:0 0 6px">Analisi del sangue e risultati che ti danno biologo, nutrizionista o ginecologa.</p>${htmlValori(d.id,false)}
+   ${avvisiValori(d.id).length?`<div class="asp">Valori fuori dai riferimenti indicativi (${avvisiValori(d.id).join(", ")}): parlane con il tuo medico. Fase non li interpreta.</div>`:""}
+   <button class="btn" onclick="location.hash='#d9'">Aggiungi valori</button>${S().valori.some(x=>x.donna===d.id)?`<button class="btn w" onclick="location.hash='#d9/storico'">Vedi tutto lo storico</button>`:""}</div>
   <button class="btn" onclick="cicloOggi()">È arrivato il ciclo oggi</button>
   <button class="btn w" onclick="tmp={};location.hash='#d3'">Rifai il test</button>
   <div class="card" style="margin-top:14px"><div class="lab">Le mie richieste</div>${rq.length?rq.map(x=>`<div class="tech"><div style="flex:1"><b>${esc(pn(x.pro))}</b><small>${fdd(x.data)} · ${x.stato}${x.scheda?" · scheda condivisa":""}</small></div></div>`).join(""):`<p class="hint">Nessuna richiesta.</p>`}</div>
@@ -427,11 +448,25 @@ V.d8=()=>{ if(needDonna())return ""; const s=S(), d=me(); const sch=s.schede.fil
    <button class="btn w" onclick="scarica()">Scarica i miei dati</button><button class="btn w" onclick="ritiraSalute()">Ritira il consenso sui dati di salute</button><button class="btn w" style="color:var(--no)" onclick="cancella()">Cancella il mio account</button></div>
   <button class="btn w" onclick="esci()">Esci</button>`);};
 window.cicloOggi=()=>{const s=S(); const last=s.test.filter(t=>t.donna===s.sessione.donna).slice(-1)[0]; tmp={step:3,test:last?JSON.parse(JSON.stringify(last.input)):{}}; const d=new Date(); tmp.test.last=d.toISOString().slice(0,10); if(!tmp.test.situ)tmp.step=1; location.hash="#d3"; render();};
-window.scarica=()=>{const s=S(),id=s.sessione.donna; const dati={profilo:me(),test:s.test.filter(x=>x.donna===id),schede:s.schede.filter(x=>x.donna===id),richieste:s.richieste.filter(x=>x.donna===id)};
+window.scarica=()=>{const s=S(),id=s.sessione.donna; const dati={profilo:me(),valori:s.valori.filter(x=>x.donna===id),test:s.test.filter(x=>x.donna===id),schede:s.schede.filter(x=>x.donna===id),richieste:s.richieste.filter(x=>x.donna===id)};
  const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([JSON.stringify(dati,null,2)],{type:"application/json"})); a.download="miei-dati-fase.json"; a.click();};
-window.ritiraSalute=()=>{const s=S(),id=s.sessione.donna; s.test=s.test.filter(x=>x.donna!==id); s.schede=s.schede.filter(x=>x.donna!==id); s.richieste.forEach(r=>{if(r.donna===id)r.scheda=null;}); me().consensi.salute=false; DB.save(); render();};
-window.cancella=()=>{if(!confirmBox())return;const s=S(),id=s.sessione.donna; s.donne=s.donne.filter(x=>x.id!==id); s.test=s.test.filter(x=>x.donna!==id); s.schede=s.schede.filter(x=>x.donna!==id); s.richieste=s.richieste.filter(x=>x.donna!==id); s.sessione.donna=null; DB.save(); location.hash="#d1";};
+window.ritiraSalute=()=>{const s=S(),id=s.sessione.donna; s.valori=s.valori.filter(x=>x.donna!==id); s.test=s.test.filter(x=>x.donna!==id); s.schede=s.schede.filter(x=>x.donna!==id); s.richieste.forEach(r=>{if(r.donna===id)r.scheda=null;}); me().consensi.salute=false; DB.save(); render();};
+window.cancella=()=>{if(!confirmBox())return;const s=S(),id=s.sessione.donna; s.donne=s.donne.filter(x=>x.id!==id); s.valori=s.valori.filter(x=>x.donna!==id); s.test=s.test.filter(x=>x.donna!==id); s.schede=s.schede.filter(x=>x.donna!==id); s.richieste=s.richieste.filter(x=>x.donna!==id); s.sessione.donna=null; DB.save(); location.hash="#d1";};
 function confirmBox(){ if(tmp.conf){tmp.conf=false;return true;} tmp.conf=true; const e=document.createElement("div"); e.className="stato no"; e.textContent="Tocca di nuovo \"Cancella il mio account\" per confermare."; $("#app").prepend(e); return false; }
+
+V.d9=(mode)=>{ if(needDonna())return ""; const d=me();
+ if(!d.consensi.salute) return `<div class="card"><p>Per inserire i tuoi valori serve il consenso sui dati di salute.</p></div>`;
+ if(mode==="storico") return page("Il mio storico","I miei valori",`<div class="card">${htmlValori(d.id,true)}</div>`+S().valori.filter(x=>x.donna===d.id).slice().reverse().map(r=>`<div class="card"><div class="lab">${fdd(r.data)} · ${esc(r.fonte)}</div>${li(Object.entries(r.v).map(([k,v])=>`${VALK[k].n}: <b>${fmtN(v)} ${VALK[k].u}</b>`))}${r.note?`<p class="hint">${esc(r.note)}</p>`:""}<button class="mini" onclick="delVal('${r.id}')">Elimina</button></div>`).join(""));
+ return page("Aggiungi valori","I miei valori",`<div class="card"><div class="grid"><div><label class="f">Data dell'esame o della misura</label><input type="date" id="vd" value="${new Date().toISOString().slice(0,10)}"></div>
+  <div><label class="f">Chi te li ha dati</label><select id="vf">${FONTIV.map(f=>`<option>${f}</option>`).join("")}</select></div></div>
+  <p class="hint">Compila solo quello che hai. Copia i numeri dal referto, con le stesse unità.</p></div>`+
+  VAL.map(g=>`<div class="card"><div class="lab">${g.g} · ${g.fonte}</div><div class="grid">${g.v.map(([k,n,u])=>`<div><label class="f">${n} (${u})</label><input type="text" inputmode="decimal" data-val="${k}"></div>`).join("")}</div></div>`).join("")+
+  `<div class="card"><label class="f">Note (facoltative)</label><textarea id="vn" rows="2"></textarea><p class="hint">Fase conserva questi valori per te e ti mostra come cambiano nel tempo. Non li interpreta: li legge il tuo professionista.</p></div>
+  <button class="btn" onclick="salvaVal()">Salva</button><div class="err" id="err"></div>`);};
+window.salvaVal=()=>{const v={}; document.querySelectorAll("[data-val]").forEach(i=>{const x=num(i.value); if(x!=null&&!isNaN(x)) v[i.dataset.val]=x;});
+ if(!Object.keys(v).length){$("#err").textContent="Inserisci almeno un valore.";return;}
+ const s=S(); s.valori.push({id:uid("v"),donna:s.sessione.donna,data:$("#vd").value||new Date().toISOString().slice(0,10),fonte:$("#vf").value,v,note:$("#vn").value}); DB.save(); location.hash="#d8";};
+window.delVal=id=>{const s=S(); s.valori=s.valori.filter(x=>x.id!==id); DB.save(); render();};
 
 /* ---------- PROFESSIONISTA ---------- */
 const mePro=()=>S().pro.find(p=>p.id===S().sessione.pro);
@@ -457,7 +492,8 @@ V.p3=(rid)=>{const s=S(),p=mePro(); const rq=s.richieste.filter(r=>r.pro===p.id)
  if(rid){const r=s.richieste.find(x=>x.id===rid); const sc=r.scheda?s.schede.find(x=>x.id===r.scheda):null;
   return page(esc(dn(r.donna)),"Richiesta del "+fdd(r.data),`<div class="card">${li([`<b>Contatto preferito:</b> ${esc(r.contatto)} · ${esc(r.recapito)}`,`<b>Messaggio:</b> ${esc(r.msg)||"—"}`])}
    <label class="f">Stato</label><select onchange="statoRq('${r.id}',this.value)">${["nuova","contattata","chiusa"].map(x=>`<option${r.stato===x?" selected":""}>${x}</option>`).join("")}</select></div>
-   ${sc?`<div class="lab" style="margin:10px 4px">Scheda condivisa (sola lettura)</div>`+schedaDonna(sc):`<div class="card"><p class="hint" style="margin:0">La donna non ha condiviso la scheda.</p></div>`}<button class="btn w" onclick="location.hash='#p3'">Tutte le richieste</button>`);}
+   ${sc?`<div class="lab" style="margin:10px 4px">Scheda condivisa (sola lettura)</div>`+schedaDonna(sc):`<div class="card"><p class="hint" style="margin:0">La donna non ha condiviso la scheda.</p></div>`}
+   ${r.valori?`<div class="card"><div class="lab">Valori condivisi</div>${htmlValori(r.donna,true)}</div>`:""}<button class="btn w" onclick="location.hash='#p3'">Tutte le richieste</button>`);}
  return page("Richieste ricevute",esc(p.nome),`<div class="card">${rq.length?rq.map(r=>`<div class="tech"><div style="flex:1"><b>${esc(dn(r.donna))}</b><small>${fdd(r.data)} · ${r.stato}${r.scheda?" · con scheda":""}</small></div><button class="mini" onclick="location.hash='#p3/${r.id}'">Apri</button></div>`).join(""):`<p class="hint">Nessuna richiesta.</p>`}</div>`);};
 window.statoRq=(id,v)=>{S().richieste.find(r=>r.id===id).stato=v;DB.save();};
 
@@ -551,7 +587,7 @@ V.a4=()=>{const s=S(); const cont=(a,f)=>a.filter(f).length;
  return page("Numeri","Amministrazione",`<div class="card">${tab(rows)}</div><div class="card"><div class="lab">Richieste per professionista</div>${tab(perPro)}</div><div class="card"><div class="lab">Richieste per comune</div>${Object.keys(perCom).length?tab(Object.entries(perCom)):`<p class="hint">Nessuna.</p>`}</div>`);};
 
 /* ============================ ROUTER ============================ */
-const NAV={donna:[["d1","Home"],["d3","Test"],["d4","Scheda"],["d5","Professionisti"],["d8","La mia area"]],pro:[["p1","Aderisci"],["p2","Profilo"],["p3","Richieste"]],centro:[["c1","Centro"],["c2","Nuova valutazione"]],admin:[["a1","Da approvare"],["a2","Elenco"],["a3","Regole"],["a4","Numeri"]]};
+const NAV={donna:[["d1","Home"],["d3","Test"],["d4","Scheda"],["d9","I miei valori"],["d5","Professionisti"],["d8","La mia area"]],pro:[["p1","Aderisci"],["p2","Profilo"],["p3","Richieste"]],centro:[["c1","Centro"],["c2","Nuova valutazione"]],admin:[["a1","Da approvare"],["a2","Elenco"],["a3","Regole"],["a4","Numeri"]]};
 const ROLE=c=>({d:"donna",p:"pro",c:"centro",a:"admin"})[c];
 function render(){ const h=(location.hash||"#d1").slice(1).split("/"); const k=h[0]; const fn=V[k]||V.d1; const role=ROLE(k[0])||"donna";
  document.querySelectorAll("#roles button").forEach(b=>b.classList.toggle("on",b.dataset.r===role));
